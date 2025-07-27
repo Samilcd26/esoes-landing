@@ -1,0 +1,239 @@
+{
+  "navigation": {
+    "events": "Etkinlikler",
+    "gallery": "Galeri",
+    "department": "Bölüm",
+    "hsd": "HSD",
+    "contact": "İletişim",
+    "faq": "S.S.S",
+    "login": "Giriş Yap",
+    "logout": "Çıkış Yap",
+    "loggingOut": "Çıkış yapılıyor...",
+    "welcome": "Hoş geldin"
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Hata",
+    "success": "Başarılı",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "create": "Oluştur",
+    "update": "Güncelle",
+    "search": "Ara",
+    "language": "Dil",
+    "na": "Mevcut Değil"
+  },
+  "auth": {
+    "loginRequired": "Giriş Gerekli",
+    "invalidCredentials": "Geçersiz kimlik bilgileri",
+    "logoutSuccess": "Başarıyla çıkış yapıldı"
+  },
+  "home": {
+    "hero": {
+      "title": {
+        "part1": "Teknoloji ve İnovasyonun",
+        "highlight": "Merkezinde",
+        "part2": "Geleceği Şekillendirin"
+      },
+      "subtitle": "Öğrenci kulübümüze katılın, projeler geliştirin, networkünüzü genişletin ve teknoloji dünyasında iz bırakın.",
+      "joinClub": "Kulübe Katıl",
+      "exploreEvents": "Etkinlikleri Keşfet"
+    },
+    "features": {
+      "title": {
+        "part1": "Neler",
+        "highlight": "Sunuyoruz"
+      },
+      "subtitle": "Teknoloji alanında kendinizi geliştirmeniz için ihtiyacınız olan her şey burada"
+    },
+    "departments": {
+      "education": {
+        "title": "Eğitim ve Organizasyon",
+        "category": "Departman",
+        "description1": "Eğitim ve Organizasyon Departmanı, mühendislik öğrencilerinin ihtiyacı olan hem sosyal hem de teknik eğitim programları düzenler. Ayrıca, HEBOCON, GameJam ve İmza etkinliğimiz olan SOF'un organizasyonu ile ilgilenir.",
+        "description2": "Departmanımız, öğrencilerin hem akademik hem de sosyal gelişimlerini destekleyerek kapsamlı eğitim fırsatları sunar. Teknik becerilerin yanı sıra liderlik, takım çalışması ve proje yönetimi konularında da eğitimler verilir."
+      },
+      "corporate": {
+        "title": "Kurumsal İlişkiler",
+        "category": "Departman",
+        "description1": "EsTalks ve teknik geziler düzenleyerek öğrencilere mesleki ağ kazandırılması, daha donanımlı bireyler olmalarını amaçlar. Aynı zamanda büyük etkinliklere konuşmacı bulunması Kurumsal İlişkiler departmanının sorumluluğu altındadır.",
+        "description2": "Departmanımız, sektör profesyonelleri ile öğrenciler arasında köprü görevi görür ve kariyer fırsatları yaratır. Şirket ziyaretleri, networking etkinlikleri ve mentörlük programları organize eder."
+      },
+      "media": {
+        "title": "Medya ve Tanıtım",
+        "category": "Departman",
+        "description1": "Kulübün tüm medya hesaplarını yönetir ve bu mecraları etkili bir şekilde kullanır. Aynı zamanda sosyal medya PR'ını üstlenir; paylaşılacak içeriklerin tasarımı ve editlenmesinden sorumludur.",
+        "description2": "Departmanımız, kulübün görünürlüğünü artırarak marka değerini yükseltir. Grafik tasarım, video prodüksiyonu, sosyal medya yönetimi ve içerik stratejisi konularında uzmanlaşmış ekibimiz bulunur."
+      },
+      "sponsorship": {
+        "title": "Sponsorluk",
+        "category": "Departman",
+        "description1": "Kulübün şirketler, esnaflar ve sponsor adayı olan tüm firmalarla bağlantı kurulmasını sağlar. Kulübün maddi ihtiyaçlarının neredeyse tamamını sponsorluk departmanı tarafından karşılanır.",
+        "description2": "Departmanımız, sürdürülebilir finansal kaynak yaratarak kulübün büyümesini destekler. Sponsor ilişkileri yönetimi, proje finansmanı ve bütçe planlaması konularında aktif rol oynar."
+      },
+      "hr": {
+        "title": "İnsan Kaynakları",
+        "category": "Departman",
+        "description1": "Sosyal etkinlik ve sosyal sorumluluk projeleri düzenleyerek kulübe üye katmaktan ve daha sosyal bir ortam sağlanmasından sorumludur. Ayrıca düzenlenmesi planlanan büyük etkinliklerin PR çalışmalarının bir bölümü İnsan kaynakları departmanının görevidir.",
+        "description2": "Departmanımız, kulüp kültürünü güçlendirerek üye memnuniyetini artırır. Takım ruhu, motivasyon ve kişisel gelişim aktiviteleri organize eder."
+      }
+    },
+    "about": {
+      "club": {
+        "title": "Kulüp Hakkında",
+        "description": "ESOES, teknoloji ve inovasyona odaklanan dinamik bir öğrenci kulübüdür. Öğrencilere pratik deneyim ve networking imkanları sunuyoruz.",
+        "content": "Modern yaklaşımlar ve güncel teknolojilerle geleceğin liderlerini yetiştiriyoruz."
+      },
+      "vision": {
+        "title": "Vizyonumuz",
+        "description": "Öğrencilerin teknoloji alanında kendilerini geliştirmelerini sağlamak ve sektöre hazırlamaktır.",
+        "content": "İnovasyon, işbirliği ve sürekli öğrenme değerlerimizin temelini oluşturur."
+      },
+      "mission": {
+        "title": "Misyonumuz",
+        "description": "Kaliteli eğitim, pratik projeler ve güçlü bir topluluk oluşturarak öğrencilerin kariyerlerine katkı sağlamak.",
+        "content": "Her üyemizin potansiyelini maksimuma çıkarması için destek veriyoruz."
+      }
+    },
+    "testimonials": {
+      "title": {
+        "part1": "Üyelerimiz",
+        "highlight": "Diyor ki"
+      },
+      "subtitle": "ESOES deneyimi hakkında üyelerimizin görüşleri",
+      "items": [
+        {
+          "quote": "ESOES kulübü sayesinde birçok proje geliştirdim ve harika arkadaşlıklar kurdum. Teknik becerilerimi geliştirmek için ideal bir ortam.",
+          "name": "Ahmet Yılmaz",
+          "title": "Bilgisayar Mühendisliği Öğrencisi"
+        },
+        {
+          "quote": "Kulüpteki etkinlikler ve workshoplar kariyerime büyük katkı sağladı. Networking imkanları da muhteşem.",
+          "name": "Zeynep Kaya",
+          "title": "Yazılım Geliştirici"
+        },
+        {
+          "quote": "ESOES'te öğrendiğim teknolojiler sayesinde stajımı başarıyla tamamladım. Herkese tavsiye ederim.",
+          "name": "Mehmet Demir",
+          "title": "Frontend Developer"
+        }
+      ]
+    },
+    "cta": {
+      "title": {
+        "part1": "Hazır mısın",
+        "highlight": "Aramıza",
+        "part2": "Katılmaya?"
+      },
+      "subtitle": "Teknoloji dünyasında kendinizi geliştirmek ve harika projeler üretmek için hemen başvurun!",
+      "applyNow": "Hemen Başvur",
+      "learnMore": "Daha Fazla Bilgi"
+    },
+    "errors": {
+      "title": "Bir Hata Oluştu",
+      "message": "Lütfen daha sonra tekrar deneyin."
+    },
+    "events": {
+      "selectedDate": "Seçilen tarih:",
+      "selectedEvent": "Seçilen etkinlik:",
+      "eventDetails": "Etkinlik: {title}\nTarih: {date}\nSaat: {time}\nAçıklama: {description}",
+      "noDescription": "Açıklama yok"
+    }
+  },
+  "footer": {
+    "company": {
+      "title": "ESOES",
+      "description": "Girişimci ESOGÜ Mühendislik Fakültesi öğrencileri tarafından kurulan \"Engineering Society of Eskişehir\" (ESOES) tüm mühendislik öğrencilerine hitap eden geniş üye profiliyle, keşfederek fark yaratmayı amaçlayan bir öğrenci kulübüdür."
+    },
+    "contact": {
+      "title": "İletişim",
+      "email": "esoes@university.edu",
+      "phone": "+90 XXX XXX XX XX",
+      "address": "Üniversite Kampüsü"
+    },
+    "quickLinks": {
+      "title": "Hızlı Erişim",
+      "home": "Ana Sayfa",
+      "departments": "Bölümler",
+      "gallery": "Galeri",
+      "faq": "SSS",
+      "contact": "İletişim"
+    },
+    "social": {
+      "title": "Sosyal"
+    },
+    "bottom": {
+      "copyright": "© 2024 ESOES. Tüm hakları saklıdır.",
+      "privacy": "Gizlilik Politikası",
+      "terms": "Kullanım Şartları"
+    }
+  },
+  "contact": {
+    "header": {
+      "title": "İletişime Geçin",
+      "description1": "ESOES ile iletişime geçmek için aşağıdaki kanalları kullanabilirsiniz.",
+      "description2": "Sorularınız için bize ulaşın!"
+    },
+    "social": {
+      "title": "Sosyal Medya Hesaplarımız",
+      "instagramUrl": "https://instagram.com/esoes",
+      "linkedinUrl": "https://linkedin.com/company/esoes",
+      "emailUrl": "mailto:info@esoes.com"
+    },
+    "form": {
+      "title": "Mesaj Gönderin",
+      "fullNameLabel": "Ad Soyad",
+      "fullNamePlaceholder": "Adınız ve soyadınız",
+      "emailLabel": "E-posta",
+      "emailPlaceholder": "ornek@email.com",
+      "subjectLabel": "Konu",
+      "subjectPlaceholder": "Mesajınızın konusu",
+      "messageLabel": "Mesaj",
+      "messagePlaceholder": "Mesajınızı buraya yazın...",
+      "sendButton": "Mesaj Gönder"
+    }
+  },
+  "FaqManagement": {
+    "title": "S.S.S Yönetimi",
+    "addFaq": "S.S.S Ekle",
+    "editFaq": "S.S.S Düzenle",
+    "questionTr": "Soru (Türkçe)",
+    "answerTr": "Cevap (Türkçe)",
+    "questionEn": "Soru (İngilizce)",
+    "answerEn": "Cevap (İngilizce)",
+    "order": "Sıra",
+    "updateFaq": "S.S.S Güncelle",
+    "cancel": "İptal",
+    "currentFaqs": "Mevcut S.S.S'ler",
+    "noFaqs": "Henüz S.S.S bulunmuyor.",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "loading": "S.S.S'ler yükleniyor...",
+    "errorLoading": "S.S.S'ler yüklenirken bir hata oluştu.",
+    "updateSuccess": "S.S.S başarıyla güncellendi!",
+    "createSuccess": "S.S.S başarıyla oluşturuldu!",
+    "deleteSuccess": "S.S.S başarıyla silindi!",
+    "operationError": "İşlem sırasında bir hata oluştu.",
+    "confirmDelete": "Bu S.S.S'yi silmek istediğinizden emin misiniz?",
+    "category": {
+      "selectCategory": "Kategori Seçiniz",
+      "GENERAL": "Genel",
+      "TECHNICAL": "Teknik",
+      "ACCOUNT": "Hesap",
+      "BILLING": "Fatura",
+      "SUPPORT": "Destek",
+      "OTHER": "Diğer"
+    },
+    "validation": {
+      "required": "Bu alan zorunludur.",
+      "fillAllFields": "Lütfen gerekli tüm alanları doldurun."
+    },
+    "common": {
+      "loading": "Yükleniyor..."
+    }
+   
+   
+  }
+}

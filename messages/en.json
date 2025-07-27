@@ -1,0 +1,236 @@
+{
+  "navigation": {
+    "events": "Events",
+    "gallery": "Gallery",
+    "department": "Department",
+    "hsd": "HSD",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "login": "Login",
+    "logout": "Logout",
+    "loggingOut": "Logging out...",
+    "welcome": "Welcome"
+  },
+  "common": {
+    "error": "Error",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "create": "Create",
+    "update": "Update",
+    "search": "Search",
+    "language": "Language",
+    "na": "N/A",
+    "loading": "Loading..."
+  },
+  "auth": {
+    "loginRequired": "Login Required",
+    "invalidCredentials": "Invalid credentials",
+    "logoutSuccess": "Successfully logged out"
+  },
+  "home": {
+    "hero": {
+      "title": {
+        "part1": "Shape the Future at the",
+        "highlight": "Center",
+        "part2": "of Technology and Innovation"
+      },
+      "subtitle": "Join our student club, develop projects, expand your network and make your mark in the technology world.",
+      "joinClub": "Join the Club",
+      "exploreEvents": "Explore Events"
+    },
+    "features": {
+      "title": {
+        "part1": "What We",
+        "highlight": "Offer"
+      },
+      "subtitle": "Everything you need to develop yourself in the field of technology is here"
+    },
+    "departments": {
+      "education": {
+        "title": "Education and Organization",
+        "category": "Department",
+        "description1": "The Education and Organization Department organizes both social and technical training programs needed by engineering students. It also deals with the organization of HEBOCON, GameJam and our signature event SOF.",
+        "description2": "Our department provides comprehensive educational opportunities by supporting both academic and social development of students. In addition to technical skills, training is also provided in leadership, teamwork and project management."
+      },
+      "corporate": {
+        "title": "Corporate Relations",
+        "category": "Department",
+        "description1": "By organizing EsTalks and technical trips, it aims to provide students with professional networks and become more equipped individuals. At the same time, finding speakers for major events is under the responsibility of the Corporate Relations department.",
+        "description2": "Our department acts as a bridge between industry professionals and students and creates career opportunities. It organizes company visits, networking events and mentorship programs."
+      },
+      "media": {
+        "title": "Media and Promotion",
+        "category": "Department",
+        "description1": "It manages all media accounts of the club and uses these channels effectively. It also undertakes social media PR; responsible for designing and editing content to be shared.",
+        "description2": "Our department increases the visibility of the club and raises its brand value. We have a specialized team in graphic design, video production, social media management and content strategy."
+      },
+      "sponsorship": {
+        "title": "Sponsorship",
+        "category": "Department",
+        "description1": "It ensures that the club establishes connections with companies, tradesmen and all firms that are sponsor candidates. Almost all of the club's financial needs are met by the sponsorship department.",
+        "description2": "Our department supports the growth of the club by creating sustainable financial resources. It plays an active role in sponsor relationship management, project financing and budget planning."
+      },
+      "hr": {
+        "title": "Human Resources",
+        "category": "Department",
+        "description1": "It is responsible for adding members to the club and providing a more social environment by organizing social activities and social responsibility projects. Also, part of the PR work of major events planned to be organized is the duty of the Human Resources department.",
+        "description2": "Our department increases member satisfaction by strengthening the club culture. It organizes team spirit, motivation and personal development activities."
+      }
+    },
+    "about": {
+      "club": {
+        "title": "About the Club",
+        "description": "ESOES is a dynamic student club focused on technology and innovation. We provide students with practical experience and networking opportunities.",
+        "content": "We train the leaders of the future with modern approaches and current technologies."
+      },
+      "vision": {
+        "title": "Our Vision",
+        "description": "To enable students to develop themselves in the field of technology and prepare them for the industry.",
+        "content": "Innovation, collaboration and continuous learning form the foundation of our values."
+      },
+      "mission": {
+        "title": "Our Mission",
+        "description": "To contribute to students' careers by creating quality education, practical projects and a strong community.",
+        "content": "We provide support for each of our members to maximize their potential."
+      }
+    },
+    "testimonials": {
+      "title": {
+        "part1": "What Our Members",
+        "highlight": "Say"
+      },
+      "subtitle": "Our members' opinions about the ESOES experience",
+      "items": [
+        {
+          "quote": "Thanks to the ESOES club, I developed many projects and made great friendships. It's an ideal environment to improve my technical skills.",
+          "name": "Ahmet Yılmaz",
+          "title": "Computer Engineering Student"
+        },
+        {
+          "quote": "The events and workshops at the club made a great contribution to my career. The networking opportunities are also amazing.",
+          "name": "Zeynep Kaya",
+          "title": "Software Developer"
+        },
+        {
+          "quote": "Thanks to the technologies I learned at ESOES, I successfully completed my internship. I recommend it to everyone.",
+          "name": "Mehmet Demir",
+          "title": "Frontend Developer"
+        }
+      ]
+    },
+    "cta": {
+      "title": {
+        "part1": "Are You Ready to",
+        "highlight": "Join",
+        "part2": "Us?"
+      },
+      "subtitle": "Apply now to develop yourself in the technology world and produce amazing projects!",
+      "applyNow": "Apply Now",
+      "learnMore": "Learn More"
+    },
+    "errors": {
+      "title": "An Error Occurred",
+      "message": "Please try again later."
+    },
+    "events": {
+      "selectedDate": "Selected date:",
+      "selectedEvent": "Selected event:",
+      "eventDetails": "Event: {title}\nDate: {date}\nTime: {time}\nDescription: {description}",
+      "noDescription": "No description"
+    }
+  },
+  "footer": {
+    "company": {
+      "title": "ESOES",
+      "description": "Founded by entrepreneurial ESOGÜ Engineering Faculty students, \"Engineering Society of Eskişehir\" (ESOES) is a student club that aims to make a difference by exploring, with a wide member profile that appeals to all engineering students."
+    },
+    "contact": {
+      "title": "Contact",
+      "email": "esoes@university.edu",
+      "phone": "+90 XXX XXX XX XX",
+      "address": "University Campus"
+    },
+    "quickLinks": {
+      "title": "Quick Access",
+      "home": "Home",
+      "departments": "Departments",
+      "gallery": "Gallery",
+      "faq": "FAQ",
+      "contact": "Contact"
+    },
+    "social": {
+      "title": "Social"
+    },
+    "bottom": {
+      "copyright": "© 2024 ESOES. All rights reserved.",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    }
+  },
+  "contact": {
+    "header": {
+      "title": "Get in Touch",
+      "description1": "You can use the channels below to contact ESOES.",
+      "description2": "Reach out to us with your questions!"
+    },
+    "social": {
+      "title": "Our Social Media Accounts",
+      "instagramUrl": "https://instagram.com/esoes",
+      "linkedinUrl": "https://linkedin.com/company/esoes",
+      "emailUrl": "mailto:info@esoes.com"
+    },
+    "form": {
+      "title": "Send a Message",
+      "fullNameLabel": "Full Name",
+      "fullNamePlaceholder": "Your name and surname",
+      "emailLabel": "E-mail",
+      "emailPlaceholder": "example@email.com",
+      "subjectLabel": "Subject",
+      "subjectPlaceholder": "Subject of your message",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Write your message here...",
+      "sendButton": "Send Message"
+    }
+  },
+  "FaqManagement": {
+    "title": "FAQ Management",
+    "addFaq": "Add FAQ",
+    "editFaq": "Edit FAQ",
+    "questionTr": "Question (Turkish)",
+    "answerTr": "Answer (Turkish)",
+    "questionEn": "Question (English)",
+    "answerEn": "Answer (English)",
+    "order": "Order",
+    "updateFaq": "Update FAQ",
+    "cancel": "Cancel",
+    "currentFaqs": "Current FAQs",
+    "noFaqs": "No FAQs found.",
+    "edit": "Edit",
+    "delete": "Delete",
+    "loading": "Loading FAQs...",
+    "errorLoading": "Error loading FAQs.",
+    "updateSuccess": "FAQ updated successfully!",
+    "createSuccess": "FAQ created successfully!",
+    "deleteSuccess": "FAQ deleted successfully!",
+    "operationError": "An error occurred during the operation.",
+    "confirmDelete": "Are you sure you want to delete this FAQ?",
+    "category": {
+      "selectCategory": "Select Category",
+      "title": "Category",
+      "GENERAL": "General",
+      "TECHNICAL": "Technical",
+      "ACCOUNT": "Account",
+      "BILLING": "Billing",
+      "SUPPORT": "Support",
+      "OTHER": "Other"
+    }
+  },
+ 
+  "validation": {
+    "required": "This field is required.",
+    "fillAllFields": "Please fill in all required fields."
+  }
+}
