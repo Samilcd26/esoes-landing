@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Link } from 'lucide-react';
 
 export default function Footer() {
   const t = useTranslations('footer');
@@ -56,11 +56,11 @@ export default function Footer() {
                     {t('quickLinks.title')}
                   </h3>
                   <div className="space-y-1 text-sm">
-                    <a href="/home" className="block hover:text-purple-400 transition-colors">{t('quickLinks.home')}</a>
-                    <a href="/department" className="block hover:text-purple-400 transition-colors">{t('quickLinks.departments')}</a>
-                    <a href="/gallery" className="block hover:text-purple-400 transition-colors">{t('quickLinks.gallery')}</a>
-                    <a href="/faq" className="block hover:text-purple-400 transition-colors">{t('quickLinks.faq')}</a>
-                    <a href="/contact" className="block hover:text-purple-400 transition-colors">{t('quickLinks.contact')}</a>
+                    <Link href="/home" className="block hover:text-purple-400 transition-colors">{t('quickLinks.home')}</Link>
+                    <Link href="/department" className="block hover:text-purple-400 transition-colors">{t('quickLinks.departments')}</Link>
+                    <Link href="/gallery" className="block hover:text-purple-400 transition-colors">{t('quickLinks.gallery')}</Link>
+                    <Link href="/faq" className="block hover:text-purple-400 transition-colors">{t('quickLinks.faq')}</Link>
+                    <Link href="/contact" className="block hover:text-purple-400 transition-colors">{t('quickLinks.contact')}</Link>
                   </div>
                 </div>
               </div>
@@ -137,7 +137,7 @@ const SocialIcon = ({ icon, href, hoverColor }: { icon: React.ReactNode; href: s
   return (
     <a
       href={href}
-      className={`w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center`}
+      className={`w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center hover:${hoverColor}`}
     >
       {icon}
     </a>

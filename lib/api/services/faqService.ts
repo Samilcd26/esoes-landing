@@ -1,4 +1,4 @@
-import { supabase, typedSupabase } from '../client';
+import {  typedSupabase } from '../client';
 import { Faq, CreateFaqRequest, UpdateFaqRequest } from '../../types/api';
 
 export const faqService = {

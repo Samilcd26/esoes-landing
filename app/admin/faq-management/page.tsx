@@ -2,6 +2,11 @@ import React from 'react';
 import { useTranslations } from 'next-intl';
 import FaqManagement from '@/components/admin/faq-management/FaqManagement';
 
+// Force dynamic rendering to prevent static generation issues with React Query
+export const dynamic = 'force-dynamic';
+export const runtime = 'edge';
+export const revalidate = 0;
+
 const FaqManagementPage: React.FC = () => {
   const t = useTranslations('FaqManagement');
 

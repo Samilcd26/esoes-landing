@@ -2,53 +2,11 @@
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { Mail, Instagram, Linkedin, MapPin, Phone } from "lucide-react";
 
 export default function ContactPage() {
   const tContact = useTranslations("contact");
-  const tFooter = useTranslations("footer");
 
-  const socialLinks = [
-    {
-      name: "Instagram",
-      url: tFooter("social.instagramUrl"),
-      icon: Instagram,
-      color: "from-pink-500 to-purple-600",
-      hoverColor: "hover:from-pink-600 hover:to-purple-700"
-    },
-    {
-      name: "LinkedIn",
-      url: tFooter("social.linkedinUrl"),
-      icon: Linkedin,
-      color: "from-blue-500 to-blue-700",
-      hoverColor: "hover:from-blue-600 hover:to-blue-800"
-    },
-    {
-      name: "Email",
-      url: tFooter("contact.emailUrl"),
-      icon: Mail,
-      color: "from-green-500 to-teal-600",
-      hoverColor: "hover:from-green-600 hover:to-teal-700"
-    }
-  ];
 
-  const contactInfo = [
-    {
-      icon: MapPin,
-      title: tFooter("contact.address"),
-      description: tFooter("contact.address")
-    },
-    {
-      icon: Phone,
-      title: tFooter("contact.phone"),
-      description: tFooter("contact.phone")
-    },
-    {
-      icon: Mail,
-      title: tFooter("contact.email"),
-      description: tFooter("contact.email")
-    }
-  ];
 
   return (
     <div className="min-h-screen relative overflow-hidden">

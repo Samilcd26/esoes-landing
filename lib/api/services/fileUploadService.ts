@@ -9,12 +9,10 @@ import {
   FileUploadRequest, 
   FileUploadResponse, 
   FileCompressionOptions, 
-  VideoCompressionOptions,
   FileUploadProgress,
   UploadedFile 
 } from '../../types/api';
 import { v4 as uuidv4 } from 'uuid';
-import mime from 'mime-types';
 
 // R2 Configuration
 const R2_ENDPOINT = process.env.NEXT_PUBLIC_R2_ENDPOINT!;
@@ -105,7 +103,6 @@ class FileUploadService {
 
   private async compressVideo(
     file: File, 
-    options: VideoCompressionOptions = {}
   ): Promise<{ compressedFile: File; compressionRatio: number }> {
     // Video sıkıştırma şimdilik devre dışı - FFmpeg sorunları nedeniyle
     console.warn('Video compression is temporarily disabled due to FFmpeg issues');
@@ -296,10 +293,7 @@ class FileUploadService {
             isCompressed: true,
           };
         } else if (isVideo) {
-          const { compressedFile, compressionRatio } = await this.compressVideo(file, {
-            width: request.maxWidth || 1280,
-            height: request.maxHeight || 720,
-          });
+          const { compressedFile, compressionRatio } = await this.compressVideo(file);
           finalFile = compressedFile;
           compressionData = {
             compressedSize: compressedFile.size,

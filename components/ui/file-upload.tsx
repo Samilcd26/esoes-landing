@@ -7,7 +7,7 @@ import { Upload, X, File, Image, Check, AlertCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface FileUploadProps {
-  onUploadComplete?: (files: any[]) => void;
+  onUploadComplete?: (files: unknown[]) => void;
   onError?: (error: string) => void;
   accept?: string;
   maxFiles?: number;
@@ -26,15 +26,15 @@ interface FileState {
   id: string;
   status: 'pending' | 'uploading' | 'completed' | 'error';
   progress?: FileUploadProgress;
-  result?: any;
+  result?: unknown;
   error?: string;
 }
 
 export interface FileUploadRef {
-  uploadFiles: () => Promise<any[]>;
+  uploadFiles: () => Promise<unknown[]>;
   clearFiles: () => void;
   hasPendingFiles: () => boolean;
-  getUploadedFiles: () => any[];
+  getUploadedFiles: () => unknown[];
 }
 
 export const FileUpload = forwardRef<FileUploadRef, FileUploadProps>(({
@@ -54,13 +54,13 @@ export const FileUpload = forwardRef<FileUploadRef, FileUploadProps>(({
   const [files, setFiles] = useState<FileState[]>([]);
   const [isDragOver, setIsDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { uploadFile, uploadProgress, isUploading, uploadError } = useFileUpload();
+  const { uploadFile } = useFileUpload();
 
   // Expose methods to parent component
   useImperativeHandle(ref, () => ({
     uploadFiles: async () => {
       const pendingFiles = files.filter(f => f.status === 'pending');
-      const uploadedResults: any[] = [];
+      const uploadedResults: unknown[] = [];
       
       for (const fileState of pendingFiles) {
         setFiles(prev => prev.map(f => 
@@ -182,8 +182,8 @@ export const FileUpload = forwardRef<FileUploadRef, FileUploadProps>(({
   };
 
   const getFileIcon = (file: File) => {
-    if (file.type.startsWith('image/')) return <Image className="w-4 h-4" />;
-    return <File className="w-4 h-4" />;
+    if (file.type.startsWith('image/')) return <Image className="w-4 h-4" aria-hidden="true" />;
+    return <File className="w-4 h-4" aria-hidden="true" />;
   };
 
   const getStatusIcon = (status: FileState['status']) => {
@@ -282,9 +282,9 @@ export const FileUpload = forwardRef<FileUploadRef, FileUploadProps>(({
                   {fileState.status === 'error' && (
                     <span className="text-red-500">{fileState.error}</span>
                   )}
-                  {fileState.status === 'uploading' && uploadProgress && (
+                  {fileState.status === 'uploading' && fileState.progress && (
                     <span className="text-blue-500">
-                      {uploadProgress.percentage}% • {uploadProgress.stage}
+                      {fileState.progress.percentage}% • {fileState.progress.stage}
                     </span>
                   )}
                   {fileState.status === 'pending' && (

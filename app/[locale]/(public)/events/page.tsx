@@ -2,7 +2,7 @@
 
 import { MotionCalendar } from "@/components/ui/motion-calendar";
 import { useCalendarEvents } from "@/hooks/useEvents";
-import { apiEventsToMotionEvents } from "@/lib/utils";
+import { apiEventsToMotionEvents, MotionCalendarEvent } from "@/lib/utils";
 import { LoaderOne } from "@/components/ui/loader";
 import { motion } from "framer-motion";
 
@@ -33,7 +33,7 @@ export default function EventsPage() {
     console.log("Seçilen tarih:", date);
   };
 
-  const handleEventClick = (event: any) => {
+  const handleEventClick = (event: MotionCalendarEvent) => {
     console.log("Seçilen etkinlik:", event);
     // Etkinlik detaylarını göster
     alert(`Etkinlik: ${event.title}\nTarih: ${event.date.toLocaleDateString('tr-TR')}\nSaat: ${event.time}\nAçıklama: ${event.description || 'Açıklama yok'}`);

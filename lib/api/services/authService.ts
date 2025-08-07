@@ -1,5 +1,6 @@
 import { supabase } from '../client';
 import { LoginRequest, RegisterRequest, AuthResponse, User } from '../../types/api';
+import { AuthChangeEvent, Session } from '@supabase/supabase-js';
 
 export const authService = {
   // Kullanıcı girişi
@@ -91,7 +92,7 @@ export const authService = {
   },
 
   // Kullanıcı profilini oluştur (eğer yoksa)
-  async createUserProfile(authUser: any): Promise<User> {
+  async createUserProfile(authUser: { id: string; email?: string; user_metadata?: { first_name?: string; last_name?: string; role?: string; avatar_url?: string } }): Promise<User> {
     const { data: userProfile, error } = await supabase
       .from('users')
       .insert({
@@ -182,7 +183,7 @@ export const authService = {
   },
 
   // Auth state değişikliklerini dinle
-  onAuthStateChange(callback: (event: string, session: any) => void) {
+  onAuthStateChange(callback: (event: AuthChangeEvent, session: Session | null) => void) {
     return supabase.auth.onAuthStateChange(callback);
   }
 }; 

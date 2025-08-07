@@ -1,7 +1,7 @@
 import { FaqCategory } from "./enum";
 
 // Genel API response tipi
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   data: T;
   message?: string;
@@ -103,7 +103,9 @@ export interface CreateDepartmentRequest {
   image_url?: string;
 }
 
-export interface UpdateDepartmentRequest extends Partial<CreateDepartmentRequest> {}
+export interface UpdateDepartmentRequest extends Partial<CreateDepartmentRequest> {
+  id: string;
+}
 
 export interface DepartmentStatistics {
   department_id: string;
@@ -137,7 +139,9 @@ export interface CreateFaqRequest {
   order: number;
 }
 
-export interface UpdateFaqRequest extends Partial<CreateFaqRequest> {}
+export interface UpdateFaqRequest extends Partial<CreateFaqRequest> {
+  id: string;
+}
 
 
 // Contact form tipi
@@ -175,7 +179,7 @@ export interface UploadedFile {
   isCompressed: boolean;
   compressionRatio?: number;
   status: 'processing' | 'completed' | 'failed';
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
   created_at: string;
   updated_at: string;
 }

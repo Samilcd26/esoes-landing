@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { eventService } from '../lib/api/services/eventService';
-import { CreateEventRequest, UpdateEventRequest, PaginationParams } from '../lib/types/api';
+import { CreateEventRequest, PaginationParams } from '../lib/types/api';
 
 // Query keys
 export const eventKeys = {

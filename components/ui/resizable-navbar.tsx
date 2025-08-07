@@ -7,8 +7,10 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "motion/react";
+import Image from "next/image";
 
 import React, { useRef, useState } from "react";
+import Link from "next/link";
 
 
 interface NavbarProps {
@@ -219,7 +221,6 @@ export const MobileNavMenu = ({
   children,
   className,
   isOpen,
-  onClose,
 }: MobileNavMenuProps) => {
   return (
     <AnimatePresence>
@@ -256,19 +257,20 @@ export const MobileNavToggle = ({
 
 export const NavbarLogo = () => {
   return (
-    <a
+    <Link
       href="/home"
       className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
     >
-      <img
-        src={"/esoes-logo.jpeg"}
-        alt="ESOES Logo"
-        width={30}
-        height={30}
-        className="rounded-lg"
-      />
+      <div className="relative w-[30px] h-[30px]">
+        <Image
+          src={"/esoes-logo.jpg"}
+          alt="ESOES Logo"
+          fill
+          className="rounded-lg"
+        />
+      </div>
       <span className="font-medium text-black dark:text-white">ESOES</span>
-    </a>
+    </Link>
   );
 };
 

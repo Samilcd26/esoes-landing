@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useCurrentUser } from "@/hooks/useAuth";
 import { 
@@ -8,12 +9,16 @@ import {
   useUsersWithDepartment
 } from "@/hooks/useDepartments";
 import { LoaderOne } from "@/components/ui/loader";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { FileUpload, FileUploadRef } from "@/components/ui/file-upload";
-import { User, Department } from "@/lib/types/api";
+import { User } from "@/lib/types/api";
 import { supabase } from "@/lib/api/client";
+
+// Force dynamic rendering to prevent static generation issues with React Query
+export const dynamic = 'force-dynamic';
+export const runtime = 'edge';
+export const revalidate = 0;
 
 // Alt bileşenler
 const BottomGradient = () => {
@@ -142,14 +147,14 @@ const UserForm = ({
     setIsSubmitting(true);
 
     try {
-      let finalFormData = { ...formData };
+      const finalFormData = { ...formData };
 
       // Önce dosyaları yükle
       if (fileUploadRef.current?.hasPendingFiles()) {
         try {
           const uploadedFiles = await fileUploadRef.current.uploadFiles();
           if (uploadedFiles.length > 0) {
-            const uploadedFile = uploadedFiles[0];
+            const uploadedFile = uploadedFiles[0] as { publicUrl?: string; url?: string; cdnUrl?: string };
             // Supabase storage URL'ini oluştur
             const avatar_url = uploadedFile.publicUrl || uploadedFile.url || uploadedFile.cdnUrl || "";
             if (avatar_url) {
@@ -402,11 +407,12 @@ const UserForm = ({
           <div className="mt-2 space-y-4">
             {formData.avatar_url && (
               <div className="flex items-center space-x-4">
-                <div className="h-16 w-16 overflow-hidden rounded-full">
-                  <img 
+                <div className="h-16 w-16 overflow-hidden rounded-full relative">
+                  <Image 
                     src={formData.avatar_url} 
                     alt="Mevcut profil fotoğrafı" 
-                    className="h-full w-full object-cover"
+                    fill
+                    className="object-cover"
                   />
                 </div>
                 <span className="text-sm text-gray-600 dark:text-gray-400">
@@ -550,12 +556,13 @@ const UsersList = ({ onEdit }: { onEdit: (user: User) => void }) => {
               className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm hover:shadow-md transition-shadow dark:border-gray-700 dark:bg-neutral-800"
             >
               <div className="flex items-center space-x-3">
-                <div className="h-10 w-10 overflow-hidden rounded-full bg-gray-200 dark:bg-neutral-700">
+                <div className="h-10 w-10 overflow-hidden rounded-full bg-gray-200 dark:bg-neutral-700 relative">
                   {user.avatar_url ? (
-                    <img 
+                    <Image 
                       src={user.avatar_url} 
                       alt={`${user.first_name} ${user.last_name}`}
-                      className="h-full w-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   ) : (
                     <div className="flex h-full w-full items-center justify-center text-gray-500 dark:text-gray-400">

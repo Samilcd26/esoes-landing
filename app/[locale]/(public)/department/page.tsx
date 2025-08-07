@@ -64,7 +64,7 @@ export default function DepartmentPage() {
                             Departmanlarımız
                         </h2>
                         <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                            ESOES'in farklı departmanları ve sorumluluk alanları hakkında detaylı bilgi edinin.
+                            ESOES&apos;in farklı departmanları ve sorumluluk alanları hakkında detaylı bilgi edinin.
                         </p>
                     </div>
                     <ExpandableCardGrid />

@@ -6,6 +6,17 @@ const withNextIntl = createNextIntlPlugin('./i18n.ts');
 const nextConfig: NextConfig = {
   // Docker için standalone output
   output: 'standalone',
+  // Image domains configuration
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
   // Turbopack ile uyumlu konfigürasyon
   webpack: (config, { isServer }) => {
     // FFmpeg için gerekli konfigürasyonlar

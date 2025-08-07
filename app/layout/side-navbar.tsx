@@ -7,7 +7,6 @@ import {
   IconSettings,
   IconChartBar,
   IconList,
-  IconCalendar,
   IconUsers,
   IconLogout,
   IconBuilding
@@ -15,6 +14,7 @@ import {
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { useCurrentUser } from "@/hooks/useAuth";
+import Link from "next/link";
 
 interface LinkType {
   label: string;
@@ -171,7 +171,7 @@ export function SideNavbar({ children }: SideNavbarProps) {
 }
 export const Logo = () => {
   return (
-    <a
+    <Link
       href="/admin"
       className="relative z-20 flex items-center space-x-2 py-1 text-sm font-normal text-black"
     >
@@ -183,17 +183,17 @@ export const Logo = () => {
       >
         ESOES Admin
       </motion.span>
-    </a>
+    </Link>
   );
 };
 export const LogoIcon = () => {
   return (
-    <a
+    <Link
       href="/admin"
       className="relative z-20 flex items-center space-x-2 py-1 text-sm font-normal text-black"
     >
       <div className="h-5 w-6 shrink-0 rounded-tl-lg rounded-tr-sm rounded-br-lg rounded-bl-sm bg-gradient-to-br from-purple-500 to-pink-500" />
-    </a>
+    </Link>
   );
 };
 

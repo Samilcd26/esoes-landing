@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { CreateEventRequest, Event } from "@/lib/types/api";
 import { useCreateEvent, useUpdateEvent, useUpdateEventStatus } from "@/hooks/useEvents";
 import { LoaderOne } from "@/components/ui/loader";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { FileUpload, FileUploadRef } from "@/components/ui/file-upload";
@@ -53,7 +53,7 @@ export const EventForm = ({ event, onSuccess, onCancel, className }: EventFormPr
     capacity: 0,
   });
 
-  const [errors, setErrors] = useState<Partial<CreateEventRequest>>({});
+  const [errors, setErrors] = useState<Partial<Record<keyof CreateEventRequest, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const fileUploadRef = useRef<FileUploadRef>(null);
 
@@ -93,7 +93,7 @@ export const EventForm = ({ event, onSuccess, onCancel, className }: EventFormPr
   };
 
   const validateForm = (): boolean => {
-    const newErrors: Partial<CreateEventRequest> = {};
+    const newErrors: Partial<Record<keyof CreateEventRequest, string>> = {};
 
     if (!formData.title.trim()) {
       newErrors.title = "Etkinlik başlığı gereklidir";
@@ -125,7 +125,7 @@ export const EventForm = ({ event, onSuccess, onCancel, className }: EventFormPr
     }
 
     if (formData.capacity <= 0) {
-      newErrors.capacity = "Kapasite 0'dan büyük olmalıdır" as any;
+      newErrors.capacity = "Kapasite 0'dan büyük olmalıdır";
     }
 
     setErrors(newErrors);
@@ -158,7 +158,7 @@ export const EventForm = ({ event, onSuccess, onCancel, className }: EventFormPr
         try {
           const uploadedFiles = await fileUploadRef.current.uploadFiles();
           if (uploadedFiles.length > 0) {
-            const uploadedFile = uploadedFiles[0];
+            const uploadedFile = uploadedFiles[0] as { url?: string; publicUrl?: string };
             setFormData(prev => ({
               ...prev,
               image: uploadedFile.url || uploadedFile.publicUrl || ""
@@ -212,9 +212,9 @@ export const EventForm = ({ event, onSuccess, onCancel, className }: EventFormPr
     }
   };
 
-  const handleFileUpload = (files: any[]) => {
+  const handleFileUpload = (files: unknown[]) => {
     if (files.length > 0) {
-      const uploadedFile = files[0];
+      const uploadedFile = files[0] as { url?: string; publicUrl?: string };
       // Yüklenen dosyanın URL'sini formData'ya ekle
       setFormData(prev => ({
         ...prev,

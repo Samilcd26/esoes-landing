@@ -19,7 +19,6 @@ import {
   IconChevronLeft,
   IconChevronRight,
   IconCheck,
-  IconX,
   IconClock
 } from "@tabler/icons-react";
 

@@ -4,7 +4,11 @@ import { motion, AnimatePresence } from "motion/react";
 import { EventList } from "@/components/admin/event-list";
 import { EventForm } from "@/components/admin/event-form";
 import { Event } from "@/lib/types/api";
-import { LoaderOne } from "@/components/ui/loader";
+
+// Force dynamic rendering to prevent static generation issues with React Query
+export const dynamic = 'force-dynamic';
+export const runtime = 'edge';
+export const revalidate = 0;
 
 type ViewMode = 'list' | 'add' | 'edit';
 

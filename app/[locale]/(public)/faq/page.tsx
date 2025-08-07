@@ -68,8 +68,7 @@ export default function FAQPage() {
     : faqData.filter(faq => faq.category === selectedCategory);
 
   return (
-    <div className="w-full h-screen ">
-      <BackgroundLines 
+    <BackgroundLines 
       className="min-h-screen"
       svgOptions={{ duration: 4 }}
     >
@@ -128,7 +127,7 @@ export default function FAQPage() {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="flex flex-wrap justify-center gap-3 mb-12"
         >
-          {categories.map((category, index) => (
+          {categories.map((category) => (
             <HoverBorderGradient
               key={category}
               as="button"
@@ -285,6 +284,5 @@ export default function FAQPage() {
         </motion.div>
       </div>
     </BackgroundLines>
-    </div>
   );
 }

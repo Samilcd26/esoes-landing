@@ -2,6 +2,7 @@
 
 import React, { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 
 export default function ExpandableCardGrid() {
@@ -70,13 +71,12 @@ export default function ExpandableCardGrid() {
               ref={ref}
               className="w-full max-w-[500px]  h-full md:h-fit md:max-h-[90%]  flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden"
             >
-              <motion.div layoutId={`image-${active.title}-${id}`}>
-                <img
-                  width={200}
-                  height={200}
+              <motion.div layoutId={`image-${active.title}-${id}`} className="relative w-full h-80 lg:h-80">
+                <Image
                   src={active.src}
                   alt={active.title}
-                  className="w-full h-80 lg:h-80 sm:rounded-tr-lg sm:rounded-tl-lg object-cover object-top"
+                  fill
+                  className="sm:rounded-tr-lg sm:rounded-tl-lg object-cover object-top"
                 />
               </motion.div>
 
@@ -128,7 +128,7 @@ export default function ExpandableCardGrid() {
         ) : null}
       </AnimatePresence>
       <ul className="max-w-2xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 items-start gap-4">
-        {cards.map((card, index) => (
+        {cards.map((card) => (
           <motion.div
             layoutId={`card-${card.title}-${id}`}
             key={card.title}
@@ -136,13 +136,12 @@ export default function ExpandableCardGrid() {
             className="p-4 flex flex-col  hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl cursor-pointer"
           >
             <div className="flex gap-4 flex-col  w-full">
-              <motion.div layoutId={`image-${card.title}-${id}`}>
-                <img
-                  width={100}
-                  height={100}
+              <motion.div layoutId={`image-${card.title}-${id}`} className="relative h-60 w-full">
+                <Image
                   src={card.src}
                   alt={card.title}
-                  className="h-60 w-full  rounded-lg object-cover object-top"
+                  fill
+                  className="rounded-lg object-cover object-top"
                 />
               </motion.div>
               <div className="flex justify-center items-center flex-col">
@@ -212,7 +211,7 @@ const cards = [
         <p>
           Eğitim ve Organizasyon Departmanı, mühendislik öğrencilerinin ihtiyacı olan 
           hem sosyal hem de teknik eğitim programları düzenler. Ayrıca, HEBOCON, 
-          GameJam ve İmza etkinliğimiz olan SOF'un organizasyonu ile ilgilenir. <br /> <br /> 
+          GameJam ve İmza etkinliğimiz olan SOF&apos;un organizasyonu ile ilgilenir. <br /> <br /> 
           Departmanımız, öğrencilerin hem akademik hem de sosyal gelişimlerini destekleyerek 
           kapsamlı eğitim fırsatları sunar. Teknik becerilerin yanı sıra liderlik, 
           takım çalışması ve proje yönetimi konularında da eğitimler verilir.
@@ -249,7 +248,7 @@ const cards = [
       return (
         <p>
           Kulübün tüm medya hesaplarını yönetir ve bu mecraları etkili bir şekilde kullanır. 
-          Aynı zamanda sosyal medya PR'ını üstlenir; paylaşılacak içeriklerin tasarımı 
+          Aynı zamanda sosyal medya PR&apos;ını üstlenir; paylaşılacak içeriklerin tasarımı 
           ve editlenmesinden sorumludur. <br /> <br /> 
           Departmanımız, kulübün görünürlüğünü artırarak marka değerini yükseltir. 
           Grafik tasarım, video prodüksiyonu, sosyal medya yönetimi ve içerik 

@@ -13,10 +13,13 @@ export function QueryProvider({ children }: { children: React.ReactNode }) {
             // Global query ayarları
             staleTime: 5 * 60 * 1000, // 5 dakika
             gcTime: 10 * 60 * 1000, // 10 dakika (eski adı: cacheTime)
-            retry: (failureCount, error: any) => {
+            retry: (failureCount, error: unknown) => {
               // Auth hatalarında retry yapma
-              if (error?.status === 401 || error?.status === 403) {
-                return false;
+              if (error && typeof error === 'object' && 'status' in error) {
+                const status = (error as { status: number }).status;
+                if (status === 401 || status === 403) {
+                  return false;
+                }
               }
               // Diğer hatalarda maksimum 3 kez dene
               return failureCount < 3;

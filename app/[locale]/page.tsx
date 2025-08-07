@@ -14,17 +14,11 @@ export default function RootPage() {
 
   useEffect(() => {
     if (!isLoading) {
-      if (user) {
-        // If user is logged in, redirect to admin dashboard
-        router.push(`/${locale}/admin`);
-      } else {
-        // If user is not logged in, redirect to home page
-        router.push(`/${locale}/home`);
-      }
+      const targetPath = user ? `/${locale}/admin` : `/${locale}/home`;
+      router.push(targetPath);
     }
   }, [user, isLoading, locale, router]);
 
-  // Show loading while checking authentication
   return (
     <div className="flex h-screen w-full items-center justify-center bg-black">
       <div className="flex flex-col items-center gap-4">

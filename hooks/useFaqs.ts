@@ -6,7 +6,7 @@ import { CreateFaqRequest, UpdateFaqRequest } from '../lib/types/api';
 export const faqKeys = {
   all: ['faqs'] as const,
   lists: () => [...faqKeys.all, 'list'] as const,
-  list: (filters: any) => [...faqKeys.lists(), { filters }] as const,
+  list: (filters: Record<string, unknown>) => [...faqKeys.lists(), { filters }] as const,
   details: () => [...faqKeys.all, 'detail'] as const,
   detail: (id: string) => [...faqKeys.details(), id] as const,
 };

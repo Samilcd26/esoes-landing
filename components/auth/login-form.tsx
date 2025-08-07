@@ -58,9 +58,9 @@ export function LoginForm() {
         password: formData.password,
       });
       router.push("/");
-    } catch (error: any) {
+    } catch (error: unknown) {
       setErrors({
-        general: error.message || "Login failed. Please try again.",
+        general: error instanceof Error ? error.message : "Login failed. Please try again.",
       });
     }
   };

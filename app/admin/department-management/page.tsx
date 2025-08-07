@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef } from "react";
 import { motion } from "motion/react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useCurrentUser } from "@/hooks/useAuth";
 import { 
@@ -19,7 +20,12 @@ import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { FileUpload, FileUploadRef } from "@/components/ui/file-upload";
-import { CreateDepartmentRequest, UpdateDepartmentRequest, Department, User } from "@/lib/types/api";
+import { CreateDepartmentRequest, Department } from "@/lib/types/api";
+
+// Force dynamic rendering to prevent static generation issues with React Query
+export const dynamic = 'force-dynamic';
+export const runtime = 'edge';
+export const revalidate = 0;
 
 // Alt bileşenler
 const BottomGradient = () => {
@@ -108,7 +114,7 @@ const DepartmentForm = ({
     setIsSubmitting(true);
 
         try {
-      let finalFormData = { ...formData };
+      const finalFormData = { ...formData };
 
       // Eğer yeni dosya seçilmişse önce yükle
       if (fileUploadRef.current?.hasPendingFiles()) {
@@ -116,8 +122,8 @@ const DepartmentForm = ({
           console.log("Yeni dosya yükleniyor...");
           const uploadResponses = await fileUploadRef.current.uploadFiles();
           if (uploadResponses.length > 0) {
-            const uploadResponse = uploadResponses[0]; // FileUploadResponse
-            const uploadedFile = uploadResponse.file; // UploadedFile
+            const uploadResponse = uploadResponses[0] as { file: { cdnUrl?: string } };
+            const uploadedFile = uploadResponse.file;
             const imageUrl = uploadedFile.cdnUrl || "";
             console.log("Yüklenen dosya URL'si:", { uploadResponse, uploadedFile, imageUrl });
             finalFormData.image_url = imageUrl;
@@ -136,7 +142,10 @@ const DepartmentForm = ({
         // Update existing department
         await updateMutation.mutateAsync({
           id: department.id,
-          data: finalFormData
+          data: {
+            ...finalFormData,
+            id: department.id
+          }
         });
       } else {
         // Create new department
@@ -219,11 +228,12 @@ const DepartmentForm = ({
           <div className="mt-2 space-y-4">
             {formData.image_url && (
               <div className="flex items-center space-x-4">
-                <div className="h-16 w-16 overflow-hidden rounded-lg">
-                  <img 
+                <div className="h-16 w-16 overflow-hidden rounded-lg relative">
+                  <Image 
                     src={formData.image_url} 
                     alt="Mevcut departman görseli" 
-                    className="h-full w-full object-cover"
+                    fill
+                    className="object-cover"
                   />
                 </div>
                 <span className="text-sm text-gray-600 dark:text-gray-400">
@@ -235,8 +245,8 @@ const DepartmentForm = ({
               ref={fileUploadRef}
               onUploadComplete={(files) => {
                 if (files.length > 0) {
-                  const uploadResponse = files[0]; // Bu bir FileUploadResponse
-                  const uploadedFile = uploadResponse.file; // Bu bir UploadedFile
+                  const uploadResponse = files[0] as { file: { cdnUrl?: string } };
+                  const uploadedFile = uploadResponse.file;
                   const imageUrl = uploadedFile.cdnUrl || "";
                   console.log("Dosya yüklendi:", { uploadResponse, uploadedFile, imageUrl });
                   handleInputChange("image_url", imageUrl);
@@ -429,12 +439,13 @@ const UserDepartmentAssignment = () => {
                 className="flex items-center justify-between rounded-lg border border-gray-100 p-4 dark:border-gray-700"
               >
                 <div className="flex items-center space-x-3">
-                  <div className="h-10 w-10 overflow-hidden rounded-full bg-gray-200 dark:bg-neutral-700">
-                    {user.avatar_url     ? (
-                      <img 
+                  <div className="h-10 w-10 overflow-hidden rounded-full bg-gray-200 dark:bg-neutral-700 relative">
+                    {user.avatar_url ? (
+                      <Image 
                         src={user.avatar_url} 
                         alt={`${user.first_name} ${user.last_name}`}
-                        className="h-full w-full object-cover"
+                        fill
+                        className="object-cover"
                       />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center text-gray-500 dark:text-gray-400">
@@ -678,11 +689,12 @@ export default function DepartmentManagementPage() {
                           </p>
                         </div>
                         {department.image_url && (
-                          <div className="ml-4 h-16 w-16 overflow-hidden rounded-lg">
-                            <img 
+                          <div className="ml-4 h-16 w-16 overflow-hidden rounded-lg relative">
+                            <Image 
                               src={department.image_url} 
                               alt={department.name}
-                              className="h-full w-full object-cover"
+                              fill
+                              className="object-cover"
                             />
                           </div>
                         )}

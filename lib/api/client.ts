@@ -145,7 +145,7 @@ export type Database = {
           is_compressed: boolean;
           compression_ratio?: number;
           status: 'processing' | 'completed' | 'failed';
-          metadata?: Record<string, any>;
+          metadata?: Record<string, unknown>;
           created_at: string;
           updated_at: string;
         };
@@ -168,7 +168,7 @@ export type Database = {
           is_compressed?: boolean;
           compression_ratio?: number;
           status?: 'processing' | 'completed' | 'failed';
-          metadata?: Record<string, any>;
+          metadata?: Record<string, unknown>;
           created_at?: string;
           updated_at?: string;
         };
@@ -191,7 +191,7 @@ export type Database = {
           is_compressed?: boolean;
           compression_ratio?: number;
           status?: 'processing' | 'completed' | 'failed';
-          metadata?: Record<string, any>;
+          metadata?: Record<string, unknown>;
           created_at?: string;
           updated_at?: string;
         };

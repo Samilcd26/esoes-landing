@@ -34,13 +34,13 @@ export const StickyScroll = ({
   content: {
     title: string;
     description: string;
-    content?: React.ReactNode | any;
+    content?: React.ReactNode;
   }[];
   contentClassName?: string;
   fullscreen?: boolean;
 }) => {
   const [activeCard, setActiveCard] = React.useState(0);
-  const ref = useRef<any>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     // For fullscreen mode, use the entire page scroll instead of container scroll
     target: fullscreen ? ref : undefined,
@@ -80,7 +80,7 @@ export const StickyScroll = ({
       document.body.style.background = backgroundColors[activeCard % backgroundColors.length];
       document.body.style.transition = "background 0.8s ease";
     }
-  }, [activeCard, fullscreen]);
+  }, [activeCard, fullscreen, backgroundColors, linearGradients]);
 
   // Cleanup effect for fullscreen mode
   useEffect(() => {

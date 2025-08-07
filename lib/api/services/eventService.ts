@@ -2,10 +2,8 @@ import { supabase, typedSupabase } from '../client';
 import { 
   Event, 
   CreateEventRequest, 
-  UpdateEventRequest, 
   PaginationParams, 
   PaginatedResponse,
-  ApiResponse 
 } from '../../types/api';
 
 export const eventService = {
@@ -203,14 +201,14 @@ export const eventService = {
 
   // Event güncelle
   async updateEvent(id: string, eventData: Partial<CreateEventRequest>): Promise<Event> {
-    const updateData: any = {};
+    const updateData: Partial<CreateEventRequest> = {};
     
     if (eventData.title) updateData.title = eventData.title;
     if (eventData.description) updateData.description = eventData.description;
-    if (eventData.startDate) updateData.start_date = eventData.startDate;
-    if (eventData.endDate) updateData.end_date = eventData.endDate;
+    if (eventData.startDate) updateData.startDate = eventData.startDate;
+    if (eventData.endDate) updateData.endDate = eventData.endDate;
     if (eventData.location) updateData.location = eventData.location;
-    if (eventData.image) updateData.image_url = eventData.image;
+    if (eventData.image) updateData.image = eventData.image;
     if (eventData.capacity) updateData.capacity = eventData.capacity;
 
     const { data, error } = await typedSupabase

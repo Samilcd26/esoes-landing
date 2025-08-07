@@ -1,23 +1,20 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { useCurrentUser, useLogout } from "@/hooks/useAuth";
+//import { useCurrentUser, useLogout } from "@/hooks/useAuth";
 import { LanguageSelector } from "@/components/ui/language-selector";
 import {
   Navbar,
   NavBody,
-  NavItems,
   MobileNav,
   MobileNavHeader,
   MobileNavMenu,
   MobileNavToggle,
   NavbarLogo,
-  NavbarButton,
 } from "@/components/ui/resizable-navbar";
 
-const getNavigationItems = (t: any): Array<{
+const getNavigationItems = (t: ReturnType<typeof useTranslations>): Array<{
   key: string;
   name: string;
   link: string;
@@ -58,17 +55,11 @@ const getNavigationItems = (t: any): Array<{
 
 export default function TopNavbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { data: user } = useCurrentUser();
-  const logoutMutation = useLogout();
+  //const { data: user } = useCurrentUser();
+  //const logoutMutation = useLogout();
   
   // Safe translation hook with fallback
-  let t: any;
-  try {
-    t = useTranslations();
-  } catch (error) {
-    console.warn("Translation context not ready in TopNavbar, using fallbacks");
-    t = (key: string) => key; // Fallback function
-  }
+  const t = useTranslations();
   
   const navigationItems = getNavigationItems(t);
 
@@ -79,7 +70,7 @@ export default function TopNavbar() {
   const handleItemClick = () => {
     setIsOpen(false);
   };
-
+/*
   const handleLogout = async () => {
     try {
       await logoutMutation.mutateAsync();
@@ -87,7 +78,7 @@ export default function TopNavbar() {
     } catch (error) {
       console.error("Logout error:", error);
     }
-  };
+  }*/
 
   return (
     <Navbar className="max-w-7xl mx-auto">
@@ -129,6 +120,7 @@ export default function TopNavbar() {
         </div>
         <div className="flex items-center gap-4">
           <LanguageSelector />
+          {/* Login button temporarily hidden
           {user ? (
             <div className="flex flex-col gap-0">
               <span className="text-sm text-neutral-600 dark:text-neutral-300">
@@ -148,6 +140,7 @@ export default function TopNavbar() {
               <NavbarButton variant="primary" as="span">{t("navigation.login")}</NavbarButton>
             </Link>
           )}
+          */}
         </div>
       </NavBody>
 
@@ -192,6 +185,7 @@ export default function TopNavbar() {
           })}
           <div className="flex items-center gap-4 px-4 py-3">
             <LanguageSelector />
+            {/* Login button temporarily hidden
             {user ? (
               <div className="flex flex-col gap-0">
                 <span className="text-sm text-neutral-600 dark:text-neutral-300">
@@ -211,6 +205,7 @@ export default function TopNavbar() {
                 <NavbarButton variant="primary" as="span">{t("navigation.login")}</NavbarButton>
               </Link>
             )}
+            */}
           </div>
         </MobileNavMenu>
       </MobileNav>

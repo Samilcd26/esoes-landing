@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
 import { locales, type Locale } from "@/i18n";
 
@@ -25,13 +25,7 @@ export function LanguageSelector() {
   }
   
   // Safe translation hook with fallback
-  let t: any;
-  try {
-    t = useTranslations("common");
-  } catch (error) {
-    console.warn("Translation context not ready in LanguageSelector, using fallbacks");
-    t = (key: string) => key; // Fallback function
-  }
+  const t = useTranslations("common");
 
   const switchLanguage = (newLocale: Locale) => {
     const currentPathname = pathname;

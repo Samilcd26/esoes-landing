@@ -1,5 +1,4 @@
 "use client";
-import { TextHoverEffect } from "@/components/ui/text-hover-effect";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
@@ -8,7 +7,7 @@ import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
 import { motion } from "framer-motion";
 import { GoogleGeminiEffect } from "@/components/ui/google-gemini-effect";
 import { useTranslations } from "next-intl";
-import { SparklesCore } from "@/components/ui/sparkles";
+import Image from "next/image";
   
 // Section wrapper for fade-in animation
 const SectionWrapper = ({ children, className }: { children: React.ReactNode, className?: string }) => {
@@ -160,9 +159,10 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-br from-blue-950/20 via-purple-950/20 to-black/50" />
         
         {/* Background Image with Overlay */}
-        <img
+        <Image 
           src="/nova-04.jpeg"
           alt="ESOES Background"
+          fill
           className="absolute inset-0 w-full h-full object-cover opacity-30"
         />
         
@@ -225,9 +225,10 @@ export default function Home() {
       {/* Features Section */}
       <SectionWrapper className="relative py-20 bg-black overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-950/20 via-purple-950/20 to-black/50" />
-        <img
+        <Image
           src="/chroma-04.jpeg"
           alt="Features Background"
+          fill
           className="absolute inset-0 w-full h-full object-cover opacity-30"
         />
         <div className="relative z-10 container mx-auto px-4">

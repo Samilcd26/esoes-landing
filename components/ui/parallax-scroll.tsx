@@ -2,6 +2,7 @@
 import { useScroll, useTransform } from "motion/react";
 import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 
@@ -12,7 +13,7 @@ export const ParallaxScroll = ({
   images: string[];
   className?: string;
 }) => {
-  const gridRef = useRef<any>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState<number | null>(null);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const { scrollYProgress } = useScroll({
@@ -48,9 +49,7 @@ export const ParallaxScroll = ({
     setSelectedImage(null);
   };
 
-  const getImageIndex = (column: number, idx: number) => {
-    return column === 1 ? idx : column === 2 ? idx + third : idx + 2 * third;
-  };
+
 
   return (
     <>
@@ -75,13 +74,14 @@ export const ParallaxScroll = ({
                   hovered !== null && hovered !== idx && "blur-sm scale-[0.98]"
                 )}
               >
-                <img
-                  src={el}
-                  className={`${heightClasses[idx % heightClasses.length]} w-full object-cover object-left-top !m-0 !p-0`}
-                  height="400"
-                  width="400"
-                  alt="thumbnail"
-                />
+                <div className={`${heightClasses[idx % heightClasses.length]} w-full relative`}>
+                  <Image
+                    src={el}
+                    fill
+                    className="object-cover object-left-top"
+                    alt="thumbnail"
+                  />
+                </div>
                 <div
                   className={cn(
                     "absolute inset-0 bg-black/50 flex items-end py-8 px-4 transition-opacity duration-300",
@@ -108,13 +108,14 @@ export const ParallaxScroll = ({
                   hovered !== null && hovered !== (idx + third) && "blur-sm scale-[0.98]"
                 )}
               >
-                <img
-                  src={el}
-                  className={`${heightClasses[(idx + 2) % heightClasses.length]} w-full object-cover object-left-top !m-0 !p-0`}
-                  height="400"
-                  width="400"
-                  alt="thumbnail"
-                />
+                <div className={`${heightClasses[(idx + 2) % heightClasses.length]} w-full relative`}>
+                  <Image
+                    src={el}
+                    fill
+                    className="object-cover object-left-top"
+                    alt="thumbnail"
+                  />
+                </div>
                 <div
                   className={cn(
                     "absolute inset-0 bg-black/50 flex items-end py-8 px-4 transition-opacity duration-300",
@@ -141,13 +142,14 @@ export const ParallaxScroll = ({
                   hovered !== null && hovered !== (idx + 2 * third) && "blur-sm scale-[0.98]"
                 )}
               >
-                <img
-                  src={el}
-                  className={`${heightClasses[(idx + 4) % heightClasses.length]} w-full object-cover object-left-top !m-0 !p-0`}
-                  height="400"
-                  width="400"
-                  alt="thumbnail"
-                />
+                <div className={`${heightClasses[(idx + 4) % heightClasses.length]} w-full relative`}>
+                  <Image
+                    src={el}
+                    fill
+                    className="object-cover object-left-top"
+                    alt="thumbnail"
+                  />
+                </div>
                 <div
                   className={cn(
                     "absolute inset-0 bg-black/50 flex items-end py-8 px-4 transition-opacity duration-300",
@@ -183,11 +185,14 @@ export const ParallaxScroll = ({
               className="relative max-w-7xl max-h-[90vh] mx-4"
               onClick={(e) => e.stopPropagation()}
             >
-              <img
-                src={images[selectedImage]}
-                alt={`Image ${selectedImage + 1}`}
-                className="w-full h-auto max-h-[90vh] object-contain rounded-lg shadow-2xl"
-              />
+              <div className="relative w-full h-auto max-h-[90vh]">
+                <Image
+                  src={images[selectedImage]}
+                  alt={`Image ${selectedImage + 1}`}
+                  fill
+                  className="object-contain rounded-lg shadow-2xl"
+                />
+              </div>
               
               {/* Close button */}
               <button

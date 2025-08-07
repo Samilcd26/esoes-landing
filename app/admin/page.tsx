@@ -2,19 +2,21 @@
 import { motion } from "motion/react";
 import { useAllEvents } from "@/hooks/useEvents";
 import { LoaderOne } from "@/components/ui/loader";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { 
   IconCalendar, 
   IconUsers, 
   IconChartBar, 
-  IconPlus, 
   IconList,
   IconEye,
   IconClock,
   IconCheck,
-  IconX
 } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
+
+// Force dynamic rendering to prevent static generation issues with React Query
+export const dynamic = 'force-dynamic';
+export const runtime = 'edge';
+export const revalidate = 0;
 
 export default function AdminDashboard() {
   const { data: eventsData, isLoading } = useAllEvents({ page: 1, limit: 100 });

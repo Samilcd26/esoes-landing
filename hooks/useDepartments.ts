@@ -6,7 +6,7 @@ import { CreateDepartmentRequest, UpdateDepartmentRequest } from '../lib/types/a
 export const departmentKeys = {
   all: ['departments'] as const,
   lists: () => [...departmentKeys.all, 'list'] as const,
-  list: (filters: any) => [...departmentKeys.lists(), { filters }] as const,
+  list: (filters: Record<string, unknown>) => [...departmentKeys.lists(), { filters }] as const,
   details: () => [...departmentKeys.all, 'detail'] as const,
   detail: (id: string) => [...departmentKeys.details(), id] as const,
   statistics: () => [...departmentKeys.all, 'statistics'] as const,
