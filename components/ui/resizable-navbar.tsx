@@ -191,7 +191,7 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
         damping: 50,
       }}
       className={cn(
-        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 lg:hidden",
+        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-4 py-2 lg:hidden",
         visible && "bg-white/80 dark:bg-neutral-950/80",
         className,
       )}
@@ -208,7 +208,7 @@ export const MobileNavHeader = ({
   return (
     <div
       className={cn(
-        "flex w-full flex-row items-center justify-between",
+        "flex w-full flex-row items-center justify-between px-4",
         className,
       )}
     >
@@ -259,11 +259,11 @@ export const NavbarLogo = () => {
   return (
     <Link
       href="/home"
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
+      className="relative z-20 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
     >
       <div className="relative w-[30px] h-[30px]">
         <Image
-          src={"/esoes-logo.jpg"}
+          src={"/assets/images/esoes-logo.jpg"}
           alt="ESOES Logo"
           fill
           className="rounded-lg"

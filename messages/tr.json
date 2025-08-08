@@ -2,7 +2,7 @@
   "navigation": {
     "events": "Etkinlikler",
     "gallery": "Galeri",
-    "department": "Bölüm",
+    "department": "Departmanlar",
     "hsd": "HSD",
     "contact": "İletişim",
     "faq": "S.S.S",
@@ -149,9 +149,8 @@
     },
     "contact": {
       "title": "İletişim",
-      "email": "esoes@university.edu",
-      "phone": "+90 XXX XXX XX XX",
-      "address": "Üniversite Kampüsü"
+      "email": "esoesogu@gmail.com",
+      "address": "Eskişehir Osmangazi Üniversitesi - ESKİŞEHİR"
     },
     "quickLinks": {
       "title": "Hızlı Erişim",
@@ -233,7 +232,81 @@
     "common": {
       "loading": "Yükleniyor..."
     }
-   
-   
+  },
+  "events": {
+    "title": "Etkinliklerimiz",
+    "subtitle": "ESOES'in düzenlediği özel etkinlikler ve imza projeleri",
+    "events": [
+      {
+        "id": "hebocon",
+        "title": "HEBOCON",
+        "description": "Hebocon, kulübümüzün imza etkinliklerinden biridir. Türkiye'nin farklı şehirlerindeki üniversitelerden gelen yarışmacı takımlarla gerçekleştirdiğimiz bir robot yarışmasıdır. Etkinliğin amacı takımlara verilen parçalarla yapılabilecek en kötü robotu yapmaktır.",
+        "category": "Robot Yarışması",
+        "type": "Yarışma"
+      },
+      {
+        "id": "summit-of-future",
+        "title": "SUMMIT OF FUTURE",
+        "description": "Summit Of Future, kulüp tarafından her yıl düzenlenen imza etkinliğimizdir. Etkinliğimizin amacı, katılımcıların vizyonunu genişletmek, alanında uzman kişilerin deneyimlerinden ilham almaktır. Ayrıca zengin fuaye alanı ve firma standlarımız aracılığıyla katılımcılarımıza profesyonel bağlantılar kurma fırsatı sağlamaktır.",
+        "category": "Konferans",
+        "type": "İmza Etkinliği"
+      },
+      {
+        "id": "game-jam",
+        "title": "GAME JAM",
+        "description": "GameJam, oyun geliştirmeye meraklı kişilerden oluşmuş takımların, belirli bir zaman dilimi içerisinde, belirlenen tema doğrultusunda özgün dijital oyun tasarlayıp geliştirdikleri yoğun ve yaratıcı bir süreçtir. Bu etkinlik katılımcıların fikir üretme, yazılım geliştirme, zaman yönetimi ve problem çözme gibi yeteneklerini geliştirmeyi amaçlar.",
+        "category": "Oyun Geliştirme",
+        "type": "Hackathon"
+      },
+      {
+        "id": "technical-trip",
+        "title": "TEKNİK GEZİ",
+        "description": "Teknik gezi, öğrencilere alanlarında faaliyet gösteren fabrikaları, üretim tesislerini ve çeşitli işletmeleri ziyaret etme fırsatı sunar. Bu etkinlik sayesinde katılımcılar kurumların çalışma süreçlerini gözlemleme deneyimi elde eder.",
+        "category": "Teknik Gezi",
+        "type": "Eğitim"
+      },
+      {
+        "id": "estalks",
+        "title": "ESTALKS - HTALKS",
+        "description": "EsTalks, bir moderatör ve bir konuşmacı ile beraber gerçekleşen bir etkinliktir. Konuşmacı, kendinden ve iş hayatındaki deneyimlerinden bahseder ve katılımcıların sorularını cevaplandırır.",
+        "category": "Söyleşi",
+        "type": "Networking"
+      },
+      {
+        "id": "social-responsibility",
+        "title": "SOSYAL SORUMLULUK GEZİLERİ",
+        "description": "Sosyal sorumluluk gezileri, topluma fayda sağlamayı ve kulüpte daha sıcak bir ortam sunmayı amaçlar.",
+        "category": "Sosyal Sorumluluk",
+        "type": "Geziler"
+      },
+      {
+        "id": "education-workshop",
+        "title": "EĞİTİM VE WORKSHOP",
+        "description": "Eğitim ve workshop etkinliklerimiz, katılımcılara faydalı eğitimler vermek, network genişletmek ve eğlenceli etkinliklerle kulüpte daha samimi bir ortam oluşturmayı hedefler.",
+        "category": "Eğitim",
+        "type": "Workshop"
+      }
+    ],
+    "filters": {
+      "all": "Tümü",
+      "competition": "Yarışma",
+      "conference": "Konferans",
+      "workshop": "Workshop",
+      "trip": "Geziler",
+      "networking": "Networking",
+      "social": "Sosyal Sorumluluk"
+    },
+    "details": {
+      "category": "Kategori",
+      "type": "Tür",
+      "date": "Tarih",
+      "location": "Konum",
+      "participants": "Katılımcılar",
+      "register": "Kayıt Ol",
+      "learnMore": "Detayları Gör",
+      "noEvents": "Henüz etkinlik bulunmuyor.",
+      "loading": "Etkinlikler yükleniyor...",
+      "error": "Etkinlikler yüklenirken bir hata oluştu."
+    }
   }
 }

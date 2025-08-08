@@ -5,10 +5,21 @@ import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 
-export default function ExpandableCardGrid() {
-  const [active, setActive] = useState<(typeof cards)[number] | boolean | null>(
-    null
-  );
+interface Card {
+  description: string;
+  title: string;
+  src: string;
+  ctaText: string;
+  ctaLink: string;
+  content: () => React.ReactNode;
+}
+
+interface ExpandableCardGridProps {
+  cards: Card[];
+}
+
+export default function ExpandableCardGrid({ cards }: ExpandableCardGridProps) {
+  const [active, setActive] = useState<Card | boolean | null>(null);
   const id = useId();
   const ref = useRef<HTMLDivElement>(null!);
 
@@ -97,17 +108,7 @@ export default function ExpandableCardGrid() {
                     </motion.p>
                   </div>
 
-                  <motion.a
-                    layout
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    href={active.ctaLink}
-                    target="_blank"
-                    className="px-4 py-3 text-sm rounded-full font-bold bg-green-500 text-white"
-                  >
-                    {active.ctaText}
-                  </motion.a>
+                  
                 </div>
                 <div className="pt-4 relative px-4">
                   <motion.div
@@ -127,7 +128,7 @@ export default function ExpandableCardGrid() {
           </div>
         ) : null}
       </AnimatePresence>
-      <ul className="max-w-2xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 items-start gap-4">
+      <ul className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start gap-4">
         {cards.map((card) => (
           <motion.div
             layoutId={`card-${card.title}-${id}`}
@@ -198,101 +199,3 @@ export const CloseIcon = () => {
     </motion.svg>
   );
 };
-
-const cards = [
-  {
-    description: "Eğitim ve Organizasyon",
-    title: "Eğitim ve Organizasyon",
-    src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    ctaText: "Daha Fazla",
-    ctaLink: "#",
-    content: () => {
-      return (
-        <p>
-          Eğitim ve Organizasyon Departmanı, mühendislik öğrencilerinin ihtiyacı olan 
-          hem sosyal hem de teknik eğitim programları düzenler. Ayrıca, HEBOCON, 
-          GameJam ve İmza etkinliğimiz olan SOF&apos;un organizasyonu ile ilgilenir. <br /> <br /> 
-          Departmanımız, öğrencilerin hem akademik hem de sosyal gelişimlerini destekleyerek 
-          kapsamlı eğitim fırsatları sunar. Teknik becerilerin yanı sıra liderlik, 
-          takım çalışması ve proje yönetimi konularında da eğitimler verilir.
-        </p>
-      );
-    },
-  },
-  {
-    description: "Kurumsal İlişkiler",
-    title: "Kurumsal İlişkiler",
-    src: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    ctaText: "Daha Fazla",
-    ctaLink: "#",
-    content: () => {
-      return (
-        <p>
-          EsTalks ve teknik geziler düzenleyerek öğrencilere mesleki ağ kazandırılması, 
-          daha donanımlı bireyler olmalarını amaçlar. Aynı zamanda büyük etkinliklere 
-          konuşmacı bulunması Kurumsal İlişkiler departmanının sorumluluğu altındadır. <br /> <br /> 
-          Departmanımız, sektör profesyonelleri ile öğrenciler arasında köprü görevi görür 
-          ve kariyer fırsatları yaratır. Şirket ziyaretleri, networking etkinlikleri ve 
-          mentörlük programları organize eder.
-        </p>
-      );
-    },
-  },
-  {
-    description: "Medya ve Tanıtım",
-    title: "Medya ve Tanıtım",
-    src: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    ctaText: "Daha Fazla",
-    ctaLink: "#",
-    content: () => {
-      return (
-        <p>
-          Kulübün tüm medya hesaplarını yönetir ve bu mecraları etkili bir şekilde kullanır. 
-          Aynı zamanda sosyal medya PR&apos;ını üstlenir; paylaşılacak içeriklerin tasarımı 
-          ve editlenmesinden sorumludur. <br /> <br /> 
-          Departmanımız, kulübün görünürlüğünü artırarak marka değerini yükseltir. 
-          Grafik tasarım, video prodüksiyonu, sosyal medya yönetimi ve içerik 
-          stratejisi konularında uzmanlaşmış ekibimiz bulunur.
-        </p>
-      );
-    },
-  },
-  {
-    description: "Sponsorluk",
-    title: "Sponsorluk",
-    src: "https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    ctaText: "Daha Fazla",
-    ctaLink: "#",
-    content: () => {
-      return (
-        <p>
-          Kulübün şirketler, esnaflar ve sponsor adayı olan tüm firmalarla bağlantı 
-          kurulmasını sağlar. Kulübün maddi ihtiyaçlarının neredeyse tamamını 
-          sponsorluk departmanı tarafından karşılanır. <br /> <br /> 
-          Departmanımız, sürdürülebilir finansal kaynak yaratarak kulübün 
-          büyümesini destekler. Sponsor ilişkileri yönetimi, proje finansmanı 
-          ve bütçe planlaması konularında aktif rol oynar.
-        </p>
-      );
-    },
-  },
-  {
-    description: "İnsan Kaynakları",
-    title: "İnsan Kaynakları",
-    src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    ctaText: "Daha Fazla",
-    ctaLink: "#",
-    content: () => {
-      return (
-        <p>
-          Sosyal etkinlik ve sosyal sorumluluk projeleri düzenleyerek kulübe 
-          üye katmaktan ve daha sosyal bir ortam sağlanmasından sorumludur. 
-          Ayrıca düzenlenmesi planlanan büyük etkinliklerin PR çalışmalarının 
-          bir bölümü İnsan kaynakları departmanının görevidir. <br /> <br /> 
-          Departmanımız, kulüp kültürünü güçlendirerek üye memnuniyetini artırır. 
-          Takım ruhu, motivasyon ve kişisel gelişim aktiviteleri organize eder.
-        </p>
-      );
-    },
-  },
-];

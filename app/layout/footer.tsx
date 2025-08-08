@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Link } from 'lucide-react';
+import { Mail,  MapPin, Instagram, Linkedin } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Footer() {
   const t = useTranslations('footer');
@@ -32,11 +33,9 @@ export default function Footer() {
                     <Mail size={16} className="text-purple-400" />
                     <span>{t('contact.email')}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Phone size={16} className="text-purple-400" />
-                    <span>{t('contact.phone')}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 cursor-pointer" onClick={() => {
+                    window.open('https://share.google/RB3wUvj52SUNHvXgO', '_blank');
+                  }}>
                     <MapPin size={16} className="text-purple-400" />
                     <span>{t('contact.address')}</span>
                   </div>
@@ -56,11 +55,11 @@ export default function Footer() {
                     {t('quickLinks.title')}
                   </h3>
                   <div className="space-y-1 text-sm">
-                    <Link href="/home" className="block hover:text-purple-400 transition-colors">{t('quickLinks.home')}</Link>
-                    <Link href="/department" className="block hover:text-purple-400 transition-colors">{t('quickLinks.departments')}</Link>
-                    <Link href="/gallery" className="block hover:text-purple-400 transition-colors">{t('quickLinks.gallery')}</Link>
-                    <Link href="/faq" className="block hover:text-purple-400 transition-colors">{t('quickLinks.faq')}</Link>
-                    <Link href="/contact" className="block hover:text-purple-400 transition-colors">{t('quickLinks.contact')}</Link>
+                    <Link href="/home" className="block hover:text-purple-400 transition-colors text-gray-300">{t('quickLinks.home')}</Link>
+                    <Link href="/department" className="block hover:text-purple-400 transition-colors text-gray-300">{t('quickLinks.departments')}</Link>
+                    <Link href="/gallery" className="block hover:text-purple-400 transition-colors text-gray-300">{t('quickLinks.gallery')}</Link>
+                    <Link href="/faq" className="block hover:text-purple-400 transition-colors text-gray-300">{t('quickLinks.faq')}</Link>
+                    <Link href="/contact" className="block hover:text-purple-400 transition-colors text-gray-300">{t('quickLinks.contact')}</Link>
                   </div>
                 </div>
               </div>
@@ -71,17 +70,14 @@ export default function Footer() {
           <div className="md:col-span-3 lg:col-span-4 xl:col-span-1 md:flex md:justify-center xl:block">
             <div className="w-full max-w-sm md:max-w-none xl:w-full h-full">
               <div className="h-full rounded-2xl border p-3 border-gray-800 relative min-h-[12rem]">
-                <div className="relative flex flex-col items-center justify-between h-full rounded-xl p-2 bg-gray-900/30">
-                  
-                  <div className="flex flex-col items-center gap-3">
+                <div className="relative flex flex-col items-center justify-start h-full rounded-xl p-2 bg-gray-900/30">
+                  <div className="flex flex-col items-center gap-3 pt-4">
                     <h3 className="font-sans text-lg font-semibold text-white text-center">
                       {t('social.title')}
                     </h3>
                     <div className="flex xl:flex-col gap-2">
-                      <SocialIcon icon={<Facebook size={20} />} href="#" hoverColor="blue-600" />
-                      <SocialIcon icon={<Twitter size={20} />} href="#" hoverColor="blue-400" />
-                      <SocialIcon icon={<Instagram size={20} />} href="#" hoverColor="pink-500" />
-                      <SocialIcon icon={<Linkedin size={20} />} href="#" hoverColor="blue-700" />
+                      <SocialIcon icon={<Instagram size={20} />} href="https://www.instagram.com/esoesogu/?hl=en" hoverColor="pink-500" />
+                      <SocialIcon icon={<Linkedin size={20} />} href="https://www.linkedin.com/company/esoesog%C3%BC/" hoverColor="blue-700" />
                     </div>
                   </div>
                 </div>
@@ -97,8 +93,6 @@ export default function Footer() {
               {t('bottom.copyright')}
             </p>
             <div className="flex gap-4 text-sm text-gray-400">
-              <a href="#" className="hover:text-white transition-colors">{t('bottom.privacy')}</a>
-              <a href="#" className="hover:text-white transition-colors">{t('bottom.terms')}</a>
             </div>
           </div>
         </div>

@@ -16,12 +16,12 @@ interface FAQItem {
 const faqData: FAQItem[] = [
   {
     question: "Kulübe nasıl üye olabilirim?",
-    answer: "ESOES'e üye olmak için sosyal medya hesaplarımızı takip edebilir ve üyelik başvuru formunu doldurabilirsiniz. Başvurular genellikle her dönem başında açılır ve tüm mühendislik öğrencilerine açıktır. Üyelik sürecinde motivasyon mektubu ve kısa bir mülakat bulunmaktadır.",
+    answer: "ESOES'e üye olmak için sosyal medya hesaplarımızı takip edebilir ve üyelik başvuru formunu doldurabilirsiniz. Başvurular genellikle her dönem başında açılır ve tüm mühendislik öğrencilerine açıktır.",
     category: "Üyelik"
   },
   {
     question: "Etkinlikler herkese açık mı?",
-    answer: "Evet! ESOES'in düzenlediği çoğu etkinlik tüm öğrencilere açıktır. Teknik konferanslar, workshop'lar, networking etkinlikleri ve sosyal aktiviteler herkesin katılımına açıktır. Sadece bazı özel eğitim programları üyelerimize özeldir.",
+    answer: "Evet! ESOES'in düzenlediği çoğu etkinlik tüm öğrencilere açıktır. Teknik konferanslar, workshop'lar, networking etkinlikleri ve sosyal aktiviteler herkesin katılımına açıktır.",
     category: "Etkinlikler"
   },
   {
@@ -31,7 +31,7 @@ const faqData: FAQItem[] = [
   },
   {
     question: "Hangi departmanlarda çalışabilirim?",
-    answer: "ESOES'te Eğitim ve Organizasyon, Kurumsal İlişkiler, Medya ve Tanıtım departmanlarında çalışabilirsiniz. Her departmanın kendine özgü sorumlulukları ve projeleri bulunmaktadır. İlgi alanlarınıza göre size en uygun departmanı seçebilirsiniz.",
+    answer: "ESOES'te Eğitim ve Organizasyon,Sponsorluk, Huwait Student Developer(HSD), Kurumsal İlişkiler, Medya ve Tanıtım departmanlarında çalışabilirsiniz. Her departmanın kendine özgü sorumlulukları ve projeleri bulunmaktadır. İlgi alanlarınıza göre size en uygun departmanı seçebilirsiniz.",
     category: "Departmanlar"
   },
   {

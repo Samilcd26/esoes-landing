@@ -149,9 +149,8 @@
     },
     "contact": {
       "title": "Contact",
-      "email": "esoes@university.edu",
-      "phone": "+90 XXX XXX XX XX",
-      "address": "University Campus"
+      "email": "esoesogu@gmail.com",
+      "address": "Eskisehir Osmangazi University - ESKISEHIR"
     },
     "quickLinks": {
       "title": "Quick Access",
@@ -232,5 +231,81 @@
   "validation": {
     "required": "This field is required.",
     "fillAllFields": "Please fill in all required fields."
+  },
+  "events": {
+    "title": "Our Events",
+    "subtitle": "Special events and signature projects organized by ESOES",
+    "events": [
+      {
+        "id": "hebocon",
+        "title": "HEBOCON",
+        "description": "Hebocon is one of our signature events. It is a robot competition held with competing teams from universities in different cities of Turkey. The aim of the event is to make the worst possible robot with the parts given to the teams.",
+        "category": "Robot Competition",
+        "type": "Competition"
+      },
+      {
+        "id": "summit-of-future",
+        "title": "SUMMIT OF FUTURE",
+        "description": "Summit Of Future is our signature event organized by the club every year. The aim of our event is to expand the vision of participants and inspire from the experiences of experts in their fields. Additionally, through our rich foyer area and company stands, we provide participants with the opportunity to establish professional connections.",
+        "category": "Conference",
+        "type": "Signature Event"
+      },
+      {
+        "id": "game-jam",
+        "title": "GAME JAM",
+        "description": "GameJam is an intensive and creative process where teams consisting of people interested in game development design and develop original digital games within a certain time period according to the determined theme. This event aims to develop participants' skills such as idea generation, software development, time management and problem solving.",
+        "category": "Game Development",
+        "type": "Hackathon"
+      },
+      {
+        "id": "technical-trip",
+        "title": "TECHNICAL TRIP",
+        "description": "Technical trips offer students the opportunity to visit factories, production facilities and various businesses operating in their fields. Through this event, participants gain experience in observing the working processes of institutions.",
+        "category": "Technical Trip",
+        "type": "Education"
+      },
+      {
+        "id": "estalks",
+        "title": "ESTALKS - HTALKS",
+        "description": "EsTalks is an event that takes place with a moderator and a speaker. The speaker talks about themselves and their experiences in business life and answers the participants' questions.",
+        "category": "Talk",
+        "type": "Networking"
+      },
+      {
+        "id": "social-responsibility",
+        "title": "SOCIAL RESPONSIBILITY TRIPS",
+        "description": "Social responsibility trips aim to benefit society and provide a warmer environment in the club.",
+        "category": "Social Responsibility",
+        "type": "Trips"
+      },
+      {
+        "id": "education-workshop",
+        "title": "EDUCATION AND WORKSHOP",
+        "description": "Our education and workshop events aim to provide useful training to participants, expand networks and create a more intimate environment in the club through fun events.",
+        "category": "Education",
+        "type": "Workshop"
+      }
+    ],
+    "filters": {
+      "all": "All",
+      "competition": "Competition",
+      "conference": "Conference",
+      "workshop": "Workshop",
+      "trip": "Trips",
+      "networking": "Networking",
+      "social": "Social Responsibility"
+    },
+    "details": {
+      "category": "Category",
+      "type": "Type",
+      "date": "Date",
+      "location": "Location",
+      "participants": "Participants",
+      "register": "Register",
+      "learnMore": "View Details",
+      "noEvents": "No events found yet.",
+      "loading": "Loading events...",
+      "error": "An error occurred while loading events."
+    }
   }
 }

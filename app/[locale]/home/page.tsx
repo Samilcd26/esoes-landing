@@ -2,7 +2,6 @@
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
-import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
 import { motion } from "framer-motion";
 import { GoogleGeminiEffect } from "@/components/ui/google-gemini-effect";
@@ -111,24 +110,6 @@ export default function Home() {
     },
   ];
 
-  // Sticky scroll content
-  const stickyContent = [
-    {
-      title: t("about.club.title"),
-      description: t("about.club.description"),
-      content: t("about.club.content")
-    },
-    {
-      title: t("about.vision.title"),
-      description: t("about.vision.description"),
-      content: t("about.vision.content")
-    },
-    {
-      title: t("about.mission.title"),
-      description: t("about.mission.description"),
-      content: t("about.mission.content")
-    }
-  ];
 
   const testimonials = [
     {
@@ -160,7 +141,7 @@ export default function Home() {
         
         {/* Background Image with Overlay */}
         <Image 
-          src="/nova-04.jpeg"
+          src="/assets/images/backgrounds/nova-04.jpeg"
           alt="ESOES Background"
           fill
           className="absolute inset-0 w-full h-full object-cover opacity-30"
@@ -226,7 +207,7 @@ export default function Home() {
       <SectionWrapper className="relative py-20 bg-black overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-950/20 via-purple-950/20 to-black/50" />
         <Image
-          src="/chroma-04.jpeg"
+          src="/assets/images/backgrounds/chroma-04.jpeg"
           alt="Features Background"
           fill
           className="absolute inset-0 w-full h-full object-cover opacity-30"
@@ -252,10 +233,7 @@ export default function Home() {
         </div>
       </SectionWrapper>
 
-      {/* About Section with Sticky Scroll */}
-      <SectionWrapper className="relative bg-black">
-        <StickyScroll content={stickyContent} />
-      </SectionWrapper>
+  
 
       {/* Testimonials Section */}
       <SectionWrapper className="relative py-20 bg-gradient-to-br from-purple-950/20 via-black to-blue-950/20">
@@ -301,7 +279,7 @@ export default function Home() {
             
             <HoverBorderGradient
               onClick={() => {
-                window.location.href = "/c  ";
+                window.location.href = "/contact";
               }}
               containerClassName="rounded-full"
               className="bg-transparent border border-white/20 text-white px-12 py-4 text-xl font-semibold hover:bg-white/10 cursor-pointer"

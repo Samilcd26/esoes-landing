@@ -147,7 +147,9 @@ export default function TopNavbar() {
       {/* Mobile Navigation */}
       <MobileNav>
         <MobileNavHeader>
-          <NavbarLogo />
+          <div className="flex items-center">
+            <NavbarLogo />
+          </div>
           <MobileNavToggle isOpen={isOpen} onClick={handleToggle} />
         </MobileNavHeader>
         

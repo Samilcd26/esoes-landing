@@ -4,30 +4,89 @@ import { MotionCalendar } from "@/components/ui/motion-calendar";
 import { useCalendarEvents } from "@/hooks/useEvents";
 import { apiEventsToMotionEvents, MotionCalendarEvent } from "@/lib/utils";
 import { LoaderOne } from "@/components/ui/loader";
-import { motion } from "framer-motion";
+import EventsSection from "@/components/ui/events-section";
+import { useTranslations } from "next-intl";
 
-// Section wrapper for fade-in animation
-const SectionWrapper = ({ children, className }: { children: React.ReactNode, className?: string }) => {
-  return (
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: "easeInOut" }}
-      viewport={{ once: true }}
-      className={className}
-    >
-      {children}
-    </motion.section>
-  );
+interface TranslationEvent {
+  id: string;
+  title: string;
+  description: string;
+}
+
+// Events objesi - Translation'dan alınacak ve images eklenecek
+const getEventsData = () => {
+  const events = [
+    {
+      id: "hebocon",
+      images: [
+        "/assets/images/events/hebocon-1.jpg",
+        "/assets/images/events/hebocon-2.jpg",
+      ]
+    },
+    {
+      id: "summit-of-future",
+      images: [
+        "/assets/images/events/summit-1.jpg",
+      ]
+    },
+    {
+      id: "game-jam",
+      images: [
+        "/assets/images/events/gamejam-1.jpg",
+        "/assets/images/events/gamejam-2.jpg"
+      ]
+    },
+    {
+      id: "technical-trip",
+      images: [
+        "/assets/images/events/technical-1.jpg",
+      ]
+    },
+    {
+      id: "estalks",
+      images: [
+        "/assets/images/events/estalks-1.gif",
+        "/assets/images/events/estalks-2.jpg"
+      ]
+    },
+    {
+      id: "social-responsibility",
+      images: [
+        "/assets/images/events/social-1.jpg",
+      ]
+    },
+    {
+      id: "education-workshop",
+      images: [
+        "/assets/images/events/workshop-1.gif",
+        "/assets/images/events/workshop-2.jpg",
+      ]
+    }
+  ];
+  
+  return events;
 };
 
 
+
+
 export default function EventsPage() {
+  const t = useTranslations("events");
+  
   // Fetch calendar events from Supabase
   const { data: calendarEvents, isLoading, error } = useCalendarEvents();
 
   // Convert API events to MotionCalendar format
   const motionEvents = calendarEvents ? apiEventsToMotionEvents(calendarEvents) : [];
+
+  // Get events from translation and combine with images
+  const eventsData = t.raw("events").map((event: TranslationEvent) => {
+    const imageData = getEventsData().find(img => img.id === event.id);
+    return {
+      ...event,
+      images: imageData?.images || []
+    };
+  });
 
   const handleDateSelect = (date: Date) => {
     console.log("Seçilen tarih:", date);
@@ -84,22 +143,7 @@ export default function EventsPage() {
             </div>
 
         {/* Events Section */}
-        <SectionWrapper className="relative py-20 bg-black">
-            <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                Upcoming
-                <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
-                    {" "}Events
-                </span>
-                </h2>
-                <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                Heyecan verici etkinliklerimizi keşfedin ve kayıt olun
-                </p>
-            </div>
-            
-            </div>
-        </SectionWrapper>
+        <EventsSection events={eventsData} />
     </div>
   );
 }
