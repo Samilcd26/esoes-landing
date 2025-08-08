@@ -2,11 +2,50 @@
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { useEmailService } from "@/hooks/useEmailService";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 
 export default function ContactPage() {
   const tContact = useTranslations("contact");
+  const { sendContactFormEmail, isLoading } = useEmailService();
+  
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: ""
+  });
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      return;
+    }
+
+    const success = await sendContactFormEmail(formData);
+    
+    if (success) {
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: ""
+      });
+    }
+  };
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -45,57 +84,77 @@ export default function ContactPage() {
             <h2 className="relative z-10 text-2xl md:text-3xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 text-center font-sans font-bold mb-6">
               {tContact("form.title")}
             </h2>
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label className="relative z-10 block bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-400 font-medium mb-2">
+                  <Label className="relative z-10 block bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-400 font-medium mb-2">
                     {tContact("form.fullNameLabel")}
-                  </label>
-                  <input
+                  </Label>
+                  <Input
                     type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                     placeholder={tContact("form.fullNamePlaceholder")}
+                    required
                   />
                 </div>
                 <div>
-                  <label className="relative z-10 block bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-400 font-medium mb-2">
+                  <Label className="relative z-10 block bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-400 font-medium mb-2">
                     {tContact("form.emailLabel")}
-                  </label>
-                  <input
+                  </Label>
+                  <Input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                     placeholder={tContact("form.emailPlaceholder")}
+                    required
                   />
                 </div>
               </div>
               <div>
-                <label className="relative z-10 block bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-400 font-medium mb-2">
+                <Label className="relative z-10 block bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-400 font-medium mb-2">
                   {tContact("form.subjectLabel")}
-                </label>
-                <input
+                </Label>
+                <Input
                   type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                   placeholder={tContact("form.subjectPlaceholder")}
+                  required
                 />
               </div>
               <div>
-                <label className="relative z-10 block bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-400 font-medium mb-2">
+                <Label className="relative z-10 block bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-400 font-medium mb-2">
                   {tContact("form.messageLabel")}
-                </label>
-                <textarea
+                </Label>
+                <Textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
                   rows={5}
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
                   placeholder={tContact("form.messagePlaceholder")}
+                  required
                 />
               </div>
-              <motion.button
+              <motion.div
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl"
-                type="submit"
               >
-                {tContact("form.sendButton")}
-              </motion.button>
+                <Button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isLoading ? tContact("form.sendingButton") : tContact("form.sendButton")}
+                </Button>
+              </motion.div>
             </form>
           </motion.div>
         </div>

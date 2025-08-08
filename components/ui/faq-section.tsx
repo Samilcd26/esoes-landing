@@ -1,13 +1,19 @@
-"use client";
+'use client';
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { IconChevronDown, IconQuestionMark } from "@tabler/icons-react";
-import { BackgroundLines } from "@/components/ui/background-lines";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
-import { useRouter } from "next/navigation";
 import { useSanityFaqs, useSanityFaqsByCategory } from "@/hooks/useSanityFaqs";
 import { Faq } from "@/lib/types/api";
+
+interface FaqSectionProps {
+  title?: string;
+  description?: string;
+  showCategories?: boolean;
+  limit?: number;
+  selectedCategory?: string;
+  onCategoryChange?: (category: string) => void;
+}
 
 const categories = ["Tümü", "general", "events", "membership", "technical", "other"];
 
@@ -20,13 +26,21 @@ const categoryLabels: Record<string, string> = {
   "other": "Diğer"
 };
 
-export default function FAQPage() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState("Tümü");
-  const router = useRouter();
+export default function FaqSection({ 
+  title = "Sıkça Sorulan Sorular",
+  description = "ESOES hakkında merak ettiğiniz her şeyi burada bulabilirsiniz.",
+  showCategories = true,
+  limit,
+  selectedCategory: externalSelectedCategory,
+  onCategoryChange
+}: FaqSectionProps) {
+  const [internalSelectedCategory, setInternalSelectedCategory] = useState("Tümü");
+  
+  const selectedCategory = externalSelectedCategory || internalSelectedCategory;
+  const handleCategoryChange = onCategoryChange || setInternalSelectedCategory;
 
   // Sanity hook'larını kullan
-  const { data: allFaqsData, isLoading: isLoadingAll } = useSanityFaqs();
+  const { data: allFaqsData, isLoading: isLoadingAll } = useSanityFaqs(limit ? { page: 1, limit } : undefined);
   const { data: categoryFaqsData, isLoading: isLoadingCategory } = useSanityFaqsByCategory(
     selectedCategory === "Tümü" ? "" : selectedCategory
   );
@@ -40,33 +54,32 @@ export default function FAQPage() {
 
   // FAQ'ları API formatından component formatına çevir
   const faqItems = faqs.map((faq: Faq) => ({
-    question: faq.question,
-    answer: faq.answer,
+    question: faq.question, // Soru
+    answer: faq.answer, // Cevap
     category: faq.category,
     id: faq.id
   }));
 
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   if (isLoading) {
     return (
-      <BackgroundLines 
-        className="min-h-screen"
-        svgOptions={{ duration: 4 }}
-      >
-        <div className="relative z-10 container mx-auto px-4 py-16">
-          <div className="text-center mb-16">
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-6 shadow-lg">
               <IconQuestionMark className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-slate-900 via-blue-800 to-purple-800 bg-clip-text text-transparent dark:from-white dark:via-blue-200 dark:to-purple-200 mb-4">
-              Sıkça Sorulan Sorular
-            </h1>
-            <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              {title}
+            </h2>
+            <p className="text-lg text-slate-600 dark:text-slate-300">
               Yükleniyor...
             </p>
           </div>
           
           <div className="max-w-4xl mx-auto space-y-4">
-            {[...Array(6)].map((_, i) => (
+            {[...Array(4)].map((_, i) => (
               <div key={i} className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-200/50 dark:border-slate-700/50 p-6 animate-pulse">
                 <div className="h-6 bg-gray-300 dark:bg-gray-600 rounded mb-4"></div>
                 <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded mb-2"></div>
@@ -75,22 +88,19 @@ export default function FAQPage() {
             ))}
           </div>
         </div>
-      </BackgroundLines>
+      </section>
     );
   }
 
   return (
-    <BackgroundLines 
-      className="min-h-screen"
-      svgOptions={{ duration: 4 }}
-    >
-      <div className="relative z-10 container mx-auto px-4 py-16">
-        {/* Header Section */}
+    <section className="py-16">
+      <div className="container mx-auto px-4">
+        {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <motion.div
             initial={{ scale: 0.8, opacity: 0, rotate: -180 }}
@@ -112,14 +122,14 @@ export default function FAQPage() {
             <IconQuestionMark className="w-8 h-8 text-white" />
           </motion.div>
           
-          <motion.h1 
+          <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-slate-900 via-blue-800 to-purple-800 bg-clip-text text-transparent dark:from-white dark:via-blue-200 dark:to-purple-200 mb-4"
+            className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4"
           >
-            Sıkça Sorulan Sorular
-          </motion.h1>
+            {title}
+          </motion.h2>
           
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -127,35 +137,33 @@ export default function FAQPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto"
           >
-            ESOES hakkında merak ettiğiniz her şeyi burada bulabilirsiniz. 
-            Sorularınızın cevabını bulamazsanız bizimle iletişime geçebilirsiniz.
+            {description}
           </motion.p>
         </motion.div>
 
         {/* Category Filter */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
-        >
-          {categories.map((category) => (
-            <HoverBorderGradient
-              key={category}
-              as="button"
-              duration={0.5}
-              containerClassName={
-                selectedCategory === category
-                  ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/25"
-                  : "bg-white/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
-              }
-              className="font-medium px-6 py-3"
-              onClick={() => setSelectedCategory(category)}
-            >
-              {categoryLabels[category]}
-            </HoverBorderGradient>
-          ))}
-        </motion.div>
+        {showCategories && (
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="flex flex-wrap justify-center gap-3 mb-12"
+          >
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => handleCategoryChange(category)}
+                className={`font-medium px-6 py-3 rounded-full transition-all duration-300 ${
+                  selectedCategory === category
+                    ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/25"
+                    : "bg-white/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700"
+                }`}
+              >
+                {categoryLabels[category]}
+              </button>
+            ))}
+          </motion.div>
+        )}
 
         {/* FAQ Items */}
         <motion.div 
@@ -280,43 +288,7 @@ export default function FAQPage() {
             </div>
           </motion.div>
         )}
-
-        {/* Contact Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ 
-            duration: 0.6, 
-            delay: 0.8,
-            type: "spring",
-            stiffness: 100,
-            damping: 20
-          }}
-          whileHover={{ 
-            scale: 1.02,
-            y: -5,
-            transition: { duration: 0.3 }
-          }}
-          className="text-center mt-16 p-8 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-500/5 dark:to-purple-500/5 rounded-3xl border border-blue-200/50 dark:border-blue-800/50 backdrop-blur-sm"
-        >
-          <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
-            Hala sorunuz mu var?
-          </h3>
-          <p className="text-slate-600 dark:text-slate-300 mb-6 max-w-2xl mx-auto">
-            Sorularınızın cevabını burada bulamadıysanız, sosyal medya hesaplarımızdan 
-            veya e-posta yoluyla bizimle iletişime geçebilirsiniz.
-          </p>
-          <HoverBorderGradient
-            as="button"
-            duration={0.7}
-            containerClassName="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-            className="text-lg"
-            onClick={() => router.push("/contact")}
-          >
-            İletişime Geç
-          </HoverBorderGradient>
-        </motion.div>
       </div>
-    </BackgroundLines>
+    </section>
   );
 }

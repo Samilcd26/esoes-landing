@@ -23,7 +23,10 @@
     "search": "Search",
     "language": "Language",
     "na": "N/A",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "pageNotFound": "Page Not Found",
+    "pageNotFoundDescription": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
+    "goHome": "Go Home"
   },
   "auth": {
     "loginRequired": "Login Required",
@@ -191,7 +194,8 @@
       "subjectPlaceholder": "Subject of your message",
       "messageLabel": "Message",
       "messagePlaceholder": "Write your message here...",
-      "sendButton": "Send Message"
+      "sendButton": "Send Message",
+      "sendingButton": "Sending..."
     }
   },
   "FaqManagement": {
