@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { SanityGalleryService, Gallery } from '../lib/api/sanityGalleryService'
+import { SanityGalleryService } from '../lib/api/sanityGalleryService'
 
 export const useSanityGallery = () => {
   const {

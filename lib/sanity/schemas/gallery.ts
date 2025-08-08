@@ -204,14 +204,21 @@ export default defineType({
     prepare(selection: {
       title: string
       category: string
-      media: any
+      media: {
+        _type: string
+        asset: {
+          _ref: string
+          _type: string
+        }
+      }
       order: number
     }) {
       const { title, category, media, order } = selection
       return {
         title,
         subtitle: `${category} • Order: ${order}`,
-        media,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        media: media as any,
       }
     },
   },

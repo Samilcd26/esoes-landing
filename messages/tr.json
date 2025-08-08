@@ -23,7 +23,10 @@
     "update": "Güncelle",
     "search": "Ara",
     "language": "Dil",
-    "na": "Mevcut Değil"
+    "na": "Mevcut Değil",
+    "pageNotFound": "Sayfa Bulunamadı",
+    "pageNotFoundDescription": "Aradığınız sayfa kaldırılmış, adı değiştirilmiş veya geçici olarak kullanılamıyor olabilir.",
+    "goHome": "Ana Sayfaya Dön"
   },
   "auth": {
     "loginRequired": "Giriş Gerekli",

@@ -1,4 +1,4 @@
-import {defineConfig} from 'sanity'
+import {defineConfig, SchemaTypeDefinition} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './lib/sanity/schemas'
@@ -13,7 +13,7 @@ export default defineConfig({
   plugins: [structureTool(), visionTool()],
 
   schema: {
-    types: schemaTypes,
+    types: schemaTypes as SchemaTypeDefinition[],
   },
 
   // Studio URL'i

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { sanityDepartmentService } from '../lib/api/sanityDepartmentService';
-import { Department, PaginationParams } from '../lib/types/api';
+import {  PaginationParams } from '../lib/types/api';
 
 export const useSanityDepartments = (params?: PaginationParams) => {
   return useQuery({

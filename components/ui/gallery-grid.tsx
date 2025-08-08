@@ -1,5 +1,5 @@
 "use client";
-import { useScroll, useTransform } from "motion/react";
+import { useScroll, useTransform, MotionValue } from "motion/react";
 import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
@@ -10,18 +10,42 @@ interface GalleryMediaItem {
   _type: 'imageItem' | 'videoItem' | 'externalLink'
   _key: string
   // Image fields
-  image?: any
+  image?: {
+    _type: string
+    asset: {
+      _ref: string
+      _type: string
+    }
+  }
   alt?: string
   caption?: string
   // Video fields
-  video?: any
-  poster?: any
+  video?: {
+    _type: string
+    asset: {
+      _ref: string
+      _type: string
+    }
+  }
+  poster?: {
+    _type: string
+    asset: {
+      _ref: string
+      _type: string
+    }
+  }
   // External link fields
   url?: string
   platform?: string
   title?: string
   description?: string
-  thumbnail?: any
+  thumbnail?: {
+    _type: string
+    asset: {
+      _ref: string
+      _type: string
+    }
+  }
 }
 
 interface GalleryGridProps {
@@ -80,7 +104,7 @@ export const GalleryGrid = ({ galleries, className }: GalleryGridProps) => {
     } else {
       // Resim ve video için modal aç
       console.log('Opening modal for:', item);
-      console.log('Image URL:', item._type === 'imageItem' ? urlFor(item.image).url() : 'Not an image');
+      console.log('Image URL:', item._type === 'imageItem' && item.image ? urlFor(item.image).url() : 'Not an image');
       setSelectedItem({
         galleryId: item.galleryId,
         mediaIndex: item.mediaIndex,
@@ -93,7 +117,7 @@ export const GalleryGrid = ({ galleries, className }: GalleryGridProps) => {
     setSelectedItem(null);
   };
 
-  const renderMediaItem = (item: typeof allMediaItems[0], index: number, translateY: any) => {
+  const renderMediaItem = (item: typeof allMediaItems[0], index: number, translateY: MotionValue<number>) => {
     const isImage = item._type === 'imageItem' && item.image;
     const isVideo = item._type === 'videoItem' && item.video;
     const isExternal = item._type === 'externalLink' && item.url;
@@ -102,7 +126,7 @@ export const GalleryGrid = ({ galleries, className }: GalleryGridProps) => {
     let altText = '';
     let caption = '';
 
-    if (isImage) {
+    if (isImage && item.image) {
       imageUrl = urlFor(item.image).url();
       altText = item.alt || item.caption || 'Gallery image';
       caption = item.caption || '';
@@ -238,7 +262,7 @@ export const GalleryGrid = ({ galleries, className }: GalleryGridProps) => {
                       className="w-auto h-auto max-w-[1200px] max-h-[600px] rounded-lg shadow-2xl"
                       poster={selectedItem.mediaItem.poster ? urlFor(selectedItem.mediaItem.poster).url() : undefined}
                     >
-                      <source src={selectedItem.mediaItem.video.asset.url} type="video/mp4" />
+                      <source src={urlFor(selectedItem.mediaItem.video).url()} type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                   </div>

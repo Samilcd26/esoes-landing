@@ -2,6 +2,7 @@
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface MediaResource {
   type: 'image' | 'video' | 'youtube' | 'document' | 'link';
@@ -217,9 +218,12 @@ const EventModal = ({
                         >
                           {resource.type === 'image' && (
                             <div className="aspect-video rounded-lg overflow-hidden bg-gray-100 dark:bg-neutral-800">
-                              <img 
+                              <Image 
                                 src={url} 
                                 alt={`${event.title} medya ${index + 1}`}
+                                width={0}
+                                height={0}
+                                sizes="100vw"
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                               />
                             </div>

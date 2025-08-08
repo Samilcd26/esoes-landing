@@ -1,6 +1,7 @@
 import { createClient } from 'next-sanity';
 import imageUrlBuilder from '@sanity/image-url';
-import { SanityDocument } from '@sanity/client';
+import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import type { Mutation, SanityDocument } from '@sanity/client';
 
 export const config = {
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
@@ -15,7 +16,7 @@ export const sanityClient = createClient(config);
 // Image builder
 const builder = imageUrlBuilder(sanityClient);
 
-export function urlFor(source: string) {
+export function urlFor(source: SanityImageSource) {
   return builder.image(source);
 }
 
@@ -25,6 +26,6 @@ export async function sanityQuery<T>(query: string, params?: Record<string, unkn
 }
 
 // Sanity mutation helper
-export async function sanityMutation<T>(mutations: SanityDocument<Record<string, unknown>>  []): Promise<T> {
+export async function sanityMutation(mutations: Mutation[]): Promise<SanityDocument> {
   return await sanityClient.mutate(mutations);
 }

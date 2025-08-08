@@ -19,7 +19,7 @@ export interface EventRegistrationData {
 export const useEmailService = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const sendEmail = async (type: string, data: any) => {
+  const sendEmail = async (type: string, data: unknown) => {
     setIsLoading(true);
     try {
       const response = await fetch('/api/email', {
@@ -64,7 +64,7 @@ export const useEmailService = () => {
     return sendEmail('password-reset', { email, resetToken });
   };
 
-  const sendCustomEmail = async (emailData: any) => {
+  const sendCustomEmail = async (emailData: unknown) => {
     return sendEmail('custom', emailData);
   };
 

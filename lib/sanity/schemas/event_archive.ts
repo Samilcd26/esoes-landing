@@ -115,12 +115,12 @@ export default defineType({
               type: 'type',
               media: 'image',
             },
-            prepare(value) {
-              const { type, media } = value as { type: string; media?: any };
+            prepare(selection) {
+              const { type, media } = selection;
               return {
-                title: type,
+                title: type as string,
                 subtitle: 'Media Resource',
-                media,
+                media: media,
               };
             },
           },
@@ -143,8 +143,8 @@ export default defineType({
       title: 'title',
       mediaCount: 'mediaResources',
     },
-    prepare(value) {
-      const { title, mediaCount } = value as { title: string; mediaCount?: any[] };
+    prepare(selection) {
+      const { title, mediaCount } = selection;
       const mediaCountText = mediaCount ? `${mediaCount.length} media` : 'No media';
       return {
         title,

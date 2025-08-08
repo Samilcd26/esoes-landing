@@ -54,8 +54,8 @@ export default function FaqSection({
 
   // FAQ'ları API formatından component formatına çevir
   const faqItems = faqs.map((faq: Faq) => ({
-    question: faq.question_tr, // Türkçe soru
-    answer: faq.answer_tr, // Türkçe cevap
+    question: faq.question, // Soru
+    answer: faq.answer, // Cevap
     category: faq.category,
     id: faq.id
   }));

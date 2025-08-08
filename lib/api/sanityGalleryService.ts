@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { sanityClient } from '../sanity/client'
 import {
   activeGalleryQuery,
@@ -12,18 +13,42 @@ export interface GalleryMediaItem {
   _type: 'imageItem' | 'videoItem' | 'externalLink'
   _key: string
   // Image fields
-  image?: any
+  image?: {
+    _type: string
+    asset: {
+      _ref: string
+      _type: string
+    }
+  }
   alt?: string
   caption?: string
   // Video fields
-  video?: any
-  poster?: any
+  video?: {
+    _type: string
+    asset: {
+      _ref: string
+      _type: string
+    }
+  }
+  poster?: {
+    _type: string
+    asset: {
+      _ref: string
+      _type: string
+    }
+  }
   // External link fields
   url?: string
   platform?: string
   title?: string
   description?: string
-  thumbnail?: any
+  thumbnail?: {
+    _type: string
+    asset: {
+      _ref: string
+      _type: string
+    }
+  }
 }
 
 export interface Gallery {
@@ -39,6 +64,25 @@ export interface Gallery {
   date?: string
   _createdAt: string
   _updatedAt: string
+}
+
+export interface GalleryImagesResult {
+  _id: string
+  title: string
+  category: string
+  mediaItems: Array<{
+    _type: string
+    _key: string
+    image?: {
+      _type: string
+      asset: {
+        _ref: string
+        _type: string
+      }
+    }
+    alt?: string
+    caption?: string
+  }>
 }
 
 export class SanityGalleryService {
@@ -78,10 +122,10 @@ export class SanityGalleryService {
   // Gallery arama
   static async searchGalleries(query: string): Promise<Gallery[]> {
     try {
-      const galleries = await sanityClient.fetch(searchGalleryQuery, { query })
+      const galleries = await sanityClient.fetch(searchGalleryQuery, { query } as any)
       return galleries
     } catch (error) {
-      console.error('Error searching galleries:', error)
+      console.error('Error fetching galleries by category:', error)
       throw error
     }
   }
@@ -89,7 +133,7 @@ export class SanityGalleryService {
   // Tek bir gallery getir
   static async getGalleryById(id: string): Promise<Gallery | null> {
     try {
-      const gallery = await sanityClient.fetch(singleGalleryQuery, { id })
+      const gallery = await sanityClient.fetch(singleGalleryQuery, { id }) as Gallery | null
       return gallery
     } catch (error) {
       console.error('Error fetching gallery by id:', error)
@@ -98,9 +142,9 @@ export class SanityGalleryService {
   }
 
   // Sadece resimler
-  static async getGalleryImages(): Promise<any[]> {
+  static async getGalleryImages(): Promise<GalleryImagesResult[]> {
     try {
-      const images = await sanityClient.fetch(galleryImagesQuery)
+      const images = await sanityClient.fetch(galleryImagesQuery) as GalleryImagesResult[]
       return images
     } catch (error) {
       console.error('Error fetching gallery images:', error)
