@@ -175,7 +175,9 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4">
             <HoverBorderGradient
               onClick={() => {
-                window.location.href = "/contact";
+                if (typeof window !== 'undefined') {
+                  window.location.href = "/contact";
+                }
               }}
               containerClassName="rounded-full"
               className="bg-black text-white px-8 py-3 text-lg font-semibold cursor-pointer"
@@ -185,7 +187,9 @@ export default function Home() {
             
             <HoverBorderGradient
               onClick={() => {
-                window.location.href = "/events";
+                if (typeof window !== 'undefined') {
+                  window.location.href = "/events";
+                }
               }}
               containerClassName="rounded-full"
               className="bg-transparent border border-white/20 text-white px-8 py-3 text-lg font-semibold hover:bg-white/10 cursor-pointer"
@@ -279,7 +283,9 @@ export default function Home() {
             
             <HoverBorderGradient
               onClick={() => {
-                window.location.href = "/contact";
+                if (typeof window !== 'undefined') {
+                  window.location.href = "/contact";
+                }
               }}
               containerClassName="rounded-full"
               className="bg-transparent border border-white/20 text-white px-12 py-4 text-xl font-semibold hover:bg-white/10 cursor-pointer"

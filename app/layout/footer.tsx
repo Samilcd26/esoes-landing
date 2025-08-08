@@ -34,7 +34,9 @@ export default function Footer() {
                     <span>{t('contact.email')}</span>
                   </div>
                   <div className="flex items-center gap-2 cursor-pointer" onClick={() => {
-                    window.open('https://share.google/RB3wUvj52SUNHvXgO', '_blank');
+                    if (typeof window !== 'undefined') {
+                      window.open('https://share.google/RB3wUvj52SUNHvXgO', '_blank');
+                    }
                   }}>
                     <MapPin size={16} className="text-purple-400" />
                     <span>{t('contact.address')}</span>

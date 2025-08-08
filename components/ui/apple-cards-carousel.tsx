@@ -84,7 +84,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   };
 
   const isMobile = () => {
-    return window && window.innerWidth < 768;
+    return typeof window !== 'undefined' && window.innerWidth < 768;
   };
 
   return (
@@ -182,14 +182,16 @@ export const Card = ({
       }
     }
 
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    if (typeof window !== 'undefined') {
+      if (open) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "auto";
+      }
 
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+      window.addEventListener("keydown", onKeyDown);
+      return () => window.removeEventListener("keydown", onKeyDown);
+    }
   }, [open, handleClose]);
 
   useOutsideClick(containerRef as React.RefObject<HTMLDivElement>, () => handleClose());
