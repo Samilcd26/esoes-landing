@@ -30,14 +30,16 @@ export default function ExpandableCardGrid({ cards }: ExpandableCardGridProps) {
       }
     }
 
-    if (active && typeof active === "object") {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    if (typeof window !== 'undefined') {
+      if (active && typeof active === "object") {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "auto";
+      }
 
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+      window.addEventListener("keydown", onKeyDown);
+      return () => window.removeEventListener("keydown", onKeyDown);
+    }
   }, [active]);
 
   useOutsideClick(ref, () => setActive(null));

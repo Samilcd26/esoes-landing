@@ -40,7 +40,11 @@ const Gallery = () => {
           <h2 className="text-2xl font-bold text-red-600 mb-4">Hata Oluştu</h2>
           <p className="text-gray-600 mb-4">Galeri yüklenirken bir sorun oluştu.</p>
           <button 
-            onClick={() => window.location.reload()}
+            onClick={() => {
+              if (typeof window !== 'undefined') {
+                window.location.reload();
+              }
+            }}
             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors"
           >
             Tekrar Dene

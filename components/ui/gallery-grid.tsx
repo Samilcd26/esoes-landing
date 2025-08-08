@@ -100,7 +100,9 @@ export const GalleryGrid = ({ galleries, className }: GalleryGridProps) => {
   const handleItemClick = (item: typeof allMediaItems[0]) => {
     if (item._type === 'externalLink' && item.url) {
       // Harici link için yeni sekmede aç
-      window.open(item.url, '_blank');
+      if (typeof window !== 'undefined') {
+        window.open(item.url, '_blank');
+      }
     } else {
       // Resim ve video için modal aç
       console.log('Opening modal for:', item);

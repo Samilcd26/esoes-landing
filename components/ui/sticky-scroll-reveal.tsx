@@ -76,7 +76,7 @@ export const StickyScroll = ({
     setBackgroundGradient(linearGradients[activeCard % linearGradients.length]);
     
     // For fullscreen mode, apply background to document body
-    if (fullscreen) {
+    if (fullscreen && typeof window !== 'undefined') {
       document.body.style.background = backgroundColors[activeCard % backgroundColors.length];
       document.body.style.transition = "background 0.8s ease";
     }
@@ -84,7 +84,7 @@ export const StickyScroll = ({
 
   // Cleanup effect for fullscreen mode
   useEffect(() => {
-    if (fullscreen) {
+    if (fullscreen && typeof window !== 'undefined') {
       const originalBackground = document.body.style.background;
       const originalOverflow = document.body.style.overflow;
       
