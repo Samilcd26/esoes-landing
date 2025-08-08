@@ -15,10 +15,16 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
   // Turbopack ile uyumlu konfigürasyon
-  webpack: (config, { isServer }) => {
+  webpack: (config) => {
     // FFmpeg için gerekli konfigürasyonlar
     config.resolve.fallback = {
       ...config.resolve.fallback,

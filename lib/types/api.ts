@@ -26,7 +26,57 @@ export interface PaginatedResponse<T> {
   };
 }
 
-// Event tipleri
+// Calendar Event tipleri
+export interface CalendarEvent {
+  _id: string;
+  _type: 'calendar_event';
+  title: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  location: string;
+  image?: string;
+  capacity: number;
+  registeredCount: number;
+  status: 'draft' | 'published' | 'cancelled';
+  slug: string;
+  category?: string;
+  tags?: string[];
+  organizer?: {
+    _id: string;
+    name: string;
+    avatar?: string;
+  };
+  _createdAt: string;
+  _updatedAt: string;
+}
+
+// Event Archive tipleri
+export interface MediaResource {
+  type: 'image' | 'video' | 'youtube' | 'document' | 'link';
+  image?: string;
+  imageUrl?: string;
+  video?: string;
+  videoUrl?: string;
+  youtubeUrl?: string;
+  document?: string;
+  documentUrl?: string;
+  externalUrl?: string;
+  order: number;
+}
+
+export interface EventArchive {
+  _id: string;
+  _type: 'event_archive';
+  title: string;
+  description: string;
+  slug: string;
+  mediaResources?: MediaResource[];
+  _createdAt: string;
+  _updatedAt: string;
+}
+
+// Legacy Event type (for backward compatibility)
 export interface Event {
   id: string;
   title: string;
@@ -88,11 +138,32 @@ export interface AuthResponse {
 }
 
 // Department tipleri
+export interface DepartmentImage {
+  url: string;
+  alt?: string;
+}
+
+export interface DepartmentAssistant {
+  name: string;
+  phone?: string;
+  email?: string;
+  notes?: string;
+}
+
 export interface Department {
   id: string;
   name: string;
   description: string;
-  image_url?: string;
+  images?: DepartmentImage[];
+  responsibleUserName: string;
+  responsibleUserImage?: string;
+  responsibleUserNotes?: string;
+  phone?: string;
+  email?: string;
+  assistants?: DepartmentAssistant[];
+  slug: string;
+  isActive: boolean;
+  order: number;
   created_at: string;
   updated_at: string;
 }
@@ -100,7 +171,16 @@ export interface Department {
 export interface CreateDepartmentRequest {
   name: string;
   description: string;
-  image_url?: string;
+  images?: DepartmentImage[];
+  responsibleUserName: string;
+  responsibleUserImage?: string;
+  responsibleUserNotes?: string;
+  phone?: string;
+  email?: string;
+  assistants?: DepartmentAssistant[];
+  slug: string;
+  isActive?: boolean;
+  order: number;
 }
 
 export interface UpdateDepartmentRequest extends Partial<CreateDepartmentRequest> {
@@ -120,10 +200,8 @@ export interface DepartmentStatistics {
 // Faq tipleri
 export interface Faq {
   id: string;
-  question_tr: string;
-  answer_tr: string;
-  question_en: string;
-  answer_en: string;
+  question: string;
+  answer: string;
   category: FaqCategory;
   order: number;
   created_at: string;
@@ -131,10 +209,8 @@ export interface Faq {
 }
 
 export interface CreateFaqRequest {
-  question_tr: string;
-  answer_tr: string;
-  question_en: string;
-  answer_en: string;
+  question: string;
+  answer: string;
   category: FaqCategory;
   order: number;
 }

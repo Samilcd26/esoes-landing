@@ -1,11 +1,11 @@
 # ESOES Landing Page
 
-Modern event management platform built with Next.js, Supabase, and React Query.
+Modern event management platform built with Next.js, SendGrid, and React Query.
 
 ## Features
 
 - 🎯 Modern UI with Framer Motion animations
-- 🔐 Supabase authentication
+- 📧 SendGrid email service
 - 📊 React Query for efficient data fetching
 - 🎨 Tailwind CSS for styling
 - 📱 Responsive design
@@ -14,7 +14,7 @@ Modern event management platform built with Next.js, Supabase, and React Query.
 ## Tech Stack
 
 - **Frontend**: Next.js 15, React 19, TypeScript
-- **Database**: Supabase (PostgreSQL)
+- **Email Service**: SendGrid
 - **State Management**: React Query (TanStack Query)
 - **Styling**: Tailwind CSS
 - **Animations**: Framer Motion
@@ -282,9 +282,28 @@ The application uses several PostgreSQL functions for complex operations:
 Create a `.env.local` file with the following variables:
 
 ```env
-# Supabase Configuration
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+# SendGrid Configuration
+SENDGRID_API_KEY=your_sendgrid_api_key_here
+FROM_EMAIL=noreply@esoes.com
+
+# App Configuration
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+
+# Sanity Configuration (if still using)
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id
+NEXT_PUBLIC_SANITY_DATASET=production
+SANITY_API_TOKEN=your_sanity_api_token
+
+# AWS S3 Configuration (if using)
+AWS_ACCESS_KEY_ID=your_aws_access_key
+AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+AWS_REGION=your_aws_region
+AWS_S3_BUCKET=your_s3_bucket_name
+
+# Note: Supabase email functionality has been replaced with SendGrid
+# Remove these variables if no longer using Supabase:
+# NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+# NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
 ## Available Scripts

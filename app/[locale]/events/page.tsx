@@ -1,105 +1,103 @@
 "use client";
 
 import { MotionCalendar } from "@/components/ui/motion-calendar";
-import { useCalendarEvents } from "@/hooks/useEvents";
-import { apiEventsToMotionEvents, MotionCalendarEvent } from "@/lib/utils";
+import { useSanityCalendarEventsForCalendar } from "@/hooks/useSanityCalendarEvents";
+import { useSanityEventArchives } from "@/hooks/useSanityEventArchive";
 import { LoaderOne } from "@/components/ui/loader";
 import EventsSection from "@/components/ui/events-section";
-import { useTranslations } from "next-intl";
-
-interface TranslationEvent {
-  id: string;
-  title: string;
-  description: string;
-}
-
-// Events objesi - Translation'dan alınacak ve images eklenecek
-const getEventsData = () => {
-  const events = [
-    {
-      id: "hebocon",
-      images: [
-        "/assets/images/events/hebocon-1.jpg",
-        "/assets/images/events/hebocon-2.jpg",
-      ]
-    },
-    {
-      id: "summit-of-future",
-      images: [
-        "/assets/images/events/summit-1.jpg",
-      ]
-    },
-    {
-      id: "game-jam",
-      images: [
-        "/assets/images/events/gamejam-1.jpg",
-        "/assets/images/events/gamejam-2.jpg"
-      ]
-    },
-    {
-      id: "technical-trip",
-      images: [
-        "/assets/images/events/technical-1.jpg",
-      ]
-    },
-    {
-      id: "estalks",
-      images: [
-        "/assets/images/events/estalks-1.gif",
-        "/assets/images/events/estalks-2.jpg"
-      ]
-    },
-    {
-      id: "social-responsibility",
-      images: [
-        "/assets/images/events/social-1.jpg",
-      ]
-    },
-    {
-      id: "education-workshop",
-      images: [
-        "/assets/images/events/workshop-1.gif",
-        "/assets/images/events/workshop-2.jpg",
-      ]
-    }
-  ];
-  
-  return events;
-};
+import { CalendarEvent, EventArchive } from "@/lib/types/api";
+import type { MotionCalendarEvent } from "@/lib/utils";
 
 
 
-
-export default function EventsPage() {
-  const t = useTranslations("events");
-  
-  // Fetch calendar events from Supabase
-  const { data: calendarEvents, isLoading, error } = useCalendarEvents();
-
-  // Convert API events to MotionCalendar format
-  const motionEvents = calendarEvents ? apiEventsToMotionEvents(calendarEvents) : [];
-
-  // Get events from translation and combine with images
-  const eventsData = t.raw("events").map((event: TranslationEvent) => {
-    const imageData = getEventsData().find(img => img.id === event.id);
+// Calendar events'i MotionCalendar formatına çevir
+const calendarEventsToMotionEvents = (events: CalendarEvent[]): MotionCalendarEvent[] => {
+  return events.map(event => {
+    const startDate = new Date(event.startDate);
+    const endDate = new Date(event.endDate);
+    
+    // Generate consistent color based on event ID
+    const EVENT_COLORS = [
+      "bg-blue-500", "bg-green-500", "bg-purple-500", "bg-red-500", 
+      "bg-yellow-500", "bg-pink-500", "bg-indigo-500", "bg-teal-500", 
+      "bg-orange-500", "bg-cyan-500"
+    ];
+    const colorIndex = event._id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % EVENT_COLORS.length;
+    const color = EVENT_COLORS[colorIndex];
+    
     return {
-      ...event,
-      images: imageData?.images || []
+      id: event._id,
+      title: event.title,
+      date: startDate,
+      endDate: endDate,
+      time: startDate.toLocaleTimeString('tr-TR', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: false
+      }),
+      color: color,
+      description: event.description,
+      location: event.location,
+      capacity: event.capacity,
+      registeredCount: event.registeredCount,
+      organizer: event.organizer,
+      // Medya içerikleri şimdilik boş, çünkü CalendarEvent'te mediaResources yok
+      // Eğer CalendarEvent'e mediaResources eklenecekse buraya eklenebilir
+      mediaResources: []
     };
   });
+};
 
-  const handleDateSelect = (date: Date) => {
-    console.log("Seçilen tarih:", date);
-  };
+// Event archive'ı EventsSection formatına çevir
+  const eventArchivesToEventsData = (archives: EventArchive[]) => {
+  return archives.map(archive => {
+    // Tüm medya içinden benzersiz URL’leri çıkar
+    const uniqueUrls = new Set<string>();
+    const images: string[] = [];
+    archive.mediaResources?.forEach(resource => {
+      const url = resource.image || resource.imageUrl || '';
+      if (resource.type === 'image' && url && !uniqueUrls.has(url)) {
+        uniqueUrls.add(url);
+        images.push(url);
+      }
+    });
+    
+    return {
+      id: archive._id,
+      title: archive.title,
+      description: archive.description,
+      images: images,
+      date: undefined,
+      category: 'other',
+      mediaResources: archive.mediaResources
+    };
+  });
+};
 
-  const handleEventClick = (event: MotionCalendarEvent) => {
-    console.log("Seçilen etkinlik:", event);
-    // Etkinlik detaylarını göster
-    alert(`Etkinlik: ${event.title}\nTarih: ${event.date.toLocaleDateString('tr-TR')}\nSaat: ${event.time}\nAçıklama: ${event.description || 'Açıklama yok'}`);
-  };
+export default function EventsPage() {
+  
+  // Fetch calendar events for calendar display
+  const { 
+    data: calendarEvents, 
+    isLoading: calendarLoading, 
+    error: calendarError 
+  } = useSanityCalendarEventsForCalendar();
+
+  // Fetch event archives for bottom section
+  const { 
+    data: eventArchives, 
+    isLoading: archiveLoading, 
+    error: archiveError 
+  } = useSanityEventArchives();
+
+  // Convert calendar events to MotionCalendar format
+  const motionEvents = calendarEvents ? calendarEventsToMotionEvents(calendarEvents) : [];
+
+  // Convert event archives to events data format
+  const archiveEventsData = eventArchives?.data ? eventArchivesToEventsData(eventArchives.data) : [];
 
   // Show loading state
-  if (isLoading) {
+  if (calendarLoading || archiveLoading) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <LoaderOne />
@@ -108,7 +106,7 @@ export default function EventsPage() {
   }
 
   // Show error state
-  if (error) {
+  if (calendarError || archiveError) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
@@ -135,15 +133,13 @@ export default function EventsPage() {
                 </p>
             </div>
             
-                <MotionCalendar
-                events={motionEvents}
-                onDateSelect={handleDateSelect}
-                onEventClick={handleEventClick}
-                />
-            </div>
+            <MotionCalendar events={motionEvents} />
+        </div>
 
-        {/* Events Section */}
-        <EventsSection events={eventsData} />
+        {/* Event Archive Section */}
+        <div className="container mx-auto px-4 mt-52">
+            <EventsSection events={archiveEventsData} />
+        </div>
     </div>
   );
 }

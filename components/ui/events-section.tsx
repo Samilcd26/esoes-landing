@@ -2,20 +2,70 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, ExternalLink, FileText } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+
+interface MediaResource {
+  type: 'image' | 'video' | 'youtube' | 'document' | 'link';
+  image?: string;
+  imageUrl?: string;
+  video?: string;
+  videoUrl?: string;
+  youtubeUrl?: string;
+  document?: string;
+  documentUrl?: string;
+  externalUrl?: string;
+  order: number;
+}
 
 interface Event {
   id: string;
   title: string;
   description: string;
   images: string[];
+  date?: string;
+  category?: string;
+  mediaResources?: MediaResource[];
 }
 
 const EventCard = ({ event, index, onCardClick }: { event: Event; index: number; onCardClick: (event: Event) => void }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const aspectRatio = "aspect-[4/3]";
+  const [loadedImageDimensions, setLoadedImageDimensions] = useState<{ width: number; height: number } | null>(null);
+
+  const getAllMediaFromEvent = (evt: Event) => {
+    const uniqueUrls = new Set<string>();
+    const media: { type: MediaResource['type']; url: string; title: string }[] = [];
+
+    (evt.images || []).forEach((imgUrl) => {
+      if (imgUrl && !uniqueUrls.has(imgUrl)) {
+        uniqueUrls.add(imgUrl);
+        media.push({ type: 'image', url: imgUrl, title: evt.title });
+      }
+    });
+
+    (evt.mediaResources || []).forEach((resource) => {
+      const url =
+        resource.image ||
+        resource.imageUrl ||
+        resource.video ||
+        resource.videoUrl ||
+        resource.youtubeUrl ||
+        resource.document ||
+        resource.documentUrl ||
+        resource.externalUrl ||
+        '';
+      if (url && !uniqueUrls.has(url)) {
+        uniqueUrls.add(url);
+        media.push({ type: resource.type, url, title: `${resource.type} media` });
+      }
+    });
+
+    return media;
+  };
+
+  const allMedia = getAllMediaFromEvent(event);
+  const firstImage = allMedia.find((m) => m.type === 'image')?.url || null;
 
   return (
     <motion.div
@@ -30,15 +80,25 @@ const EventCard = ({ event, index, onCardClick }: { event: Event; index: number;
       className="group relative bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl overflow-hidden hover:border-purple-500/50 transition-all duration-300 hover:scale-105 cursor-pointer"
     >
       {/* Image/Video - İlk resmi göster */}
-      <div className={`relative ${aspectRatio} overflow-hidden`}>
-        {event.images && event.images.length > 0 ? (
+      <div
+        className={"relative overflow-hidden"}
+        style={{ 
+          aspectRatio: loadedImageDimensions 
+            ? `${loadedImageDimensions.width} / ${loadedImageDimensions.height}` 
+            : '16 / 9' 
+        }}
+      >
+        {firstImage ? (
           <>
             <Image
-              src={event.images[0]}
+              src={firstImage}
               alt={event.title}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              onLoadingComplete={(img) => {
+                setLoadedImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
+              }}
             />
             {/* Gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
@@ -79,10 +139,36 @@ const EventCard = ({ event, index, onCardClick }: { event: Event; index: number;
           {event.title}
         </h3>
 
+        {/* Date if available */}
+        {event.date && (
+          <p className="text-purple-400 text-xs md:text-sm mb-2 font-medium">
+            {event.date}
+          </p>
+        )}
+
         {/* Description */}
         <p className="text-gray-300 text-xs md:text-sm leading-relaxed line-clamp-3">
           {event.description}
         </p>
+
+        {/* Media count indicator */}
+        {event.mediaResources && event.mediaResources.length > 0 && (
+          <div className="mt-3 flex items-center gap-2">
+            <div className="flex gap-1">
+              {event.mediaResources.slice(0, 3).map((resource, idx) => (
+                <div key={idx} className="w-2 h-2 rounded-full bg-purple-400" />
+              ))}
+              {event.mediaResources.length > 3 && (
+                <span className="text-xs text-gray-400 ml-1">
+                  +{event.mediaResources.length - 3}
+                </span>
+              )}
+            </div>
+            <span className="text-xs text-gray-400">
+              {event.mediaResources.length} medya
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Glow effect on hover */}
@@ -95,20 +181,126 @@ const EventCard = ({ event, index, onCardClick }: { event: Event; index: number;
   );
 };
 
-
-
 // Modal bileşeni
 const EventModal = ({ event, isOpen, onClose }: { event: Event | null; isOpen: boolean; onClose: () => void }) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
   
   if (!event) return null;
 
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % event.images.length);
+  // Combine images and mediaResources for display
+  const allMedia = [
+    ...(event.images || []).map(img => ({ type: 'image' as const, url: img, title: event.title })),
+    ...(event.mediaResources || []).map(resource => {
+      const url = resource.image || resource.imageUrl || resource.video || resource.videoUrl || resource.youtubeUrl || resource.document || resource.documentUrl || resource.externalUrl;
+      return {
+        type: resource.type,
+        url: url || '',
+        title: `${resource.type} media`,
+        description: undefined
+      };
+    })
+  ];
+
+  const nextMedia = () => {
+    setCurrentMediaIndex((prev) => (prev + 1) % allMedia.length);
   };
 
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + event.images.length) % event.images.length);
+  const prevMedia = () => {
+    setCurrentMediaIndex((prev) => (prev - 1 + allMedia.length) % allMedia.length);
+  };
+
+  const currentMedia = allMedia[currentMediaIndex];
+
+  const renderMediaContent = () => {
+    if (!currentMedia) return null;
+
+    switch (currentMedia.type) {
+      case 'image':
+        return (
+          <div className="relative w-full h-full flex items-center justify-center">
+            <Image
+              src={currentMedia.url}
+              alt={currentMedia.title}
+              fill
+              className="object-contain"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 50vw"
+            />
+          </div>
+        );
+      
+      case 'video':
+        return (
+          <div className="relative w-full h-full flex items-center justify-center">
+            <video 
+              src={currentMedia.url} 
+              controls 
+              className="max-w-full max-h-full object-contain"
+            />
+          </div>
+        );
+      
+      case 'youtube':
+        return (
+          <div className="relative w-full h-full flex items-center justify-center">
+            <iframe
+              src={currentMedia.url?.replace('watch?v=', 'embed/')}
+              title={currentMedia.title}
+              className="w-full h-full"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        );
+      
+      case 'document':
+        return (
+          <div className="relative w-full h-full flex items-center justify-center bg-gray-800">
+            <div className="text-center">
+              <FileText className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+              <p className="text-white text-lg">{currentMedia.title}</p>
+              <a 
+                href={currentMedia.url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+              >
+                <ExternalLink className="w-4 h-4" />
+                Dokümanı İndir
+              </a>
+            </div>
+          </div>
+        );
+      
+      case 'link':
+        return (
+          <div className="relative w-full h-full flex items-center justify-center bg-gray-800">
+            <div className="text-center">
+              <ExternalLink className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+              <p className="text-white text-lg">{currentMedia.title}</p>
+              <a 
+                href={currentMedia.url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                <ExternalLink className="w-4 h-4" />
+                Linke Git
+              </a>
+            </div>
+          </div>
+        );
+      
+      default:
+        return (
+          <div className="relative w-full h-full bg-gray-800 flex items-center justify-center">
+            <div className="text-center">
+              <div className="text-6xl text-gray-400 mb-4">?</div>
+              <p className="text-white">Desteklenmeyen medya türü</p>
+            </div>
+          </div>
+        );
+    }
   };
 
   return (
@@ -131,7 +323,7 @@ const EventModal = ({ event, isOpen, onClose }: { event: Event | null; isOpen: b
               damping: 25, 
               stiffness: 300 
             }}
-            className="relative w-full max-w-6xl max-h-[90vh] bg-gray-900 rounded-2xl overflow-hidden shadow-2xl"
+            className="relative w-full max-w-6xl max-h-[95vh] bg-gray-900 rounded-2xl overflow-hidden shadow-2xl min-h-[50vh]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
@@ -142,51 +334,43 @@ const EventModal = ({ event, isOpen, onClose }: { event: Event | null; isOpen: b
               <X size={20} className="md:w-6 md:h-6" />
             </button>
 
-            <div className="flex flex-col lg:flex-row h-full">
-              {/* Image Gallery */}
-              <div className="relative lg:w-2/3 h-48 sm:h-64 lg:h-full bg-gray-800">
-                <div className="relative h-full">
-                  <Image
-                    src={event.images[currentImageIndex]}
-                    alt={`${event.title} - Resim ${currentImageIndex + 1}`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 50vw"
-                  />
-                  
-                  {/* Navigation Arrows */}
-                  {event.images.length > 1 && (
-                    <>
+            <div className="flex flex-col lg:flex-row h-auto lg:h-[50vh]">
+              {/* Media Gallery */}
+              <div className="relative lg:w-2/3 lg:h-[50vh] bg-gray-800 flex items-center justify-center">
+                {renderMediaContent()}
+                
+                {/* Navigation Arrows */}
+                {allMedia.length > 1 && (
+                  <>
+                    <button
+                      onClick={prevMedia}
+                      className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 p-1 md:p-2 bg-black/50 rounded-full text-white hover:bg-black/70 transition-colors"
+                    >
+                      <ChevronLeft size={20} className="md:w-6 md:h-6" />
+                    </button>
+                    <button
+                      onClick={nextMedia}
+                      className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 p-1 md:p-2 bg-black/50 rounded-full text-white hover:bg-black/70 transition-colors"
+                    >
+                      <ChevronRight size={20} className="md:w-6 md:h-6" />
+                    </button>
+                  </>
+                )}
+                
+                {/* Media Indicators */}
+                {allMedia.length > 1 && (
+                  <div className="absolute bottom-2 md:bottom-4 left-1/2 -translate-x-1/2 flex gap-1 md:gap-2">
+                    {allMedia.map((_, index) => (
                       <button
-                        onClick={prevImage}
-                        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 p-1 md:p-2 bg-black/50 rounded-full text-white hover:bg-black/70 transition-colors"
-                      >
-                        <ChevronLeft size={20} className="md:w-6 md:h-6" />
-                      </button>
-                      <button
-                        onClick={nextImage}
-                        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 p-1 md:p-2 bg-black/50 rounded-full text-white hover:bg-black/70 transition-colors"
-                      >
-                        <ChevronRight size={20} className="md:w-6 md:h-6" />
-                      </button>
-                    </>
-                  )}
-                  
-                  {/* Image Indicators */}
-                  {event.images.length > 1 && (
-                    <div className="absolute bottom-2 md:bottom-4 left-1/2 -translate-x-1/2 flex gap-1 md:gap-2">
-                      {event.images.map((_, index) => (
-                        <button
-                          key={index}
-                          onClick={() => setCurrentImageIndex(index)}
-                          className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-colors ${
-                            index === currentImageIndex ? 'bg-white' : 'bg-white/50'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  )}
-                </div>
+                        key={index}
+                        onClick={() => setCurrentMediaIndex(index)}
+                        className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-colors ${
+                          index === currentMediaIndex ? 'bg-white' : 'bg-white/50'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Content */}
@@ -195,6 +379,11 @@ const EventModal = ({ event, isOpen, onClose }: { event: Event | null; isOpen: b
                   {/* Title */}
                   <div>
                     <h2 className="text-xl md:text-3xl font-bold text-white mb-2 md:mb-4">{event.title}</h2>
+                    {event.date && (
+                      <p className="text-purple-400 text-sm md:text-base font-medium">
+                        {event.date}
+                      </p>
+                    )}
                   </div>
 
                   {/* Description */}
@@ -249,7 +438,7 @@ export default function EventsSection({ events }: EventsSectionProps) {
           </p>
         </motion.div>
 
-        {/* Events Grid - Masonry Layout */}
+        {/* Events Grid - Masonry Layout with variable height cards based on image aspect ratio */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

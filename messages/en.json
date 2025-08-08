@@ -191,7 +191,8 @@
       "subjectPlaceholder": "Subject of your message",
       "messageLabel": "Message",
       "messagePlaceholder": "Write your message here...",
-      "sendButton": "Send Message"
+      "sendButton": "Send Message",
+      "sendingButton": "Sending..."
     }
   },
   "FaqManagement": {

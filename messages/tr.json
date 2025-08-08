@@ -191,7 +191,8 @@
       "subjectPlaceholder": "Mesajınızın konusu",
       "messageLabel": "Mesaj",
       "messagePlaceholder": "Mesajınızı buraya yazın...",
-      "sendButton": "Mesaj Gönder"
+      "sendButton": "Mesaj Gönder",
+      "sendingButton": "Gönderiliyor..."
     }
   },
   "FaqManagement": {
