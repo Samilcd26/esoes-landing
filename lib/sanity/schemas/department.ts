@@ -18,6 +18,20 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'General', value: 'GENERAL' },
+          { title: 'HSD', value: 'HSD' },
+        ],
+        layout: 'dropdown',
+      },
+      initialValue: 'GENERAL',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'images',
       title: 'Department Images',
       type: 'array',
@@ -118,15 +132,22 @@ export default defineType({
   preview: {
     select: {
       title: 'name',
+      category: 'category',
       responsibleUser: 'responsibleUserName',
       order: 'order',
       isActive: 'isActive',
     },
     prepare(selection: Record<string, unknown>) {
-      const { title, responsibleUser, order, isActive } = selection;
+      const { title, category, responsibleUser, order, isActive } = selection as {
+        title: string;
+        category?: string;
+        responsibleUser?: string;
+        order?: number;
+        isActive?: boolean;
+      };
       return {
-        title: title as string,
-        subtitle: `${responsibleUser} • Order: ${order} • ${isActive ? 'Active' : 'Inactive'}`,
+        title,
+        subtitle: `${category || 'GENERAL'} • ${responsibleUser || ''} • Order: ${order} • ${isActive ? 'Active' : 'Inactive'}`,
       };
     },
   },

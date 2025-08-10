@@ -4,7 +4,8 @@ import {
   allDepartmentsQuery, 
   departmentBySlugQuery,
   searchDepartmentsQuery,
-  searchAllDepartmentsQuery
+  searchAllDepartmentsQuery,
+  activeDepartmentsByCategoryQuery,
 } from '../sanity/queries/departments';
 import { Department,  PaginationParams, PaginatedResponse } from '../types/api';
 
@@ -14,6 +15,7 @@ export interface SanityDepartment {
   _type: string;
   name: string;
   description: string;
+  category?: 'HSD' | 'GENERAL';
   images?: Array<{
     url: string;
     alt?: string;
@@ -41,6 +43,7 @@ const mapSanityDepartmentToApiDepartment = (sanityDepartment: SanityDepartment):
   id: sanityDepartment._id,
   name: sanityDepartment.name,
   description: sanityDepartment.description,
+  category: sanityDepartment.category || 'GENERAL',
   images: sanityDepartment.images,
   responsibleUserName: sanityDepartment.responsibleUserName,
   responsibleUserImage: sanityDepartment.responsibleUserImage,
@@ -61,6 +64,25 @@ export const sanityDepartmentService = {
     const departments = await sanityQuery<SanityDepartment[]>(activeDepartmentsQuery);
     
     // Pagination işlemi
+    const page = params?.page || 1;
+    const limit = params?.limit || 10;
+    const startIndex = (page - 1) * limit;
+    const endIndex = startIndex + limit;
+    const paginatedDepartments = departments.slice(startIndex, endIndex);
+
+    return {
+      data: paginatedDepartments.map(mapSanityDepartmentToApiDepartment),
+      pagination: {
+        page,
+        limit,
+        total: departments.length,
+        totalPages: Math.ceil(departments.length / limit)
+      }
+    };
+  },
+
+  async getDepartmentsByCategory(category: 'HSD' | 'GENERAL', params?: PaginationParams): Promise<PaginatedResponse<Department>> {
+    const departments = await sanityQuery<SanityDepartment[]>(activeDepartmentsByCategoryQuery, { category });
     const page = params?.page || 1;
     const limit = params?.limit || 10;
     const startIndex = (page - 1) * limit;

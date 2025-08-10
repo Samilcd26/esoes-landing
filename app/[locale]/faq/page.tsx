@@ -8,33 +8,26 @@ import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { useRouter } from "next/navigation";
 import { useSanityFaqs, useSanityFaqsByCategory } from "@/hooks/useSanityFaqs";
 import { Faq } from "@/lib/types/api";
+import { useTranslations } from "next-intl";
 
-const categories = ["Tümü", "general", "events", "membership", "technical", "other"];
-
-const categoryLabels: Record<string, string> = {
-  "Tümü": "Tümü",
-  "general": "Genel",
-  "events": "Etkinlikler", 
-  "membership": "Üyelik",
-  "technical": "Teknik",
-  "other": "Diğer"
-};
+const categories = ["all", "general", "events", "membership", "technical", "other"] as const;
 
 export default function FAQPage() {
+  const t = useTranslations('faq');
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState("Tümü");
+  const [selectedCategory, setSelectedCategory] = useState<(typeof categories)[number]>("all");
   const router = useRouter();
 
   // Sanity hook'larını kullan
   const { data: allFaqsData, isLoading: isLoadingAll } = useSanityFaqs();
   const { data: categoryFaqsData, isLoading: isLoadingCategory } = useSanityFaqsByCategory(
-    selectedCategory === "Tümü" ? "" : selectedCategory
+    selectedCategory === "all" ? "" : selectedCategory
   );
 
   const isLoading = isLoadingAll || isLoadingCategory;
   
   // FAQ verilerini al
-  const faqs = selectedCategory === "Tümü" 
+  const faqs = selectedCategory === "all" 
     ? allFaqsData?.data || []
     : categoryFaqsData || [];
 
@@ -58,10 +51,10 @@ export default function FAQPage() {
               <IconQuestionMark className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-slate-900 via-blue-800 to-purple-800 bg-clip-text text-transparent dark:from-white dark:via-blue-200 dark:to-purple-200 mb-4">
-              Sıkça Sorulan Sorular
+              {t('loading.title')}
             </h1>
             <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-              Yükleniyor...
+              {t('loading.subtitle')}
             </p>
           </div>
           
@@ -118,7 +111,7 @@ export default function FAQPage() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-slate-900 via-blue-800 to-purple-800 bg-clip-text text-transparent dark:from-white dark:via-blue-200 dark:to-purple-200 mb-4"
           >
-            Sıkça Sorulan Sorular
+            {t('header.title')}
           </motion.h1>
           
           <motion.p 
@@ -127,8 +120,7 @@ export default function FAQPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto"
           >
-            ESOES hakkında merak ettiğiniz her şeyi burada bulabilirsiniz. 
-            Sorularınızın cevabını bulamazsanız bizimle iletişime geçebilirsiniz.
+            {t('header.subtitle')}
           </motion.p>
         </motion.div>
 
@@ -152,7 +144,7 @@ export default function FAQPage() {
               className="font-medium px-6 py-3"
               onClick={() => setSelectedCategory(category)}
             >
-              {categoryLabels[category]}
+              {t(`categories.${category}`)}
             </HoverBorderGradient>
           ))}
         </motion.div>
@@ -200,7 +192,7 @@ export default function FAQPage() {
                       {faq.question}
                     </h3>
                     <span className="inline-block px-3 py-1 text-xs font-medium bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-700 dark:text-blue-300 rounded-full">
-                      {categoryLabels[faq.category] || faq.category}
+                      {t(`categories.${faq.category}`)}
                     </span>
                   </div>
                   <motion.div
@@ -271,12 +263,8 @@ export default function FAQPage() {
               <div className="mb-6">
                 <IconQuestionMark className="w-24 h-24 mx-auto text-gray-400" />
               </div>
-              <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4">
-                Bu kategoride henüz soru bulunmuyor
-              </h3>
-              <p className="text-slate-600 dark:text-slate-400 text-lg">
-                Farklı bir kategori seçebilir veya bizimle iletişime geçebilirsiniz.
-              </p>
+              <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4">{t('empty.title')}</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-lg">{t('empty.subtitle')}</p>
             </div>
           </motion.div>
         )}
@@ -299,13 +287,8 @@ export default function FAQPage() {
           }}
           className="text-center mt-16 p-8 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-500/5 dark:to-purple-500/5 rounded-3xl border border-blue-200/50 dark:border-blue-800/50 backdrop-blur-sm"
         >
-          <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
-            Hala sorunuz mu var?
-          </h3>
-          <p className="text-slate-600 dark:text-slate-300 mb-6 max-w-2xl mx-auto">
-            Sorularınızın cevabını burada bulamadıysanız, sosyal medya hesaplarımızdan 
-            veya e-posta yoluyla bizimle iletişime geçebilirsiniz.
-          </p>
+          <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">{t('contact.title')}</h3>
+          <p className="text-slate-600 dark:text-slate-300 mb-6 max-w-2xl mx-auto">{t('contact.subtitle')}</p>
           <HoverBorderGradient
             as="button"
             duration={0.7}
@@ -313,7 +296,7 @@ export default function FAQPage() {
             className="text-lg"
             onClick={() => router.push("/contact")}
           >
-            İletişime Geç
+            {t('contact.button')}
           </HoverBorderGradient>
         </motion.div>
       </div>

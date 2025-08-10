@@ -161,7 +161,7 @@ export default function TopNavbar() {
                   key={`mobile-link-${item.key}`}
                   href={item.link}
                   onClick={handleItemClick}
-                  className="flex w-full items-center justify-center "
+                  className="flex w-full items-center justify-center"
                 >
                   <div className="px-4 py-2 text-white font-bold transform hover:-translate-y-1 transition duration-400">
                     <span className="relative z-10 flex items-center gap-1">
@@ -179,13 +179,13 @@ export default function TopNavbar() {
                 key={`mobile-link-${item.key}`}
                 href={item.link}
                 onClick={handleItemClick}
-                className="flex w-full items-center px-4 py-3 text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-100 transition-colors duration-200 font-medium"
+                className="flex w-full items-center justify-center px-4 py-3 text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-100 transition-colors duration-200 font-medium"
               >
                 {item.name}
               </a>
             );
           })}
-          <div className="flex items-center gap-4 px-4 py-3">
+          <div className="flex w-full items-center justify-center px-4 py-3">
             <LanguageSelector />
             {/* Login button temporarily hidden
             {user ? (

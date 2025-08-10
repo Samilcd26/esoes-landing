@@ -7,16 +7,28 @@ export const GoogleGeminiEffect = ({ className }: { className?: string }) => {
   const controls = useAnimation();
 
   useEffect(() => {
+    // Ensure component is mounted before starting animations
     const sequence = async () => {
-      while (true) {
-        await controls.start("visible");
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        await controls.start("hidden");
-        await new Promise((resolve) => setTimeout(resolve, 500));
+      try {
+        while (true) {
+          await controls.start("visible");
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+          await controls.start("hidden");
+          await new Promise((resolve) => setTimeout(resolve, 500));
+        }
+      } catch (error) {
+        // Handle any animation errors gracefully
+        console.warn("Animation sequence error:", error);
       }
     };
-    sequence();
-  }, [controls]);
+    
+    // Small delay to ensure component is fully mounted
+    const timer = setTimeout(() => {
+      sequence();
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []); // Remove controls from dependency array
 
   const containerVariants: Variants = {
     visible: {

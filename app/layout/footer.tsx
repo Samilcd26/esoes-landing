@@ -2,8 +2,9 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
-import { Mail,  MapPin, Instagram, Linkedin } from 'lucide-react';
+import { Mail,  MapPin } from 'lucide-react';
 import Link from 'next/link';
+import { IconBrandLinkedinFilled,IconBrandYoutube, IconBrandTiktok,IconBrandInstagram } from '@tabler/icons-react';
 
 export default function Footer() {
   const t = useTranslations('footer');
@@ -78,9 +79,11 @@ export default function Footer() {
                       {t('social.title')}
                     </h3>
                     <div className="flex xl:flex-col gap-2">
-                      <SocialIcon icon={<Instagram size={20} />} href="https://www.instagram.com/esoesogu/?hl=en" hoverColor="pink-500" />
-                      <SocialIcon icon={<Linkedin size={20} />} href="https://www.linkedin.com/company/esoesog%C3%BC/" hoverColor="blue-700" />
-                    </div>
+                      <SocialIcon icon={<IconBrandInstagram size={20} />} href="https://www.instagram.com/esoesogu" hoverColor="pink-500" />
+                      <SocialIcon icon={<IconBrandLinkedinFilled size={20} />} href="https://www.linkedin.com/company/esoesog%C3%BC/" hoverColor="blue-700" />
+                      <SocialIcon icon={<IconBrandYoutube size={20} />} href="https://www.youtube.com/@esoesogu" hoverColor="red-500" />
+                      <SocialIcon icon={<IconBrandTiktok size={20} />} href="https://www.tiktok.com/@esoesogu" hoverColor="blue-600" />
+                    </div>  
                   </div>
                 </div>
               </div>
@@ -129,7 +132,7 @@ const GridItem = ({ icon, title, description }: GridItemProps) => {
   );
 };
 
-const SocialIcon = ({ icon, href, hoverColor }: { icon: React.ReactNode; href: string; hoverColor: 'blue-600' | 'blue-400' | 'pink-500' | 'blue-700' }) => {
+const SocialIcon = ({ icon, href, hoverColor }: { icon: React.ReactNode; href: string; hoverColor: string }) => {
   return (
     <a
       href={href}

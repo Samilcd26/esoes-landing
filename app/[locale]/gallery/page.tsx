@@ -4,18 +4,20 @@ import { GalleryGrid } from '@/components/ui/gallery-grid'
 import { useSanityGallery } from '@/hooks/useSanityGallery'
 import { LoaderOne } from '@/components/ui/loader'
 import { HoverBorderGradient } from '@/components/ui/hover-border-gradient'
+import { useTranslations } from 'next-intl'
 
 const Gallery = () => {
+  const t = useTranslations('gallery')
   const { galleries, isLoading, error } = useSanityGallery()
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
 
   const categories = [
-    { value: 'all', label: 'Tümü' },
-    { value: 'events', label: 'Etkinlikler' },
-    { value: 'workshops', label: 'Workshoplar' },
-    { value: 'meetings', label: 'Toplantılar' },
-    { value: 'activities', label: 'Aktiviteler' },
-    { value: 'other', label: 'Diğer' },
+    { value: 'all', label: t('categories.all') },
+    { value: 'events', label: t('categories.events') },
+    { value: 'workshops', label: t('categories.workshops') },
+    { value: 'meetings', label: t('categories.meetings') },
+    { value: 'activities', label: t('categories.activities') },
+    { value: 'other', label: t('categories.other') },
   ]
 
   const filteredGalleries = selectedCategory === 'all' 
@@ -26,8 +28,8 @@ const Gallery = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <LoaderOne />
-          <h2 className="text-2xl font-bold text-white mt-8 mb-4">Galeri Yükleniyor</h2>
-          <p className="text-gray-300">Fotoğraflar ve videolar hazırlanıyor...</p>
+          <h2 className="text-2xl font-bold text-white mt-8 mb-4">{t('loading.title')}</h2>
+          <p className="text-gray-300">{t('loading.subtitle')}</p>
         </div>
       </div>
     )
@@ -37,8 +39,8 @@ const Gallery = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-red-600 mb-4">Hata Oluştu</h2>
-          <p className="text-gray-600 mb-4">Galeri yüklenirken bir sorun oluştu.</p>
+          <h2 className="text-2xl font-bold text-red-600 mb-4">{t('error.title')}</h2>
+          <p className="text-gray-600 mb-4">{t('error.message')}</p>
           <button 
             onClick={() => {
               if (typeof window !== 'undefined') {
@@ -47,7 +49,7 @@ const Gallery = () => {
             }}
             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors"
           >
-            Tekrar Dene
+            {t('error.retry')}
           </button>
         </div>
       </div>
@@ -60,10 +62,10 @@ const Gallery = () => {
       <div className="bg-gradient-to-b from-black/50 to-transparent py-20">
         <div className="max-w-7xl mx-auto px-4">
           <h1 className="text-4xl md:text-6xl font-bold text-white text-center mb-8">
-            Galeri
+            {t('header.title')}
           </h1>
           <p className="text-xl text-gray-300 text-center mb-12 max-w-3xl mx-auto">
-            ESOES&apos;in en güzel anlarını, etkinliklerini ve workshoplarını keşfedin
+            {t('header.subtitle')}
           </p>
           
           {/* Category Filter */}
@@ -91,10 +93,10 @@ const Gallery = () => {
         <div className="min-h-[50vh] flex items-center justify-center">
           <div className="text-center">
             <h3 className="text-2xl font-semibold text-gray-600 mb-4">
-              {selectedCategory === 'all' ? 'Henüz galeri içeriği yok' : 'Bu kategoride içerik bulunamadı'}
+              {selectedCategory === 'all' ? t('empty.all') : t('empty.category')}
             </h3>
             <p className="text-gray-500">
-              Yakında yeni içerikler eklenecek.
+              {t('empty.subtitle')}
             </p>
           </div>
         </div>
