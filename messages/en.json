@@ -172,6 +172,34 @@
       "terms": "Terms of Service"
     }
   },
+  "gallery": {
+    "header": {
+      "title": "Gallery",
+      "subtitle": "Discover ESOES's best moments, events and workshops"
+    },
+    "loading": {
+      "title": "Loading Gallery",
+      "subtitle": "Preparing photos and videos..."
+    },
+    "error": {
+      "title": "An Error Occurred",
+      "message": "There was a problem loading the gallery.",
+      "retry": "Retry"
+    },
+    "categories": {
+      "all": "All",
+      "events": "Events",
+      "workshops": "Workshops",
+      "meetings": "Meetings",
+      "activities": "Activities",
+      "other": "Other"
+    },
+    "empty": {
+      "all": "No gallery content yet",
+      "category": "No content found in this category",
+      "subtitle": "New content will be added soon."
+    }
+  },
   "contact": {
     "header": {
       "title": "Get in Touch",
@@ -196,6 +224,33 @@
       "messagePlaceholder": "Write your message here...",
       "sendButton": "Send Message",
       "sendingButton": "Sending..."
+    }
+  },
+  "faq": {
+    "loading": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Loading..."
+    },
+    "header": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "You can find everything you are curious about ESOES here. If you can't find the answer to your question, you can contact us."
+    },
+    "categories": {
+      "all": "All",
+      "general": "General",
+      "events": "Events",
+      "membership": "Membership",
+      "technical": "Technical",
+      "other": "Other"
+    },
+    "empty": {
+      "title": "There are no questions in this category yet",
+      "subtitle": "You can select a different category or contact us."
+    },
+    "contact": {
+      "title": "Still have a question?",
+      "subtitle": "If you couldn't find the answer to your question here, you can contact us via our social media accounts or by e-mail.",
+      "button": "Contact Us"
     }
   },
   "FaqManagement": {
@@ -239,6 +294,19 @@
   "events": {
     "title": "Our Events",
     "subtitle": "Special events and signature projects organized by ESOES",
+    "errors": {
+      "title": "An Error Occurred",
+      "message": "Please try again later."
+    },
+    "page": {
+      "calendar": {
+        "title": {
+          "part1": "Event",
+          "part2": "Calendar"
+        },
+        "subtitle": "Follow our upcoming events and join in"
+      }
+    },
     "events": [
       {
         "id": "hebocon",
@@ -310,6 +378,66 @@
       "noEvents": "No events found yet.",
       "loading": "Loading events...",
       "error": "An error occurred while loading events."
+    }
+   },
+  "department": {
+    "header": {
+      "title": "Our Departments",
+      "subtitle": "Get detailed information about ESOES's different departments and areas of responsibility."
+    },
+    "loading": {
+      "title": "Loading Departments",
+      "subtitle": "Fetching information about ESOES departments..."
+    },
+    "error": {
+      "title": "An Error Occurred",
+      "message": "An error occurred while loading departments. Please try again later."
+    },
+    "empty": "No department information available yet.",
+    "testimonials": {
+      "title": "From Our Leads",
+      "subtitle": "Experiences and opinions of our department leads"
+    },
+    "card": {
+      "ctaText": "Learn More",
+      "responsible": { "title": "Responsible Person" },
+      "contact": { "title": "Contact" },
+      "assistants": { "title": "Assistants" },
+      "description": { "title": "Description" }
+    }
+  }
+  ,
+  "hsd": {
+    "header": {
+      "title": "Who We Are: Huawei Student Developers (HSD) Eskisehir",
+      "description1": "Founded in collaboration with Engineering Society Of Eskisehir and Huawei, it is a student community where students interested in software and technology come together to organize events, share knowledge, and conduct technical studies."
+    },
+    "mission": {
+      "title": "OUR MISSION",
+      "p1": "As the Huawei Student Developers Team, our priority is to provide an environment especially for engineering students, and all students interested in technology, where they can learn, develop themselves in software, and gain useful practices.",
+      "p2": "With the events we organize, technical trainings, and project work, we offer our members opportunities for development both individually and as a team.",
+      "p3": "We also aim to keep up with current technologies, build a bridge between industry and students, help them gain leadership skills by taking responsibility, and create a productive, creative, and solution-oriented community culture."
+    },
+    "sections": {
+      "departments": {
+        "title": "HSD Departments",
+        "subtitle": "Departments within the scope of HSD"
+      },
+      "people": {
+        "title": "People",
+        "subtitle": "Leads and assistants of HSD departments",
+        "empty": "No people found yet."
+      }
+    },
+    "people": {
+      "roles": {
+        "responsible": "Lead",
+        "assistant": "Assistant"
+      },
+      "departmentPageLink": "Department page"
+    },
+    "loading": {
+      "subtitle": "Fetching information about HSD departments..."
     }
   }
 }

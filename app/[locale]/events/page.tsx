@@ -7,11 +7,12 @@ import { LoaderOne } from "@/components/ui/loader";
 import EventsSection from "@/components/ui/events-section";
 import { CalendarEvent, EventArchive } from "@/lib/types/api";
 import type { MotionCalendarEvent } from "@/lib/utils";
+import { useTranslations, useLocale } from "next-intl";
 
 
 
 // Calendar events'i MotionCalendar formatına çevir
-const calendarEventsToMotionEvents = (events: CalendarEvent[]): MotionCalendarEvent[] => {
+const calendarEventsToMotionEvents = (events: CalendarEvent[], locale: string): MotionCalendarEvent[] => {
   return events.map(event => {
     const startDate = new Date(event.startDate);
     const endDate = new Date(event.endDate);
@@ -30,7 +31,7 @@ const calendarEventsToMotionEvents = (events: CalendarEvent[]): MotionCalendarEv
       title: event.title,
       date: startDate,
       endDate: endDate,
-      time: startDate.toLocaleTimeString('tr-TR', { 
+      time: startDate.toLocaleTimeString(locale || 'tr-TR', { 
         hour: '2-digit', 
         minute: '2-digit',
         hour12: false
@@ -75,7 +76,8 @@ const calendarEventsToMotionEvents = (events: CalendarEvent[]): MotionCalendarEv
 };
 
 export default function EventsPage() {
-  
+  const t = useTranslations('events');
+  const locale = useLocale();
   // Fetch calendar events for calendar display
   const { 
     data: calendarEvents, 
@@ -91,7 +93,7 @@ export default function EventsPage() {
   } = useSanityEventArchives();
 
   // Convert calendar events to MotionCalendar format
-  const motionEvents = calendarEvents ? calendarEventsToMotionEvents(calendarEvents) : [];
+  const motionEvents = calendarEvents ? calendarEventsToMotionEvents(calendarEvents, locale) : [];
 
   // Convert event archives to events data format
   const archiveEventsData = eventArchives?.data ? eventArchivesToEventsData(eventArchives.data) : [];
@@ -110,8 +112,8 @@ export default function EventsPage() {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-white mb-4">Bir Hata Oluştu</h1>
-          <p className="text-red-400">Lütfen daha sonra tekrar deneyin.</p>
+          <h1 className="text-4xl font-bold text-white mb-4">{t('errors.title')}</h1>
+          <p className="text-red-400">{t('details.error')}</p>
         </div>
       </div>
     );
@@ -123,13 +125,13 @@ export default function EventsPage() {
         <div className="container mx-auto px-4">
             <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                Etkinlik
-                <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
-                    {" "}Takvimi
-                </span>
+                  {t('page.calendar.title.part1')}
+                  <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
+                    {" "}{t('page.calendar.title.part2')}
+                  </span>
                 </h2>
                 <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                Yaklaşan etkinliklerimizi takip edin ve katılım sağlayın
+                  {t('page.calendar.subtitle')}
                 </p>
             </div>
             

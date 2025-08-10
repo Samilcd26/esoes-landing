@@ -45,3 +45,12 @@ export const useSearchAllSanityDepartments = (query: string, params?: Pagination
     staleTime: 5 * 60 * 1000, // 5 dakika
   });
 };
+
+export const useSanityDepartmentsByCategory = (category: 'HSD' | 'GENERAL', params?: PaginationParams) => {
+  return useQuery({
+    queryKey: ['departments', 'category', category, params],
+    queryFn: () => sanityDepartmentService.getDepartmentsByCategory(category, params),
+    enabled: !!category,
+    staleTime: 5 * 60 * 1000,
+  });
+};

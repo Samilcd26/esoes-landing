@@ -172,6 +172,34 @@
       "terms": "Kullanım Şartları"
     }
   },
+  "gallery": {
+    "header": {
+      "title": "Galeri",
+      "subtitle": "ESOES'in en güzel anlarını, etkinliklerini ve workshoplarını keşfedin"
+    },
+    "loading": {
+      "title": "Galeri Yükleniyor",
+      "subtitle": "Fotoğraflar ve videolar hazırlanıyor..."
+    },
+    "error": {
+      "title": "Hata Oluştu",
+      "message": "Galeri yüklenirken bir sorun oluştu.",
+      "retry": "Tekrar Dene"
+    },
+    "categories": {
+      "all": "Tümü",
+      "events": "Etkinlikler",
+      "workshops": "Workshoplar",
+      "meetings": "Toplantılar",
+      "activities": "Aktiviteler",
+      "other": "Diğer"
+    },
+    "empty": {
+      "all": "Henüz galeri içeriği yok",
+      "category": "Bu kategoride içerik bulunamadı",
+      "subtitle": "Yakında yeni içerikler eklenecek."
+    }
+  },
   "contact": {
     "header": {
       "title": "İletişime Geçin",
@@ -196,6 +224,33 @@
       "messagePlaceholder": "Mesajınızı buraya yazın...",
       "sendButton": "Mesaj Gönder",
       "sendingButton": "Gönderiliyor..."
+    }
+  },
+  "faq": {
+    "loading": {
+      "title": "Sıkça Sorulan Sorular",
+      "subtitle": "Yükleniyor..."
+    },
+    "header": {
+      "title": "Sıkça Sorulan Sorular",
+      "subtitle": "ESOES hakkında merak ettiğiniz her şeyi burada bulabilirsiniz. Sorularınızın cevabını bulamazsanız bizimle iletişime geçebilirsiniz."
+    },
+    "categories": {
+      "all": "Tümü",
+      "general": "Genel",
+      "events": "Etkinlikler",
+      "membership": "Üyelik",
+      "technical": "Teknik",
+      "other": "Diğer"
+    },
+    "empty": {
+      "title": "Bu kategoride henüz soru bulunmuyor",
+      "subtitle": "Farklı bir kategori seçebilir veya bizimle iletişime geçebilirsiniz."
+    },
+    "contact": {
+      "title": "Hala sorunuz mu var?",
+      "subtitle": "Sorularınızın cevabını burada bulamadıysanız, sosyal medya hesaplarımızdan veya e-posta yoluyla bizimle iletişime geçebilirsiniz.",
+      "button": "İletişime Geç"
     }
   },
   "FaqManagement": {
@@ -240,6 +295,19 @@
   "events": {
     "title": "Etkinliklerimiz",
     "subtitle": "ESOES'in düzenlediği özel etkinlikler ve imza projeleri",
+    "errors": {
+      "title": "Bir Hata Oluştu",
+      "message": "Lütfen daha sonra tekrar deneyin."
+    },
+    "page": {
+      "calendar": {
+        "title": {
+          "part1": "Etkinlik",
+          "part2": "Takvimi"
+        },
+        "subtitle": "Yaklaşan etkinliklerimizi takip edin ve katılım sağlayın"
+      }
+    },
     "events": [
       {
         "id": "hebocon",
@@ -311,6 +379,66 @@
       "noEvents": "Henüz etkinlik bulunmuyor.",
       "loading": "Etkinlikler yükleniyor...",
       "error": "Etkinlikler yüklenirken bir hata oluştu."
+    }
+  },
+  "department": {
+    "header": {
+      "title": "Departmanlarımız",
+      "subtitle": "ESOES'in farklı departmanları ve sorumluluk alanları hakkında detaylı bilgi edinin."
+    },
+    "loading": {
+      "title": "Departmanlar Yükleniyor",
+      "subtitle": "ESOES departmanları hakkında bilgi alınıyor..."
+    },
+    "error": {
+      "title": "Hata Oluştu",
+      "message": "Departmanlar yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin."
+    },
+    "empty": "Henüz departman bilgisi bulunmuyor.",
+    "testimonials": {
+      "title": "Sorumlularımızdan",
+      "subtitle": "Departman sorumlularımızın deneyimleri ve görüşleri"
+    },
+    "card": {
+      "ctaText": "Daha Fazla",
+      "responsible": { "title": "Sorumlu Kişi" },
+      "contact": { "title": "İletişim" },
+      "assistants": { "title": "Yardımcılar" },
+      "description": { "title": "Açıklama" }
+    }
+  }
+  ,
+  "hsd": {
+    "header": {
+      "title": "Biz Kimiz: Huawei Student Developers (HSD) Eskişehir",
+      "description1": "Engineering Society Of Eskişehir ve Huawei iş birliğiyle kurulmuş, yazılım ve teknolojiye ilgi duyan öğrencilerin bir araya gelerek etkinlikler düzenleyen, bilgi paylaşan ve aynı zamanda teknik çalışmalar düzenleyen bir öğrenci topluluğudur."
+    },
+    "mission": {
+      "title": "MİSYONUMUZ",
+      "p1": "Huawei Student Developers Ekibi olarak önceliğimiz mühendislik öğrencileri olmak üzere, teknolojiye ilgi duyan tüm öğrencilere öğrenebilecekleri, yazılım alanında kendilerini geliştirebilecekleri ve faydalı pratikler kazanabilecekleri bir ortam sunmayı hedefliyoruz.",
+      "p2": "Yaptığımız etkinlikler, teknik eğitimler ve proje çalışmalarıyla üyelerimize hem bireysel hem ekip halinde gelişim imkânı tanıyoruz.",
+      "p3": "Aynı zamanda güncel teknolojileri takip etmeyi, endüstri ile öğrenciler arasında köprü kurmayı, sorumluluk alarak liderlik becerileri kazanmalarını sağlamayı, üretken, yaratıcı ve çözüm odaklı bir topluluk kültürü oluşturmayı amaçlıyoruz."
+    },
+    "sections": {
+      "departments": {
+        "title": "HSD Departmanları",
+        "subtitle": "HSD kapsamındaki departmanlar"
+      },
+      "people": {
+        "title": "Kişiler",
+        "subtitle": "HSD departmanlarının sorumluları ve yardımcıları",
+        "empty": "Henüz kişi bilgisi bulunmuyor."
+      }
+    },
+    "people": {
+      "roles": {
+        "responsible": "Sorumlu",
+        "assistant": "Yardımcı"
+      },
+      "departmentPageLink": "Departman sayfası"
+    },
+    "loading": {
+      "subtitle": "HSD departmanları hakkında bilgi alınıyor..."
     }
   }
 }

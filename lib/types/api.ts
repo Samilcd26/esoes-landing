@@ -154,6 +154,7 @@ export interface Department {
   id: string;
   name: string;
   description: string;
+  category?: 'HSD' | 'GENERAL';
   images?: DepartmentImage[];
   responsibleUserName: string;
   responsibleUserImage?: string;
@@ -171,6 +172,7 @@ export interface Department {
 export interface CreateDepartmentRequest {
   name: string;
   description: string;
+  category?: 'HSD' | 'GENERAL';
   images?: DepartmentImage[];
   responsibleUserName: string;
   responsibleUserImage?: string;

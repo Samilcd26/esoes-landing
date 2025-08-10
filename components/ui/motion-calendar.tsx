@@ -778,12 +778,20 @@ export const MotionCalendar = ({
                   {/* Today indicator */}
                   {isTodayDate && (
                     <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-3 h-3 sm:w-4 sm:h-4 bg-blue-500 rounded-full shadow-lg z-20 pointer-events-none relative overflow-hidden"
+                      initial={{ scale: 0, rotate: -180 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      className="absolute top-1 left-1/2 transform -translate-x-1/2 w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-lg shadow-lg z-20 pointer-events-none border-2 border-white dark:border-neutral-800 flex items-center justify-center"
                     >
-                      {/* Glow effect on today indicator */}
-                      <div className="absolute inset-0 bg-blue-500/40 rounded-full blur-sm" />
+                      {/* Star icon */}
+                      <svg 
+                        className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white drop-shadow-sm" 
+                        fill="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                      {/* Glow effect */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/60 to-blue-500/60 rounded-lg blur-sm -z-10" />
                     </motion.div>
                   )}
                 </motion.div>
