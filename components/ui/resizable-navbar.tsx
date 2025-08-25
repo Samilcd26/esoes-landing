@@ -11,6 +11,7 @@ import Image from "next/image";
 
 import React, { useRef, useState } from "react";
 import Link from "next/link";
+import { useLocale } from "next-intl";
 
 
 interface NavbarProps {
@@ -256,9 +257,10 @@ export const MobileNavToggle = ({
 };
 
 export const NavbarLogo = () => {
+  const locale = useLocale();
   return (
     <Link
-      href="/home"
+      href={`/${locale}/home`}
       className="relative z-20 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
     >
       <div className="relative w-[30px] h-[30px]">

@@ -402,12 +402,20 @@
     "card": {
       "ctaText": "Daha Fazla",
       "responsible": { "title": "Sorumlu Kişi" },
+      "assistant": { "title": "Yardımcı Kullanıcılar" },
       "contact": { "title": "İletişim" },
-      "assistants": { "title": "Yardımcılar" },
+      
       "description": { "title": "Açıklama" }
+    },
+    "team": {
+      "title": "Ekibimiz",
+      "subtitle": "Her departmanın arkasındaki özverili kişilerle tanışın",
+      "roles": {
+        "responsible": "Sorumlu",
+        "assistant": "Yardımcı"
+      }
     }
-  }
-  ,
+  },
   "hsd": {
     "header": {
       "title": "Biz Kimiz: Huawei Student Developers (HSD) Eskişehir",
@@ -428,6 +436,10 @@
         "title": "Kişiler",
         "subtitle": "HSD departmanlarının sorumluları ve yardımcıları",
         "empty": "Henüz kişi bilgisi bulunmuyor."
+      },
+      "team": {
+        "title": "Detaylı Ekip Görünümü",
+        "subtitle": "Her departmandan özverili ekip üyelerimizle tanışın"
       }
     },
     "people": {

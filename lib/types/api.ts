@@ -143,11 +143,22 @@ export interface DepartmentImage {
   alt?: string;
 }
 
-export interface DepartmentAssistant {
-  name: string;
+export interface DepartmentResponsible {
+  firstName: string;
+  lastName: string;
+  title?: string;
+  image?: string;
   phone?: string;
   email?: string;
-  notes?: string;
+}
+
+export interface DepartmentAssistant {
+  firstName: string;
+  lastName: string;
+  title?: string;
+  image?: string;
+  phone?: string;
+  email?: string;
 }
 
 export interface Department {
@@ -156,12 +167,8 @@ export interface Department {
   description: string;
   category?: 'HSD' | 'GENERAL';
   images?: DepartmentImage[];
-  responsibleUserName: string;
-  responsibleUserImage?: string;
-  responsibleUserNotes?: string;
-  phone?: string;
-  email?: string;
-  assistants?: DepartmentAssistant[];
+  responsible: DepartmentResponsible[];
+  assistant?: DepartmentAssistant[];
   slug: string;
   isActive: boolean;
   order: number;
@@ -174,12 +181,7 @@ export interface CreateDepartmentRequest {
   description: string;
   category?: 'HSD' | 'GENERAL';
   images?: DepartmentImage[];
-  responsibleUserName: string;
-  responsibleUserImage?: string;
-  responsibleUserNotes?: string;
-  phone?: string;
-  email?: string;
-  assistants?: DepartmentAssistant[];
+  responsible: DepartmentResponsible[];
   slug: string;
   isActive?: boolean;
   order: number;

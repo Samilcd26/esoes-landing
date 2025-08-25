@@ -60,7 +60,7 @@ export default function ExpandableCardGrid({ cards }: ExpandableCardGridProps) {
         {active && typeof active === "object" ? (
           <div className="fixed inset-0  grid place-items-center z-[100]">
             <motion.button
-              key={`button-${active.title}-${id}`}
+              key={`button-${active.title}-${id}-${cards.findIndex(card => card.title === active.title)}`}
               layout
               initial={{
                 opacity: 0,
@@ -80,11 +80,11 @@ export default function ExpandableCardGrid({ cards }: ExpandableCardGridProps) {
               <CloseIcon />
             </motion.button>
             <motion.div
-              layoutId={`card-${active.title}-${id}`}
+              layoutId={`card-${active.title}-${id}-${cards.findIndex(card => card.title === active.title)}`}
               ref={ref}
               className="w-full max-w-[500px]  h-full md:h-fit md:max-h-[90%]  flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden"
             >
-              <motion.div layoutId={`image-${active.title}-${id}`} className="relative w-full h-80 lg:h-80">
+              <motion.div layoutId={`image-${active.title}-${id}-${cards.findIndex(card => card.title === active.title)}`} className="relative w-full h-80 lg:h-80">
                 <Image
                   src={active.src}
                   alt={active.title}
@@ -97,13 +97,13 @@ export default function ExpandableCardGrid({ cards }: ExpandableCardGridProps) {
                 <div className="flex justify-between items-start p-4">
                   <div className="">
                     <motion.h3
-                      layoutId={`title-${active.title}-${id}`}
+                      layoutId={`title-${active.title}-${id}-${cards.findIndex(card => card.title === active.title)}`}
                       className="font-medium text-neutral-700 dark:text-neutral-200 text-base"
                     >
                       {active.title}
                     </motion.h3>
                     <motion.p
-                      layoutId={`description-${active.description}-${id}`}
+                      layoutId={`description-${active.description}-${id}-${cards.findIndex(card => card.title === active.title)}`}
                       className="text-neutral-600 dark:text-neutral-400 text-base"
                     >
                       {active.description}
@@ -131,15 +131,15 @@ export default function ExpandableCardGrid({ cards }: ExpandableCardGridProps) {
         ) : null}
       </AnimatePresence>
       <ul className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start gap-4">
-        {cards.map((card) => (
+        {cards.map((card, index) => (
           <motion.div
-            layoutId={`card-${card.title}-${id}`}
-            key={card.title}
+            layoutId={`card-${card.title}-${id}-${index}`}
+            key={`${card.title}-${index}`}
             onClick={() => setActive(card)}
             className="p-4 flex flex-col  hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl cursor-pointer"
           >
             <div className="flex gap-4 flex-col  w-full">
-              <motion.div layoutId={`image-${card.title}-${id}`} className="relative h-60 w-full">
+              <motion.div layoutId={`image-${card.title}-${id}-${index}`} className="relative h-60 w-full">
                 <Image
                   src={card.src}
                   alt={card.title}
@@ -149,13 +149,13 @@ export default function ExpandableCardGrid({ cards }: ExpandableCardGridProps) {
               </motion.div>
               <div className="flex justify-center items-center flex-col">
                 <motion.h3
-                  layoutId={`title-${card.title}-${id}`}
+                  layoutId={`title-${card.title}-${id}-${index}`}
                   className="font-medium text-neutral-800 dark:text-neutral-200 text-center md:text-left text-base"
                 >
                   {card.title}
                 </motion.h3>
                 <motion.p
-                  layoutId={`description-${card.description}-${id}`}
+                  layoutId={`description-${card.description}-${id}-${index}`}
                   className="text-neutral-600 dark:text-neutral-400 text-center md:text-left text-base"
                 >
                   {card.description}

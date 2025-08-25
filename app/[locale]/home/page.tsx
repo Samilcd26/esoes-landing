@@ -1,7 +1,6 @@
 "use client";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
-import { GoogleGeminiEffect } from "@/components/ui/google-gemini-effect";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
@@ -90,46 +89,10 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
-          </div>
-        </div>
+    
       </section>
 
 
-      {/* CTA Section */}
-      <section className="relative py-40 bg-black overflow-hidden ">
-        <GoogleGeminiEffect />
-        <div className="relative z-10 container mx-auto px-4 text-center mb-8">
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-8">
-            {t("cta.title.part1")}
-            <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
-              {" "}{t("cta.title.highlight")}{" "}
-            </span>
-            {t("cta.title.part2")}
-          </h2>
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
-            {t("cta.subtitle")}
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-
-            <HoverBorderGradient
-              onClick={() => {
-                if (typeof window !== 'undefined') {
-                  window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSeDHO9m0yJvLWpvzZgwek2tfovrCagfI58MqffHhrixxekyTw/viewform?usp=dialog";
-                }
-              }}
-              containerClassName="rounded-full"
-              className="bg-transparent border border-white/20 text-white px-12 py-4 text-xl font-semibold hover:bg-white/10 cursor-pointer"
-            >
-              {t("cta.applyNow")}
-            </HoverBorderGradient>
-          </div>
-        </div>
-      </section>
     </>
   );
 }

@@ -62,7 +62,6 @@ export default function Footer() {
                     <Link href="/department" className="block hover:text-purple-400 transition-colors text-gray-300">{t('quickLinks.departments')}</Link>
                     <Link href="/gallery" className="block hover:text-purple-400 transition-colors text-gray-300">{t('quickLinks.gallery')}</Link>
                     <Link href="/faq" className="block hover:text-purple-400 transition-colors text-gray-300">{t('quickLinks.faq')}</Link>
-                    <Link href="/contact" className="block hover:text-purple-400 transition-colors text-gray-300">{t('quickLinks.contact')}</Link>
                   </div>
                 </div>
               </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 //import { useCurrentUser, useLogout } from "@/hooks/useAuth";
 import { LanguageSelector } from "@/components/ui/language-selector";
 import {
@@ -14,7 +14,7 @@ import {
   NavbarLogo,
 } from "@/components/ui/resizable-navbar";
 
-const getNavigationItems = (t: ReturnType<typeof useTranslations>): Array<{
+const getNavigationItems = (t: ReturnType<typeof useTranslations>, locale: string): Array<{
   key: string;
   name: string;
   link: string;
@@ -23,33 +23,29 @@ const getNavigationItems = (t: ReturnType<typeof useTranslations>): Array<{
   {
     key: "events",
     name: t("navigation.events"),
-    link: "/events",
+    link: `/${locale}/events`,
   },
   {
     key: "gallery",
     name: t("navigation.gallery"),
-    link: "/gallery",
+    link: `/${locale}/gallery`,
   },
   {
     key: "department",
     name: t("navigation.department"),
-    link: "/department",
+    link: `/${locale}/department`,
   },
   {
     key: "hsd",
     name: t("navigation.hsd"),
-    link: "/hsd",
+    link: `/${locale}/hsd`,
     isSpecial: true,
   },
-  {
-    key: "contact",
-    name: t("navigation.contact"),
-    link: "/contact",
-  },
+
   {
     key: "faq",
     name: t("navigation.faq"),
-    link: "/faq",
+    link: `/${locale}/faq`,
   },
 ];
 
@@ -60,8 +56,9 @@ export default function TopNavbar() {
   
   // Safe translation hook with fallback
   const t = useTranslations();
+  const locale = useLocale();
   
-  const navigationItems = getNavigationItems(t);
+  const navigationItems = getNavigationItems(t, locale);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);

@@ -1,97 +1,159 @@
 "use client";
 
-import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import ExpandableCardGrid from "@/components/ui/expandable-card-grid";
 import { useSanityDepartmentsByCategory } from "@/hooks/useSanityDepartments";
 import { LoaderOne } from "@/components/ui/loader";
 import React from "react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 export default function DepartmentPage() {
     const t = useTranslations("department");
     const { data: departmentsResponse, isLoading, error } = useSanityDepartmentsByCategory('GENERAL');
 
+    
     // Department verilerini ExpandableCardGrid formatına çevir
     const departmentCards = departmentsResponse?.data?.map((department) => ({
         title: department.name,
         description: department.description,
-        src: department.images?.[0]?.url || "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        src: department.images?.[0]?.url || "/assets/images/backgrounds/nova-04.jpeg",
         ctaText: t("card.ctaText"),
         ctaLink: `/department/${department.slug}`,
         content: () => {
             return (
-                <div className="space-y-4">
-                    <div>
-                        <h4 className="font-semibold text-lg mb-2">{t("card.responsible.title")}</h4>
-                        <p className="text-gray-700 dark:text-gray-300">{department.responsibleUserName}</p>
-                        {department.responsibleUserNotes && (
-                            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 italic">
-                                &ldquo;{department.responsibleUserNotes}&rdquo;
-                            </p>
-                        )}
-                    </div>
-                    
-                    {department.phone && (
+                <div className="space-y-6">
+                    {/* Responsible Users Section */}
+                    {department.responsible && department.responsible.length > 0 && (
                         <div>
-                            <h4 className="font-semibold text-lg mb-2">{t("card.contact.title")}</h4>
-                            <p className="text-gray-700 dark:text-gray-300">📞 {department.phone}</p>
-                            {department.email && (
-                                <p className="text-gray-700 dark:text-gray-300">📧 {department.email}</p>
-                            )}
+                            <h4 className="font-semibold text-lg mb-3 text-blue-600 dark:text-blue-400 flex items-center gap-2">
+                                <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                {t("card.responsible.title")}
+                            </h4>
+                            <div className="space-y-3">
+                                {department.responsible.map((person, index) => (
+                                    <div key={index} className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg p-4 border-l-4 border-blue-500">
+                                        <div className="flex items-start gap-3">
+                                            <div className="flex-shrink-0">
+                                                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-semibold text-sm">
+                                                    {person.image ? (
+                                                        <Image 
+                                                            src={person.image} 
+                                                            alt={`${person.firstName} ${person.lastName}`}
+                                                            width={48}
+                                                            height={48}
+                                                            className="w-full h-full rounded-full object-cover"
+                                                        />
+                                                    ) : null}
+                                                    <span className={`${person.image ? 'hidden' : ''}`}>
+                                                        {person.firstName?.[0]}{person.lastName?.[0]}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                                <p className="font-semibold text-gray-900 dark:text-white">
+                                                    {person.firstName} {person.lastName}
+                                                </p>
+                                                {person.title && (
+                                                    <p className="text-sm text-blue-600 dark:text-blue-400 font-medium mb-1">
+                                                        {person.title}
+                                                    </p>
+                                                )}
+                                                <div className="space-y-1">
+                                                    {person.phone && (
+                                                        <p className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">
+                                                            <span className="text-blue-500">📞</span>
+                                                            {person.phone}
+                                                        </p>
+                                                    )}
+                                                    {person.email && (
+                                                        <p className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">
+                                                            <span className="text-green-500">📧</span>
+                                                            {person.email}
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     )}
-                    
-                    {department.assistants && department.assistants.length > 0 && (
+
+                    {/* Assistant Users Section */}
+                    {department.assistant && department.assistant.length > 0 && (
                         <div>
-                            <h4 className="font-semibold text-lg mb-2">{t("card.assistants.title")}</h4>
-                            <div className="space-y-2">
-                                {department.assistants.map((assistant, index) => (
-                                    <div key={index} className="border-l-2 border-blue-500 pl-3">
-                                        <p className="font-medium text-gray-700 dark:text-gray-300">
-                                            {assistant.name}
-                                        </p>
-                                        {assistant.phone && (
-                                            <p className="text-sm text-gray-600 dark:text-gray-400">
-                                                📞 {assistant.phone}
-                                            </p>
-                                        )}
-                                        {assistant.email && (
-                                            <p className="text-sm text-gray-600 dark:text-gray-400">
-                                                📧 {assistant.email}
-                                            </p>
-                                        )}
-                                        {assistant.notes && (
-                                            <p className="text-sm text-gray-500 dark:text-gray-500 mt-1 italic">
-                                                &ldquo;{assistant.notes}&rdquo;
-                                            </p>
-                                        )}
+                            <h4 className="font-semibold text-lg mb-3 text-purple-600 dark:text-purple-400 flex items-center gap-2">
+                                <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
+                                {t("card.assistant.title") || "Assistant Users"}
+                            </h4>
+                            <div className="space-y-3">
+                                {department.assistant.map((person, index) => (
+                                    <div key={index} className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-lg p-4 border-l-4 border-purple-500">
+                                        <div className="flex items-start gap-3">
+                                            <div className="flex-shrink-0">
+                                                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white font-semibold text-sm">
+                                                    {person.image ? (
+                                                        <Image 
+                                                            src={person.image} 
+                                                            alt={`${person.firstName} ${person.lastName}`}
+                                                            width={48}
+                                                            height={48}
+                                                            className="w-full h-full rounded-full object-cover"
+                                                        />
+                                                    ) : null}
+                                                    <span className={`${person.image ? 'hidden' : ''}`}>
+                                                        {person.firstName?.[0]}{person.lastName?.[0]}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                                <p className="font-semibold text-gray-900 dark:text-white">
+                                                    {person.firstName} {person.lastName}
+                                                </p>
+                                                {person.title && (
+                                                    <p className="text-sm text-purple-600 dark:text-purple-400 font-medium mb-1">
+                                                        {person.title}
+                                                    </p>
+                                                )}
+                                                <div className="space-y-1">
+                                                    {person.phone && (
+                                                        <p className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">
+                                                            <span className="text-purple-500">📞</span>
+                                                            {person.phone}
+                                                        </p>
+                                                    )}
+                                                    {person.email && (
+                                                        <p className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">
+                                                            <span className="text-green-500">📧</span>
+                                                            {person.email}
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
                         </div>
                     )}
                     
+                    {/* Description Section */}
                     <div>
-                        <h4 className="font-semibold text-lg mb-2">{t("card.description.title")}</h4>
-                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                            {department.description}
-                        </p>
+                        <h4 className="font-semibold text-lg mb-3 text-gray-700 dark:text-gray-300 flex items-center gap-2">
+                            <span className="w-2 h-2 bg-gray-500 rounded-full"></span>
+                            {t("card.description.title")}
+                        </h4>
+                        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                            <p className="text-gray-800 dark:text-gray-200 leading-relaxed">
+                                {department.description}
+                            </p>
+                        </div>
                     </div>
                 </div>
             );
         },
     })) || [];
-
-    // Responsible user'lardan testimonials oluştur
-    const testimonials = departmentsResponse?.data
-        ?.filter(dept => dept.responsibleUserName && dept.responsibleUserNotes)
-        ?.map((dept) => ({
-            quote: dept.responsibleUserNotes!,
-            name: dept.responsibleUserName,
-            designation: dept.name,
-            src: dept.responsibleUserImage || "/assets/images/testimonials/default-avatar.png",
-        }))
-        ?.slice(0, 7) || []; // Maksimum 7 testimonial göster
 
     if (isLoading) {
         return (
@@ -133,17 +195,6 @@ export default function DepartmentPage() {
                         </div>
                     )}
                 </section>
-
-                {/* Team Testimonials Section */}
-                {testimonials.length > 0 && (
-                    <section className="py-20">
-                        <div className="text-center mb-12">
-                            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">{t("testimonials.title")}</h2>
-                            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">{t("testimonials.subtitle")}</p>
-                        </div>
-                        <AnimatedTestimonials testimonials={testimonials} />
-                    </section>
-                )}
             </div>
         </div>
     );
