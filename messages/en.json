@@ -401,9 +401,18 @@
     "card": {
       "ctaText": "Learn More",
       "responsible": { "title": "Responsible Person" },
+      "assistant": { "title": "Assistant Users" },
       "contact": { "title": "Contact" },
-      "assistants": { "title": "Assistants" },
+      
       "description": { "title": "Description" }
+    },
+    "team": {
+      "title": "Our Team Members",
+      "subtitle": "Meet the dedicated people behind each department",
+      "roles": {
+        "responsible": "Responsible",
+        "assistant": "Assistant"
+      }
     }
   }
   ,
@@ -427,6 +436,10 @@
         "title": "People",
         "subtitle": "Leads and assistants of HSD departments",
         "empty": "No people found yet."
+      },
+      "team": {
+        "title": "Detailed Team View",
+        "subtitle": "Meet our dedicated team members from each department"
       }
     },
     "people": {

@@ -10,16 +10,21 @@ export const activeDepartmentsQuery = `
       "url": asset->url,
       "alt": asset->altText
     },
-    responsibleUserName,
-    "responsibleUserImage": responsibleUserImage.asset->url,
-    responsibleUserNotes,
-    phone,
-    email,
-    "assistants": assistants[]{
-      name,
+    "responsible": responsible[]{
+      firstName,
+      lastName,
+      title,
+      "image": image.asset->url,
       phone,
-      email,
-      notes
+      email
+    },
+    "assistant": assistant[]{
+      firstName,
+      lastName,
+      title,
+      "image": image.asset->url,
+      phone,
+      email
     },
     "slug": slug.current,
     isActive,
@@ -41,16 +46,21 @@ export const allDepartmentsQuery = `
       "url": asset->url,
       "alt": asset->altText
     },
-    responsibleUserName,
-    "responsibleUserImage": responsibleUserImage.asset->url,
-    responsibleUserNotes,
-    phone,
-    email,
-    "assistants": assistants[]{
-      name,
+    "responsible": responsible[]{
+      firstName,
+      lastName,
+      title,
+      "image": image.asset->url,
       phone,
-      email,
-      notes
+      email
+    },
+    "assistant": assistant[]{
+      firstName,
+      lastName,
+      title,
+      "image": image.asset->url,
+      phone,
+      email
     },
     "slug": slug.current,
     isActive,
@@ -72,16 +82,21 @@ export const departmentBySlugQuery = `
       "url": asset->url,
       "alt": asset->altText
     },
-    responsibleUserName,
-    "responsibleUserImage": responsibleUserImage.asset->url,
-    responsibleUserNotes,
-    phone,
-    email,
-    "assistants": assistants[]{
-      name,
+    "responsible": responsible[]{
+      firstName,
+      lastName,
+      title,
+      "image": image.asset->url,
       phone,
-      email,
-      notes
+      email
+    },
+    "assistant": assistant[]{
+      firstName,
+      lastName,
+      title,
+      "image": image.asset->url,
+      phone,
+      email
     },
     "slug": slug.current,
     isActive,
@@ -96,7 +111,10 @@ export const searchDepartmentsQuery = `
   *[_type == "department" && isActive == true && (
     name match $query + "*" ||
     description match $query + "*" ||
-    responsibleUserName match $query + "*"
+    responsible[].firstName match $query + "*" ||
+    responsible[].lastName match $query + "*" ||
+    assistant[].firstName match $query + "*" ||
+    assistant[].lastName match $query + "*"
   )] | order(order asc) {
     _id,
     _type,
@@ -107,16 +125,21 @@ export const searchDepartmentsQuery = `
       "url": asset->url,
       "alt": asset->altText
     },
-    responsibleUserName,
-    "responsibleUserImage": responsibleUserImage.asset->url,
-    responsibleUserNotes,
-    phone,
-    email,
-    "assistants": assistants[]{
-      name,
+    "responsible": responsible[]{
+      firstName,
+      lastName,
+      title,
+      "image": image.asset->url,
       phone,
-      email,
-      notes
+      email
+    },
+    "assistant": assistant[]{
+      firstName,
+      lastName,
+      title,
+      "image": image.asset->url,
+      phone,
+      email
     },
     "slug": slug.current,
     isActive,
@@ -131,7 +154,10 @@ export const searchAllDepartmentsQuery = `
   *[_type == "department" && (
     name match $query + "*" ||
     description match $query + "*" ||
-    responsibleUserName match $query + "*"
+    responsible[].firstName match $query + "*" ||
+    responsible[].lastName match $query + "*" ||
+    assistant[].firstName match $query + "*" ||
+    assistant[].lastName match $query + "*"
   )] | order(order asc) {
     _id,
     _type,
@@ -142,16 +168,21 @@ export const searchAllDepartmentsQuery = `
       "url": asset->url,
       "alt": asset->altText
     },
-    responsibleUserName,
-    "responsibleUserImage": responsibleUserImage.asset->url,
-    responsibleUserNotes,
-    phone,
-    email,
-    "assistants": assistants[]{
-      name,
+    "responsible": responsible[]{
+      firstName,
+      lastName,
+      title,
+      "image": image.asset->url,
       phone,
-      email,
-      notes
+      email
+    },
+    "assistant": assistant[]{
+      firstName,
+      lastName,
+      title,
+      "image": image.asset->url,
+      phone,
+      email
     },
     "slug": slug.current,
     isActive,
@@ -173,16 +204,21 @@ export const activeDepartmentsByCategoryQuery = `
       "url": asset->url,
       "alt": asset->altText
     },
-    responsibleUserName,
-    "responsibleUserImage": responsibleUserImage.asset->url,
-    responsibleUserNotes,
-    phone,
-    email,
-    "assistants": assistants[]{
-      name,
+    "responsible": responsible[]{
+      firstName,
+      lastName,
+      title,
+      "image": image.asset->url,
       phone,
-      email,
-      notes
+      email
+    },
+    "assistant": assistant[]{
+      firstName,
+      lastName,
+      title,
+      "image": image.asset->url,
+      phone,
+      email
     },
     "slug": slug.current,
     isActive,

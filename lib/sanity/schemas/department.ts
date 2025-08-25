@@ -45,47 +45,37 @@ export default defineType({
       ],
     }),
     defineField({
-      name: 'responsibleUserName',
-      title: 'Responsible User Name',
-      type: 'string',
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'responsibleUserImage',
-      title: 'Responsible User Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-    }),
-    defineField({
-      name: 'responsibleUserNotes',
-      title: 'Responsible User Notes',
-      type: 'text',
-    }),
-    defineField({
-      name: 'phone',
-      title: 'Phone Number',
-      type: 'string',
-    }),
-    defineField({
-      name: 'email',
-      title: 'Email',
-      type: 'string',
-    }),
-    defineField({
-      name: 'assistants',
-      title: 'Assistants',
+      name: 'responsible',
+      title: 'Responsible Users',
       type: 'array',
       of: [
         {
           type: 'object',
           fields: [
             {
-              name: 'name',
-              title: 'Name',
+              name: 'firstName',
+              title: 'First Name',
               type: 'string',
               validation: (rule) => rule.required(),
+            },
+            {
+              name: 'lastName',
+              title: 'Last Name',
+              type: 'string',
+              validation: (rule) => rule.required(),
+            },
+            {
+              name: 'title',
+              title: 'Title',
+              type: 'string',
+            },
+            {
+              name: 'image',
+              title: 'Profile Image',
+              type: 'image',
+              options: {
+                hotspot: true,
+              },
             },
             {
               name: 'phone',
@@ -97,10 +87,53 @@ export default defineType({
               title: 'Email',
               type: 'string',
             },
+          ],
+        },
+      ],
+      validation: (rule) => rule.required().min(1),
+    }),
+    defineField({
+      name: 'assistant',
+      title: 'Assistant Users',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
             {
-              name: 'notes',
-              title: 'Notes',
-              type: 'text',
+              name: 'firstName',
+              title: 'First Name',
+              type: 'string',
+              validation: (rule) => rule.required(),
+            },
+            {
+              name: 'lastName',
+              title: 'Last Name',
+              type: 'string',
+              validation: (rule) => rule.required(),
+            },
+            {
+              name: 'title',
+              title: 'Title',
+              type: 'string',
+            },
+            {
+              name: 'image',
+              title: 'Profile Image',
+              type: 'image',
+              options: {
+                hotspot: true,
+              },
+            },
+            {
+              name: 'phone',
+              title: 'Phone Number',
+              type: 'string',
+            },
+            {
+              name: 'email',
+              title: 'Email',
+              type: 'string',
             },
           ],
         },
@@ -133,21 +166,35 @@ export default defineType({
     select: {
       title: 'name',
       category: 'category',
-      responsibleUser: 'responsibleUserName',
+      responsible: 'responsible',
+      assistant: 'assistant',
       order: 'order',
       isActive: 'isActive',
     },
     prepare(selection: Record<string, unknown>) {
-      const { title, category, responsibleUser, order, isActive } = selection as {
+      const { title, category, responsible, assistant, order, isActive } = selection as {
         title: string;
         category?: string;
-        responsibleUser?: string;
+        responsible?: Array<{ firstName: string; lastName: string; title?: string }>;
+        assistant?: Array<{ firstName: string; lastName: string; title?: string }>;
         order?: number;
         isActive?: boolean;
       };
+      
+      const responsibleNames = responsible?.map(r => `${r.firstName} ${r.lastName}${r.title ? ` (${r.title})` : ''}`).join(', ') || '';
+      const assistantNames = assistant?.map(a => `${a.firstName} ${a.lastName}${a.title ? ` (${a.title})` : ''}`).join(', ') || '';
+      
+      const subtitle = [
+        category || 'GENERAL',
+        responsibleNames && `Responsible: ${responsibleNames}`,
+        assistantNames && `Assistant: ${assistantNames}`,
+        `Order: ${order}`,
+        isActive ? 'Active' : 'Inactive'
+      ].filter(Boolean).join(' • ');
+      
       return {
         title,
-        subtitle: `${category || 'GENERAL'} • ${responsibleUser || ''} • Order: ${order} • ${isActive ? 'Active' : 'Inactive'}`,
+        subtitle,
       };
     },
   },

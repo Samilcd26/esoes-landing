@@ -282,9 +282,6 @@ The application uses several PostgreSQL functions for complex operations:
 Create a `.env.local` file with the following variables:
 
 ```env
-# SendGrid Configuration
-SENDGRID_API_KEY=your_sendgrid_api_key_here
-FROM_EMAIL=noreply@esoes.com
 
 # App Configuration
 NEXT_PUBLIC_APP_URL=http://localhost:3000

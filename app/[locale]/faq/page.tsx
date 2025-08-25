@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "motion/react";
 import { IconChevronDown, IconQuestionMark } from "@tabler/icons-react";
 import { BackgroundLines } from "@/components/ui/background-lines";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
-import { useRouter } from "next/navigation";
 import { useSanityFaqs, useSanityFaqsByCategory } from "@/hooks/useSanityFaqs";
 import { Faq } from "@/lib/types/api";
 import { useTranslations } from "next-intl";
@@ -16,7 +15,6 @@ export default function FAQPage() {
   const t = useTranslations('faq');
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<(typeof categories)[number]>("all");
-  const router = useRouter();
 
   // Sanity hook'larını kullan
   const { data: allFaqsData, isLoading: isLoadingAll } = useSanityFaqs();
@@ -269,36 +267,6 @@ export default function FAQPage() {
           </motion.div>
         )}
 
-        {/* Contact Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ 
-            duration: 0.6, 
-            delay: 0.8,
-            type: "spring",
-            stiffness: 100,
-            damping: 20
-          }}
-          whileHover={{ 
-            scale: 1.02,
-            y: -5,
-            transition: { duration: 0.3 }
-          }}
-          className="text-center mt-16 p-8 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-500/5 dark:to-purple-500/5 rounded-3xl border border-blue-200/50 dark:border-blue-800/50 backdrop-blur-sm"
-        >
-          <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">{t('contact.title')}</h3>
-          <p className="text-slate-600 dark:text-slate-300 mb-6 max-w-2xl mx-auto">{t('contact.subtitle')}</p>
-          <HoverBorderGradient
-            as="button"
-            duration={0.7}
-            containerClassName="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-            className="text-lg"
-            onClick={() => router.push("/contact")}
-          >
-            {t('contact.button')}
-          </HoverBorderGradient>
-        </motion.div>
       </div>
     </BackgroundLines>
   );

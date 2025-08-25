@@ -20,16 +20,21 @@ export interface SanityDepartment {
     url: string;
     alt?: string;
   }>;
-  responsibleUserName: string;
-  responsibleUserImage?: string;
-  responsibleUserNotes?: string;
-  phone?: string;
-  email?: string;
-  assistants?: Array<{
-    name: string;
+  responsible: Array<{
+    firstName: string;
+    lastName: string;
+    title?: string;
+    image?: string;
     phone?: string;
     email?: string;
-    notes?: string;
+  }>;
+  assistant?: Array<{
+    firstName: string;
+    lastName: string;
+    title?: string;
+    image?: string;
+    phone?: string;
+    email?: string;
   }>;
   slug: string;
   isActive: boolean;
@@ -45,12 +50,8 @@ const mapSanityDepartmentToApiDepartment = (sanityDepartment: SanityDepartment):
   description: sanityDepartment.description,
   category: sanityDepartment.category || 'GENERAL',
   images: sanityDepartment.images,
-  responsibleUserName: sanityDepartment.responsibleUserName,
-  responsibleUserImage: sanityDepartment.responsibleUserImage,
-  responsibleUserNotes: sanityDepartment.responsibleUserNotes,
-  phone: sanityDepartment.phone,
-  email: sanityDepartment.email,
-  assistants: sanityDepartment.assistants,
+  responsible: sanityDepartment.responsible,
+  assistant: sanityDepartment.assistant,
   slug: sanityDepartment.slug,
   isActive: sanityDepartment.isActive,
   order: sanityDepartment.order,
@@ -65,7 +66,7 @@ export const sanityDepartmentService = {
     
     // Pagination işlemi
     const page = params?.page || 1;
-    const limit = params?.limit || 10;
+    const limit = params?.limit || 100; // Increased from 10 to 100
     const startIndex = (page - 1) * limit;
     const endIndex = startIndex + limit;
     const paginatedDepartments = departments.slice(startIndex, endIndex);
@@ -84,7 +85,7 @@ export const sanityDepartmentService = {
   async getDepartmentsByCategory(category: 'HSD' | 'GENERAL', params?: PaginationParams): Promise<PaginatedResponse<Department>> {
     const departments = await sanityQuery<SanityDepartment[]>(activeDepartmentsByCategoryQuery, { category });
     const page = params?.page || 1;
-    const limit = params?.limit || 10;
+    const limit = params?.limit || 100; // Increased from 10 to 100
     const startIndex = (page - 1) * limit;
     const endIndex = startIndex + limit;
     const paginatedDepartments = departments.slice(startIndex, endIndex);
@@ -106,7 +107,7 @@ export const sanityDepartmentService = {
     
     // Pagination işlemi
     const page = params?.page || 1;
-    const limit = params?.limit || 10;
+    const limit = params?.limit || 100; // Increased from 10 to 100
     const startIndex = (page - 1) * limit;
     const endIndex = startIndex + limit;
     const paginatedDepartments = departments.slice(startIndex, endIndex);
@@ -135,7 +136,7 @@ export const sanityDepartmentService = {
     
     // Pagination işlemi
     const page = params?.page || 1;
-    const limit = params?.limit || 10;
+    const limit = params?.limit || 100; // Increased from 10 to 100
     const startIndex = (page - 1) * limit;
     const endIndex = startIndex + limit;
     const paginatedDepartments = departments.slice(startIndex, endIndex);
@@ -157,7 +158,7 @@ export const sanityDepartmentService = {
     
     // Pagination işlemi
     const page = params?.page || 1;
-    const limit = params?.limit || 10;
+    const limit = params?.limit || 100; // Increased from 10 to 100
     const startIndex = (page - 1) * limit;
     const endIndex = startIndex + limit;
     const paginatedDepartments = departments.slice(startIndex, endIndex);
