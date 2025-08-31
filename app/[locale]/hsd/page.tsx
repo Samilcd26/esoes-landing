@@ -192,7 +192,7 @@ export default function HsdDepartmentsPage() {
         {/* Soft bottom gradient overlay */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-50 via-gray-50/50 to-transparent dark:from-gray-900 dark:via-gray-900/50"></div>
         <div className="relative z-10 max-w-6xl mx-auto text-center px-4">
-          {/* Huawei Logo */}
+          {/* HUAWEI Logo */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -201,8 +201,8 @@ export default function HsdDepartmentsPage() {
           >
             <div className="relative w-80 h-40 md:w-96 md:h-48 bg-white/15 backdrop-blur-md rounded-2xl p-6 border-2 border-white/30 shadow-2xl">
               <Image
-                src="/assets/images/huawei_logo.png"
-                alt="Huawei"
+                src="/assets/images/HUAWEI_logo.png"
+                alt="HUAWEI"
                 fill
                 className="object-contain p-3"
                 priority

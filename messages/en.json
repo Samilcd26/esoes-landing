@@ -41,8 +41,7 @@
         "part2": "of Technology and Innovation"
       },
       "subtitle": "Join our student club, develop projects, expand your network and make your mark in the technology world.",
-      "joinClub": "Join the Club",
-      "exploreEvents": "Explore Events"
+      "joinClub": "Join the Club"
     },
     "features": {
       "title": {
@@ -418,12 +417,12 @@
   ,
   "hsd": {
     "header": {
-      "title": "Who We Are: Huawei Student Developers (HSD) Eskisehir",
-      "description1": "Founded in collaboration with Engineering Society Of Eskisehir and Huawei, it is a student community where students interested in software and technology come together to organize events, share knowledge, and conduct technical studies."
+      "title": "Who We Are: HUAWEI Student Developers (HSD) Eskisehir",
+      "description1": "Founded in collaboration with Engineering Society Of Eskisehir and HUAWEI, it is a student community where students interested in software and technology come together to organize events, share knowledge, and conduct technical studies."
     },
     "mission": {
       "title": "OUR MISSION",
-      "p1": "As the Huawei Student Developers Team, our priority is to provide an environment especially for engineering students, and all students interested in technology, where they can learn, develop themselves in software, and gain useful practices.",
+      "p1": "As the HUAWEI Student Developers Team, our priority is to provide an environment especially for engineering students, and all students interested in technology, where they can learn, develop themselves in software, and gain useful practices.",
       "p2": "With the events we organize, technical trainings, and project work, we offer our members opportunities for development both individually and as a team.",
       "p3": "We also aim to keep up with current technologies, build a bridge between industry and students, help them gain leadership skills by taking responsibility, and create a productive, creative, and solution-oriented community culture."
     },
