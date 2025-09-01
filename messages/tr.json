@@ -427,6 +427,10 @@
         "title": "HSD",
         "subtitle": "HSD kapsamındaki departmanlar"
       },
+      "users": {
+        "title": "HSD Ekibi",
+        "subtitle": "HSD kategorisinde görev alan tüm ekip üyeleri"
+      },
       "people": {
         "title": "Kişiler",
         "subtitle": "HSD Ekibinın sorumluları ve yardımcıları",

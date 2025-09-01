@@ -431,6 +431,10 @@
         "title": "HSD Departments",
         "subtitle": "Departments within the scope of HSD"
       },
+      "users": {
+        "title": "HSD Team",
+        "subtitle": "All team members working in HSD category"
+      },
       "people": {
         "title": "People",
         "subtitle": "Leads and assistants of HSD departments",

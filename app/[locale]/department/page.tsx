@@ -137,19 +137,7 @@ export default function DepartmentPage() {
                             </div>
                         </div>
                     )}
-                    
-                    {/* Description Section */}
-                    <div>
-                        <h4 className="font-semibold text-lg mb-3 text-gray-700 dark:text-gray-300 flex items-center gap-2">
-                            <span className="w-2 h-2 bg-gray-500 rounded-full"></span>
-                            {t("card.description.title")}
-                        </h4>
-                        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-                            <p className="text-gray-800 dark:text-gray-200 leading-relaxed">
-                                {department.description}
-                            </p>
-                        </div>
-                    </div>
+                   
                 </div>
             );
         },
