@@ -35,14 +35,9 @@
   },
   "home": {
     "hero": {
-      "title": {
-        "part1": "Teknoloji ve İnovasyonun",
-        "highlight": "Merkezinde",
-        "part2": "Geleceği Şekillendirin"
-      },
+      
       "subtitle": "Öğrenci kulübümüze katılın, projeler geliştirin, networkünüzü genişletin ve teknoloji dünyasında iz bırakın.",
-      "joinClub": "Kulübe Katıl",
-      "exploreEvents": "Etkinlikleri Keşfet"
+      "joinClub": "Kulübe Katıl"
     },
     "features": {
       "title": {
@@ -401,8 +396,8 @@
     },
     "card": {
       "ctaText": "Daha Fazla",
-      "responsible": { "title": "Sorumlu Kişi" },
-      "assistant": { "title": "Yardımcı Kullanıcılar" },
+      "responsible": { "title": "Ekip Koordinatörü:" },
+      "assistant": { "title": "Yardımcı Kullanıcılar:" },
       "contact": { "title": "İletişim" },
       
       "description": { "title": "Açıklama" }
@@ -418,23 +413,23 @@
   },
   "hsd": {
     "header": {
-      "title": "Biz Kimiz: Huawei Student Developers (HSD) Eskişehir",
-      "description1": "Engineering Society Of Eskişehir ve Huawei iş birliğiyle kurulmuş, yazılım ve teknolojiye ilgi duyan öğrencilerin bir araya gelerek etkinlikler düzenleyen, bilgi paylaşan ve aynı zamanda teknik çalışmalar düzenleyen bir öğrenci topluluğudur."
+      "title": "Biz Kimiz: HUAWEI Student Developers (HSD) Eskişehir",
+      "description1": "Engineering Society Of Eskişehir ve HUAWEI iş birliğiyle kurulmuş, yazılım ve teknolojiye ilgi duyan öğrencilerin bir araya gelerek etkinlikler düzenleyen, bilgi paylaşan ve aynı zamanda teknik çalışmalar düzenleyen bir öğrenci topluluğudur."
     },
     "mission": {
       "title": "MİSYONUMUZ",
-      "p1": "Huawei Student Developers Ekibi olarak önceliğimiz mühendislik öğrencileri olmak üzere, teknolojiye ilgi duyan tüm öğrencilere öğrenebilecekleri, yazılım alanında kendilerini geliştirebilecekleri ve faydalı pratikler kazanabilecekleri bir ortam sunmayı hedefliyoruz.",
+      "p1": "HUAWEI Student Developers Ekibi olarak önceliğimiz mühendislik öğrencileri olmak üzere, teknolojiye ilgi duyan tüm öğrencilere öğrenebilecekleri, yazılım alanında kendilerini geliştirebilecekleri ve faydalı pratikler kazanabilecekleri bir ortam sunmayı hedefliyoruz.",
       "p2": "Yaptığımız etkinlikler, teknik eğitimler ve proje çalışmalarıyla üyelerimize hem bireysel hem ekip halinde gelişim imkânı tanıyoruz.",
       "p3": "Aynı zamanda güncel teknolojileri takip etmeyi, endüstri ile öğrenciler arasında köprü kurmayı, sorumluluk alarak liderlik becerileri kazanmalarını sağlamayı, üretken, yaratıcı ve çözüm odaklı bir topluluk kültürü oluşturmayı amaçlıyoruz."
     },
     "sections": {
       "departments": {
-        "title": "HSD Departmanları",
+        "title": "HSD",
         "subtitle": "HSD kapsamındaki departmanlar"
       },
       "people": {
         "title": "Kişiler",
-        "subtitle": "HSD departmanlarının sorumluları ve yardımcıları",
+        "subtitle": "HSD Ekibinın sorumluları ve yardımcıları",
         "empty": "Henüz kişi bilgisi bulunmuyor."
       },
       "team": {
@@ -450,7 +445,7 @@
       "departmentPageLink": "Departman sayfası"
     },
     "loading": {
-      "subtitle": "HSD departmanları hakkında bilgi alınıyor..."
+      "subtitle": "HSD Ekibi hakkında bilgi alınıyor..."
     }
   }
 }

@@ -50,13 +50,6 @@ export default function Home() {
           </div>
           
 
-          <h2 className="text-2xl md:text-4xl font-bold text-white mb-6 max-w-4xl leading-relaxed">
-            {t("hero.title.part1")}
-            <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
-              {" "}{t("hero.title.highlight")}{" "}
-            </span>
-            {t("hero.title.part2")}
-          </h2>
 
           <p className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl">
             {t("hero.subtitle")}
@@ -66,7 +59,7 @@ export default function Home() {
             <HoverBorderGradient
               onClick={() => {
                 if (typeof window !== 'undefined') {
-                  window.location.href = "/contact";
+                  window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSeDHO9m0yJvLWpvzZgwek2tfovrCagfI58MqffHhrixxekyTw/viewform";
                 }
               }}
               containerClassName="rounded-full"
@@ -75,17 +68,7 @@ export default function Home() {
               {t("hero.joinClub")}
             </HoverBorderGradient>
 
-            <HoverBorderGradient
-              onClick={() => {
-                if (typeof window !== 'undefined') {
-                  window.location.href = "/events";
-                }
-              }}
-              containerClassName="rounded-full"
-              className="bg-transparent border border-white/20 text-white px-8 py-3 text-lg font-semibold hover:bg-white/10 cursor-pointer"
-            >
-              {t("hero.exploreEvents")}
-            </HoverBorderGradient>
+          
           </div>
         </div>
 
