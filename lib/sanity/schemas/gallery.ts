@@ -48,7 +48,7 @@ export default defineType({
               type: 'image',
               options: {
                 hotspot: true,
-                metadata: ['dimensions', 'palette'],
+                metadata: ['palette'],
                 // Sanity otomatik olarak resimleri optimize eder
                 // Bu ayarlar sıkıştırma ve boyutlandırma için
                 accept: 'image/*',
