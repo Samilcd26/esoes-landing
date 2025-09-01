@@ -2,10 +2,19 @@
 
 import ExpandableCardGrid from "@/components/ui/expandable-card-grid";
 
+interface Card {
+  description: string;
+  title: string;
+  src: string;
+  ctaText: string;
+  ctaLink: string;
+  content: () => React.ReactNode;
+}
+
 interface DepartmentsSectionProps {
   title: string;
   subtitle: string;
-  departmentCards: any[];
+  departmentCards: Card[];
   emptyMessage: string;
 }
 

@@ -4,6 +4,7 @@ import { LoaderOne } from "@/components/ui/loader";
 import { useSanityDepartmentsByCategory } from "@/hooks/useSanityDepartments";
 import React from "react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { 
   HsdHeader, 
   UsersSection, 
@@ -41,9 +42,11 @@ export default function HsdDepartmentsPage() {
                       <div className="flex-shrink-0">
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-semibold text-sm">
                           {person.image ? (
-                            <img 
+                            <Image 
                               src={person.image} 
                               alt={`${person.firstName} ${person.lastName}`}
+                              width={48}
+                              height={48}
                               className="w-full h-full rounded-full object-cover"
                             />
                           ) : (
@@ -98,9 +101,11 @@ export default function HsdDepartmentsPage() {
                       <div className="flex-shrink-0">
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white font-semibold text-sm">
                           {person.image ? (
-                            <img 
+                            <Image 
                               src={person.image} 
                               alt={`${person.firstName} ${person.lastName}`}
+                              width={48}
+                              height={48}
                               className="w-full h-full rounded-full object-cover"
                             />
                           ) : (
