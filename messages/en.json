@@ -412,6 +412,10 @@
         "responsible": "Responsible",
         "assistant": "Assistant"
       }
+    },
+    "generalManagement": {
+      "title": "General Management",
+      "subtitle": "Meet our general management team"
     }
   }
   ,

@@ -3,11 +3,11 @@
 import { MotionCalendar } from "@/components/ui/motion-calendar";
 import { useSanityCalendarEventsForCalendar } from "@/hooks/useSanityCalendarEvents";
 import { useSanityEventArchives } from "@/hooks/useSanityEventArchive";
-import { LoaderOne } from "@/components/ui/loader";
 import EventsSection from "@/components/ui/events-section";
 import { CalendarEvent, EventArchive } from "@/lib/types/api";
 import type { MotionCalendarEvent } from "@/lib/utils";
 import { useTranslations, useLocale } from "next-intl";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 
 
@@ -101,9 +101,12 @@ export default function EventsPage() {
   // Show loading state
   if (calendarLoading || archiveLoading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <LoaderOne />
-      </div>
+      <LoadingSpinner 
+      title={t('loading.title')}
+      subtitle={t('loading.subtitle')}
+      className="min-h-[60vh]"
+    />
+
     );
   }
 
