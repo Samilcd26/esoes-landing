@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { IconChevronDown, IconQuestionMark } from "@tabler/icons-react";
 import { BackgroundLines } from "@/components/ui/background-lines";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { useSanityFaqs, useSanityFaqsByCategory } from "@/hooks/useSanityFaqs";
 import { Faq } from "@/lib/types/api";
 import { useTranslations } from "next-intl";
@@ -39,34 +40,11 @@ export default function FAQPage() {
 
   if (isLoading) {
     return (
-      <BackgroundLines 
-        className="min-h-screen"
-        svgOptions={{ duration: 4 }}
-      >
-        <div className="relative z-10 container mx-auto px-4 py-16">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-6 shadow-lg">
-              <IconQuestionMark className="w-8 h-8 text-white" />
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-slate-900 via-blue-800 to-purple-800 bg-clip-text text-transparent dark:from-white dark:via-blue-200 dark:to-purple-200 mb-4">
-              {t('loading.title')}
-            </h1>
-            <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-              {t('loading.subtitle')}
-            </p>
-          </div>
-          
-          <div className="max-w-4xl mx-auto space-y-4">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-200/50 dark:border-slate-700/50 p-6 animate-pulse">
-                <div className="h-6 bg-gray-300 dark:bg-gray-600 rounded mb-4"></div>
-                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded mb-2"></div>
-                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </BackgroundLines>
+      <LoadingSpinner 
+      title={t('loading.title')}
+      subtitle={t('loading.subtitle')}
+      className="min-h-[60vh]"
+    />
     );
   }
 

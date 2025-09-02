@@ -409,6 +409,10 @@
         "responsible": "Sorumlu",
         "assistant": "Yardımcı"
       }
+    },
+    "generalManagement": {
+      "title": "Genel Yönetim",
+      "subtitle": "Genel yönetim ekibimizle tanışın"
     }
   },
   "hsd": {

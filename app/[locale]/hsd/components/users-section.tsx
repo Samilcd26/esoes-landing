@@ -1,8 +1,10 @@
 "use client";
 
 import { motion } from "motion/react";
-import UserCard from "./user-card";
+import UserCard from "../../../../components/ui/user-card";
 import DepartmentHeader from "./department-header";
+import { useHsdManagementUsers } from "@/hooks/useSanityUsers";
+import { urlFor } from "@/lib/sanity/client";
 
 interface User {
   firstName?: string;
@@ -26,6 +28,7 @@ interface UsersSectionProps {
 }
 
 export default function UsersSection({ groupedUsers, title, subtitle }: UsersSectionProps) {
+  const { data: hsdUsers } = useHsdManagementUsers();
   if (groupedUsers.length === 0) return null;
 
   return (
@@ -68,27 +71,28 @@ export default function UsersSection({ groupedUsers, title, subtitle }: UsersSec
             {/* Users Grid */}
             <div className="flex justify-center">
               <div className="flex flex-row gap-8 items-center justify-center">
-                {/* Mert Yıldız - HSD Elçisi */}
-                <UserCard
-                  user={{
-                    firstName: "Mert",
-                    lastName: "Yıldız",
-                    role: "ambassador"
-                  }}
-                  variant="ambassador"
-                  index={0}
-                />
-                
-                {/* Nida - Elçi Yardımcısı */}
-                <UserCard
-                  user={{
-                    firstName: "Nida",
-                    lastName: "",
-                    role: "secretary"
-                  }}
-                  variant="secretary"
-                  index={1}
-                />
+                {/* HSD Management Users */}
+                {hsdUsers && hsdUsers.length > 0 ? (
+                  hsdUsers.slice(0, 2).map((user, index) => (
+                    <UserCard
+                      key={user._id}
+                      user={{
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                        title: user.title,
+                        email: user.email,
+                        image: user.profileImage ? urlFor(user.profileImage).url() : undefined,
+                        role: index === 0 ? "ambassador" : "secretary"
+                      }}
+                      variant={index === 0 ? "ambassador" : "secretary"}
+                      index={index}
+                    />
+                  ))
+                ) : (
+                  <>
+                  <div>HSD Elçileri bulunamadı</div>
+                  </>
+                )}
               </div>
             </div>
           </div>

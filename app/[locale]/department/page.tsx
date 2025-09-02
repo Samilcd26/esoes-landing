@@ -2,15 +2,22 @@
 
 import ExpandableCardGrid from "@/components/ui/expandable-card-grid";
 import { useSanityDepartmentsByCategory } from "@/hooks/useSanityDepartments";
-import { LoaderOne } from "@/components/ui/loader";
+import { useUsersByCategory } from "@/hooks/useSanityUsers";
 import React from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { urlFor } from "@/lib/sanity/client";
+import UserCard from "@/components/ui/user-card";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 export default function DepartmentPage() {
     const t = useTranslations("department");
     const { data: departmentsResponse, isLoading, error } = useSanityDepartmentsByCategory('GENERAL');
+    
+    // General Management kategorisindeki kullanıcıları getir
+    const { data: generalManagementUsers, isLoading: generalManagementUsersLoading } = useUsersByCategory('GENERAL_MANAGEMENT');
 
+    
     
     // Department verilerini ExpandableCardGrid formatına çevir
     const departmentCards = departmentsResponse?.data?.map((department) => ({
@@ -30,8 +37,9 @@ export default function DepartmentPage() {
                                 {t("card.responsible.title")}
                             </h4>
                             <div className="space-y-3">
+                                {/* Department Responsible Users */}
                                 {department.responsible.map((person, index) => (
-                                    <div key={index} className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg p-4 border-l-4 border-blue-500">
+                                    <div key={`dept-${index}`} className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg p-4 border-l-4 border-blue-500">
                                         <div className="flex items-start gap-3">
                                             <div className="flex-shrink-0">
                                                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-semibold text-sm">
@@ -143,15 +151,13 @@ export default function DepartmentPage() {
         },
     })) || [];
 
-    if (isLoading) {
+    if (isLoading || generalManagementUsersLoading) {
         return (
-            <div className="min-h-screen flex items-center justify-center">
-                <div className="text-center">
-                    <LoaderOne />
-                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white mt-4">{t("loading.title")}</h2>
-                    <p className="text-gray-600 dark:text-gray-400 mt-2">{t("loading.subtitle")}</p>
-                </div>
-            </div>
+            <LoadingSpinner 
+            title={t('loading.title')}
+            subtitle={t('loading.subtitle')}
+            className="min-h-[60vh]"
+          />
         );
     }
 
@@ -169,6 +175,41 @@ export default function DepartmentPage() {
     return (
         <div>
             <div className="w-full !scroll-smooth">
+                {/* General Management Section */}
+                {generalManagementUsers && generalManagementUsers.length > 0 && (
+                    <section className="py-20 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20">
+                        <div className="container mx-auto px-4">
+                            <div className="text-center mb-12">
+                                <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                                    {t("generalManagement.title")}
+                                </h2>
+                                <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                                    {t("generalManagement.subtitle")}
+                                </p>
+                            </div>
+                            <div className="flex justify-center">
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl">
+                                    {generalManagementUsers.map((user, index) => (
+                                        <UserCard
+                                            key={`general-${user._id}`}
+                                            user={{
+                                                firstName: user.firstName,
+                                                lastName: user.lastName,
+                                                title: user.title,
+                                                email: user.email,
+                                                image: user.profileImage ? urlFor(user.profileImage).width(208).height(208).url() : undefined,
+                                                role: 'responsible'
+                                            }}
+                                            variant="default"
+                                            index={index}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                )}
+
                 {/* Department Cards Section */}
                 <section className="py-20">
                     <div className="text-center mb-12">

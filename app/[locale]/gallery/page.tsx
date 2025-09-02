@@ -2,9 +2,9 @@
 import React, { useState } from 'react'
 import { GalleryGrid } from '@/components/ui/gallery-grid'
 import { useSanityGallery } from '@/hooks/useSanityGallery'
-import { LoaderOne } from '@/components/ui/loader'
 import { HoverBorderGradient } from '@/components/ui/hover-border-gradient'
 import { useTranslations } from 'next-intl'
+import { LoadingSpinner } from '@/components/ui/loading-spinner'
 
 const Gallery = () => {
   const t = useTranslations('gallery')
@@ -25,13 +25,11 @@ const Gallery = () => {
     : galleries.filter(gallery => gallery.category === selectedCategory)
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <LoaderOne />
-          <h2 className="text-2xl font-bold text-white mt-8 mb-4">{t('loading.title')}</h2>
-          <p className="text-gray-300">{t('loading.subtitle')}</p>
-        </div>
-      </div>
+      <LoadingSpinner 
+      title={t('loading.title')}
+      subtitle={t('loading.subtitle')}
+      className="min-h-[60vh]"
+    />
     )
   }
 
