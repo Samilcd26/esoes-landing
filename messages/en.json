@@ -375,7 +375,10 @@
       "register": "Register",
       "learnMore": "View Details",
       "noEvents": "No events found yet.",
-      "loading": "Loading events...",
+      "loading": {
+        "title": "Loading Events",
+        "subtitle": "Preparing events and calendar information..."
+      },
       "error": "An error occurred while loading events."
     }
    },
@@ -457,6 +460,7 @@
       "departmentPageLink": "Department page"
     },
     "loading": {
+      "title": "Loading HSD",
       "subtitle": "Fetching information about HSD departments..."
     }
   }
