@@ -24,10 +24,9 @@ interface DepartmentGroup {
 interface UsersSectionProps {
   groupedUsers: DepartmentGroup[];
   title: string;
-  subtitle: string;
 }
 
-export default function UsersSection({ groupedUsers, title, subtitle }: UsersSectionProps) {
+export default function UsersSection({ groupedUsers, title }: UsersSectionProps) {
   const { data: hsdUsers } = useHsdManagementUsers();
   if (groupedUsers.length === 0) return null;
 
@@ -48,9 +47,7 @@ export default function UsersSection({ groupedUsers, title, subtitle }: UsersSec
           <h3 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-blue-200 to-cyan-300 bg-clip-text text-transparent mb-6">
             {title}
           </h3>
-          <p className="text-xl text-blue-100 leading-relaxed max-w-3xl mx-auto">
-            {subtitle}
-          </p>
+        
         </motion.div>
         
         {/* HSD Elçileri Section - Single centered card */}
@@ -63,7 +60,7 @@ export default function UsersSection({ groupedUsers, title, subtitle }: UsersSec
         >
           <div className="bg-gradient-to-br from-white/10 to-gray-50/10 dark:from-gray-800/20 dark:to-gray-700/20 backdrop-blur-sm border border-white/20 dark:border-gray-600/30 rounded-3xl p-8 shadow-2xl max-w-2xl w-full">
             <DepartmentHeader 
-              title="HSD Elçileri" 
+              title="HSD Kampüs Elçisi ve Genel Sekreteri" 
               variant="ambassador" 
               className="mb-8"
             />

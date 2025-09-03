@@ -139,7 +139,7 @@ export default function HsdDepartmentsPage() {
             <div>
               <h4 className="font-semibold text-lg mb-3 text-purple-600 dark:text-purple-400 flex items-center gap-2">
                 <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-                {tDept('card.assistant.title') || "Assistant Users"}
+                {tDept('card.assistant.title')}
               </h4>
               <div className="space-y-3">
                 {department.assistant.map((person, index) => (
@@ -278,8 +278,7 @@ export default function HsdDepartmentsPage() {
       {/* Users Section */}
       <UsersSection 
         groupedUsers={groupedUsers}
-        title={t('sections.users.title') || 'HSD Ekibi'}
-        subtitle={t('sections.users.subtitle') || 'HSD kategorisinde görev alan tüm ekip üyeleri'}
+        title={t('sections.users.title') }
       />
 
       {/* Mission Section */}

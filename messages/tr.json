@@ -372,7 +372,10 @@
       "register": "Kayıt Ol",
       "learnMore": "Detayları Gör",
       "noEvents": "Henüz etkinlik bulunmuyor.",
-      "loading": "Etkinlikler yükleniyor...",
+      "loading": {
+        "title": "Etkinlikler Yükleniyor",
+        "subtitle": "Etkinlikler ve takvim bilgileri hazırlanıyor..."
+      },
       "error": "Etkinlikler yüklenirken bir hata oluştu."
     }
   },
@@ -432,8 +435,7 @@
         "subtitle": "HSD kapsamındaki departmanlar"
       },
       "users": {
-        "title": "HSD Ekibi",
-        "subtitle": "HSD kategorisinde görev alan tüm ekip üyeleri"
+        "title": "HSD Ekibi"
       },
       "people": {
         "title": "Kişiler",
@@ -453,6 +455,7 @@
       "departmentPageLink": "Departman sayfası"
     },
     "loading": {
+      "title": "HSD Yükleniyor",
       "subtitle": "HSD Ekibi hakkında bilgi alınıyor..."
     }
   }
