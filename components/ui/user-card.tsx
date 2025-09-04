@@ -57,28 +57,28 @@ export default function UserCard({ user, variant = 'default', index = 0 }: UserC
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
       whileHover={{ y: -8, scale: 1.03 }}
-      className="group relative min-w-56 w-full max-w-64"
+      className="group relative min-w-56 w-full max-w-72"
     >
       <div className={`absolute inset-0 bg-gradient-to-r ${styles.glow} rounded-3xl blur-xl group-hover:blur-2xl group-hover:${styles.glowHover} transition-all duration-500`}></div>
       <div className="relative bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-700/95 backdrop-blur-sm border border-white/30 dark:border-gray-600/50 rounded-3xl p-4 shadow-xl">
-        {/* Role Badge */}
-        <div className="absolute -top-3 left-4 right-4">
-          <div className={`px-3 py-1 rounded-full text-xs font-semibold text-white ${styles.badge} text-center shadow-lg`}>
-            <span className="block truncate">
+        {/* Role Badge - Redesigned for better title handling */}
+        <div className="mb-4">
+          <div className={`px-4 py-2 rounded-2xl text-sm font-semibold text-white ${styles.badge} text-center shadow-lg min-h-[2.5rem] flex items-center justify-center`}>
+            <span className="leading-tight break-words hyphens-auto">
               {user.title}
             </span>
           </div>
         </div>
         
         {/* User Avatar and Info */}
-        <div className="mt-6 text-center">
-          <div className={`w-52 h-52 mx-auto mb-3 rounded-3xl bg-gradient-to-br ${styles.avatar} flex items-center justify-center text-white font-bold text-6xl shadow-lg`}>
+        <div className="text-center">
+          <div className={`w-48 h-48 mx-auto mb-4 rounded-3xl bg-gradient-to-br ${styles.avatar} flex items-center justify-center text-white font-bold text-5xl shadow-lg`}>
             {user.image ? (
               <Image 
                 src={user.image} 
                 alt={`${user.firstName} ${user.lastName}`}
-                width={208}
-                height={208}
+                width={192}
+                height={192}
                 className="w-full h-full rounded-3xl object-cover"
               />
             ) : (
@@ -88,7 +88,7 @@ export default function UserCard({ user, variant = 'default', index = 0 }: UserC
             )}
           </div>
           
-          <h4 className="font-bold text-base text-gray-900 dark:text-white mb-2 leading-tight">
+          <h4 className="font-bold text-lg text-gray-900 dark:text-white mb-3 leading-tight">
             <span className="block">{user.firstName}</span>
             <span className="block">{user.lastName}</span>
           </h4>
