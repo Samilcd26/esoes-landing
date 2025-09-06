@@ -28,6 +28,7 @@ export interface User {
   isActive: boolean
   title?: string
   category?: 'HSD_MANAGEMENT' | 'GENERAL_MANAGEMENT'
+  order?: number
   _createdAt: string
   _updatedAt: string
 }
@@ -49,6 +50,7 @@ export interface UpdateUserData {
   isActive?: boolean
   title?: string
   category?: 'HSD_MANAGEMENT' | 'GENERAL_MANAGEMENT'
+  order?: number
 }
 
 export class SanityUserService {

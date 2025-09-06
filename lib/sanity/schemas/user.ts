@@ -57,6 +57,13 @@ export default defineType({
       },
       description: 'Kullanıcının bağlı olduğu kategori',
     }),
+    defineField({
+      name: 'order',
+      title: 'Sıra',
+      type: 'number',
+      description: 'Kullanıcının listelenme sırası (düşük sayı önce gösterilir)',
+      validation: (rule) => rule.min(0).integer(),
+    }),
   ],
   preview: {
     select: {
@@ -65,6 +72,7 @@ export default defineType({
       email: 'email',
       title: 'title',
       category: 'category',
+      order: 'order',
       media: 'profileImage',
     },
     prepare(selection: {
@@ -73,6 +81,7 @@ export default defineType({
       email: string
       title: string
       category: string
+      order: number
       media: {
         _type: string
         asset: {
@@ -81,16 +90,21 @@ export default defineType({
         }
       }
     }) {
-      const { firstName, lastName, email, title, category, media } = selection
+      const { firstName, lastName, email, title, category, order, media } = selection
       return {
         title: `${firstName} ${lastName}`,
-        subtitle: `${title || 'Ünvan yok'} • ${email} • ${category || 'Kategori yok'}`,
+        subtitle: `${title || 'Ünvan yok'} • ${email} • ${category || 'Kategori yok'} • Sıra: ${order || 'Belirtilmemiş'}`,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         media: media as any,
       }
     },
   },
   orderings: [
+    {
+      title: 'Sıra (Order)',
+      name: 'orderAsc',
+      by: [{ field: 'order', direction: 'asc' }],
+    },
     {
       title: 'Ad Soyad',
       name: 'nameAsc',
