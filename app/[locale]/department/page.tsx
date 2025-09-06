@@ -188,7 +188,7 @@ export default function DepartmentPage() {
                                 </p>
                             </div>
                             <div className="flex justify-center">
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl">
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl">
                                     {generalManagementUsers
                                         .sort((a, b) => {
                                             // Order alanına göre sırala (null/undefined değerler en sona)
