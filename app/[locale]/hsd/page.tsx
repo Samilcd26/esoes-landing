@@ -1,11 +1,9 @@
 "use client";
 
 import { useSanityDepartmentsByCategory } from "@/hooks/useSanityDepartments";
-import { useHsdManagementUsers } from "@/hooks/useSanityUsers";
 import React from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { urlFor } from "@/lib/sanity/client";
 import { 
   HsdHeader, 
   UsersSection, 
@@ -18,7 +16,6 @@ export default function HsdDepartmentsPage() {
   const t = useTranslations('hsd');
   const tDept = useTranslations('department');
   const { data: departmentsResponse, isLoading, error } = useSanityDepartmentsByCategory('HSD');
-  const { data: hsdUsers, isLoading: usersLoading } = useHsdManagementUsers();
 
   const departmentCards = departmentsResponse?.data?.map((department) => ({
     title: department.name,
@@ -203,7 +200,7 @@ export default function HsdDepartmentsPage() {
     }>;
   }>) || [];
 
-  if (isLoading || usersLoading) {
+  if (isLoading) {
     return (
       <LoadingSpinner 
       title={t('loading.title')}
