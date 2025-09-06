@@ -93,23 +93,21 @@ export default function UserCard({ user, variant = 'default', index = 0 }: UserC
             <span className="block">{user.lastName}</span>
           </h4>
           
-          {/* Contact Info - Only show for default variant */}
-          {variant === 'default' && (
-            <div className="space-y-2">
-              {user.phone && (
-                <p className="text-sm text-gray-600 dark:text-gray-400 flex items-center justify-center gap-2">
-                  <span className="text-blue-500 text-base">📞</span>
-                  <span className="truncate">{user.phone}</span>
-                </p>
-              )}
-              {user.email && (
-                <p className="text-sm text-gray-600 dark:text-gray-400 flex items-center justify-center gap-2">
-                  <span className="text-blue-500 text-base">📧</span>
-                  <span className="truncate">{user.email}</span>
-                </p>
-              )}
-            </div>
-          )}
+          {/* Contact Info - Show email for all variants */}
+          <div className="space-y-2">
+            {user.phone && variant === 'default' && (
+              <p className="text-sm text-gray-600 dark:text-gray-400 flex items-center justify-center gap-2">
+                <span className="text-blue-500 text-base">📞</span>
+                <span className="truncate">{user.phone}</span>
+              </p>
+            )}
+            {user.email && (
+              <p className="text-sm text-gray-600 dark:text-gray-400 flex items-center justify-center gap-2">
+                <span className="text-green-500 text-base">📧</span>
+                <span className="truncate">{user.email}</span>
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </motion.div>
