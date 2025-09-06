@@ -1,6 +1,6 @@
 // Tüm aktif kullanıcıları getir
 export const activeUsersQuery = `
-  *[_type == "user" && isActive == true] | order(firstName asc, lastName asc) {
+  *[_type == "user" && isActive == true] | order(order asc, firstName asc, lastName asc) {
     _id,
     _type,
     firstName,
@@ -16,6 +16,7 @@ export const activeUsersQuery = `
     isActive,
     title,
     category,
+    order,
     _createdAt,
     _updatedAt
   }
@@ -23,7 +24,7 @@ export const activeUsersQuery = `
 
 // Tüm kullanıcıları getir (admin için)
 export const allUsersQuery = `
-  *[_type == "user"] | order(firstName asc, lastName asc) {
+  *[_type == "user"] | order(order asc, firstName asc, lastName asc) {
     _id,
     _type,
     firstName,
@@ -39,6 +40,7 @@ export const allUsersQuery = `
     isActive,
     title,
     category,
+    order,
     _createdAt,
     _updatedAt
   }
@@ -46,7 +48,7 @@ export const allUsersQuery = `
 
 // Role göre kullanıcıları getir
 export const usersByRoleQuery = `
-  *[_type == "user" && isActive == true && role == $role] | order(firstName asc, lastName asc) {
+  *[_type == "user" && isActive == true && role == $role] | order(order asc, firstName asc, lastName asc) {
     _id,
     _type,
     firstName,
@@ -62,6 +64,7 @@ export const usersByRoleQuery = `
     isActive,
     title,
     category,
+    order,
     _createdAt,
     _updatedAt
   }
@@ -73,7 +76,7 @@ export const searchUsersQuery = `
     firstName match $query + "*" ||
     lastName match $query + "*" ||
     email match $query + "*"
-  )] | order(firstName asc, lastName asc) {
+  )] | order(order asc, firstName asc, lastName asc) {
     _id,
     _type,
     firstName,
@@ -89,6 +92,7 @@ export const searchUsersQuery = `
     isActive,
     title,
     category,
+    order,
     _createdAt,
     _updatedAt
   }
@@ -112,6 +116,7 @@ export const singleUserQuery = `
     isActive,
     title,
     category,
+    order,
     _createdAt,
     _updatedAt
   }[0]
@@ -135,6 +140,7 @@ export const userByEmailQuery = `
     isActive,
     title,
     category,
+    order,
     _createdAt,
     _updatedAt
   }[0]
@@ -142,7 +148,7 @@ export const userByEmailQuery = `
 
 // Admin kullanıcıları getir (title ile filtreleme)
 export const adminUsersQuery = `
-  *[_type == "user" && isActive == true && title match "*admin*" || title match "*başkan*"] | order(firstName asc, lastName asc) {
+  *[_type == "user" && isActive == true && title match "*admin*" || title match "*başkan*"] | order(order asc, firstName asc, lastName asc) {
     _id,
     _type,
     firstName,
@@ -158,6 +164,7 @@ export const adminUsersQuery = `
     isActive,
     title,
     category,
+    order,
     _createdAt,
     _updatedAt
   }
@@ -165,7 +172,7 @@ export const adminUsersQuery = `
 
 // Kategoriye göre kullanıcıları getir
 export const usersByCategoryQuery = `
-  *[_type == "user" && isActive == true && category == $category] | order(firstName asc, lastName asc) {
+  *[_type == "user" && isActive == true && category == $category] | order(order asc, firstName asc, lastName asc) {
     _id,
     _type,
     firstName,
@@ -181,6 +188,7 @@ export const usersByCategoryQuery = `
     isActive,
     title,
     category,
+    order,
     _createdAt,
     _updatedAt
   }
@@ -188,7 +196,7 @@ export const usersByCategoryQuery = `
 
 // HSD Management kategorisindeki kullanıcıları getir
 export const hsdUsersQuery = `
-  *[_type == "user" && isActive == true && category == "HSD_MANAGEMENT"] | order(firstName asc, lastName asc) {
+  *[_type == "user" && isActive == true && category == "HSD_MANAGEMENT"] | order(order asc, firstName asc, lastName asc) {
     _id,
     _type,
     firstName,
@@ -204,6 +212,7 @@ export const hsdUsersQuery = `
     isActive,
     title,
     category,
+    order,
     _createdAt,
     _updatedAt
   }
