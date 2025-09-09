@@ -27,7 +27,7 @@ export default function HsdHeader({ title, description }: HsdHeaderProps) {
         >
           <div className="relative w-80 h-40 md:w-96 md:h-48 bg-white/15 backdrop-blur-md rounded-2xl p-6 border-2 border-white/30 shadow-2xl">
             <Image
-              src="/assets/images/huawei_logo.png"
+              src="/assets/images/hsdturkiye_logo.jpg"
               alt="HUAWEI"
               fill
               className="object-contain p-3"

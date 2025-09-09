@@ -1,15 +1,21 @@
+import { getTranslations } from 'next-intl/server';
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Sıkça Sorulan Sorular | ESOES",
-  description: "ESOES hakkında sıkça sorulan sorular ve cevapları. Üyelik, etkinlikler, gönüllülük ve daha fazlası hakkında bilgi alın.",
-  keywords: ["ESOES", "FAQ", "Sıkça Sorulan Sorular", "Üyelik", "Etkinlikler", "Gönüllülük"],
-};
+export async function generateMetadata({}: {params: Promise<{locale: string}>}): Promise<Metadata> {
+  const t = await getTranslations('faqLayout');
+ 
+  return {
+    title: t('title'),
+    description: t('description'),
+    keywords: t('keywords').split(', '),
+  };
+}
 
-export default function FaqLayout({
+export default async function FaqLayout({
   children,
 }: {
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) {
   return children;
 }

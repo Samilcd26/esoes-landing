@@ -39,13 +39,8 @@ export default function RootLayout({
 }>) {
   return (
     <html suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/assets/icons/logo.svg" type="image/svg+xml" />
-        <link rel="shortcut icon" href="/assets/icons/logo.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/assets/icons/logo.svg" />
-      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>

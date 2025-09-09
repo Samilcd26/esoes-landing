@@ -30,6 +30,7 @@ interface Event {
 }
 
 const EventCard = ({ event, index, onCardClick }: { event: Event; index: number; onCardClick: (event: Event) => void }) => {
+  const t = useTranslations("eventsSection");
   const [isHovered, setIsHovered] = useState(false);
   const [loadedImageDimensions, setLoadedImageDimensions] = useState<{ width: number; height: number } | null>(null);
 
@@ -37,6 +38,7 @@ const EventCard = ({ event, index, onCardClick }: { event: Event; index: number;
     const uniqueUrls = new Set<string>();
     const media: { type: MediaResource['type']; url: string; title: string }[] = [];
 
+    // Önce images array'inden medya topla
     (evt.images || []).forEach((imgUrl) => {
       if (imgUrl && !uniqueUrls.has(imgUrl)) {
         uniqueUrls.add(imgUrl);
@@ -44,6 +46,7 @@ const EventCard = ({ event, index, onCardClick }: { event: Event; index: number;
       }
     });
 
+    // Sonra mediaResources'dan medya topla (duplicate URL'leri atla)
     (evt.mediaResources || []).forEach((resource) => {
       const url =
         resource.image ||
@@ -108,7 +111,7 @@ const EventCard = ({ event, index, onCardClick }: { event: Event; index: number;
               animate={{ opacity: isHovered ? 1 : 0 }}
               className="absolute inset-0 bg-gradient-to-br from-purple-600/40 via-blue-600/40 to-cyan-600/40 flex items-center justify-center"
             >
-              <div className="text-white text-lg font-semibold">Detayları Gör</div>
+              <div className="text-white text-lg font-semibold">{t("viewDetails")}</div>
             </motion.div>
           </>
         ) : (
@@ -126,7 +129,7 @@ const EventCard = ({ event, index, onCardClick }: { event: Event; index: number;
               animate={{ opacity: isHovered ? 1 : 0 }}
               className="absolute inset-0 bg-gradient-to-br from-purple-600/40 via-blue-600/40 to-cyan-600/40 flex items-center justify-center"
             >
-              <div className="text-white text-lg font-semibold">Detayları Gör</div>
+              <div className="text-white text-lg font-semibold">{t("viewDetails")}</div>
             </motion.div>
           </>
         )}
@@ -152,20 +155,20 @@ const EventCard = ({ event, index, onCardClick }: { event: Event; index: number;
         </p>
 
         {/* Media count indicator */}
-        {event.mediaResources && event.mediaResources.length > 0 && (
+        {allMedia.length > 0 && (
           <div className="mt-3 flex items-center gap-2">
             <div className="flex gap-1">
-              {event.mediaResources.slice(0, 3).map((resource, idx) => (
+              {allMedia.slice(0, 3).map((_, idx) => (
                 <div key={idx} className="w-2 h-2 rounded-full bg-purple-400" />
               ))}
-              {event.mediaResources.length > 3 && (
+              {allMedia.length > 3 && (
                 <span className="text-xs text-gray-400 ml-1">
-                  +{event.mediaResources.length - 3}
+                  +{allMedia.length - 3}
                 </span>
               )}
             </div>
             <span className="text-xs text-gray-400">
-              {event.mediaResources.length} medya
+              {allMedia.length} {t("media")}
             </span>
           </div>
         )}
@@ -183,23 +186,36 @@ const EventCard = ({ event, index, onCardClick }: { event: Event; index: number;
 
 // Modal bileşeni
 const EventModal = ({ event, isOpen, onClose }: { event: Event | null; isOpen: boolean; onClose: () => void }) => {
+  const t = useTranslations("eventsSection");
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
   
   if (!event) return null;
 
-  // Combine images and mediaResources for display
-  const allMedia = [
-    ...(event.images || []).map(img => ({ type: 'image' as const, url: img, title: event.title })),
-    ...(event.mediaResources || []).map(resource => {
-      const url = resource.image || resource.imageUrl || resource.video || resource.videoUrl || resource.youtubeUrl || resource.document || resource.documentUrl || resource.externalUrl;
-      return {
+  // Combine images and mediaResources for display (avoid duplicates)
+  const uniqueUrls = new Set<string>();
+  const allMedia: { type: MediaResource['type']; url: string; title: string; description?: string }[] = [];
+
+  // Önce images array'inden medya topla
+  (event.images || []).forEach(img => {
+    if (img && !uniqueUrls.has(img)) {
+      uniqueUrls.add(img);
+      allMedia.push({ type: 'image' as const, url: img, title: event.title });
+    }
+  });
+
+  // Sonra mediaResources'dan medya topla (duplicate URL'leri atla)
+  (event.mediaResources || []).forEach(resource => {
+    const url = resource.image || resource.imageUrl || resource.video || resource.videoUrl || resource.youtubeUrl || resource.document || resource.documentUrl || resource.externalUrl;
+    if (url && !uniqueUrls.has(url)) {
+      uniqueUrls.add(url);
+      allMedia.push({
         type: resource.type,
-        url: url || '',
+        url: url,
         title: `${resource.type} media`,
         description: undefined
-      };
-    })
-  ];
+      });
+    }
+  });
 
   const nextMedia = () => {
     setCurrentMediaIndex((prev) => (prev + 1) % allMedia.length);
@@ -266,7 +282,7 @@ const EventModal = ({ event, isOpen, onClose }: { event: Event | null; isOpen: b
                 className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
               >
                 <ExternalLink className="w-4 h-4" />
-                Dokümanı İndir
+                {t("downloadDocument")}
               </a>
             </div>
           </div>
@@ -285,7 +301,7 @@ const EventModal = ({ event, isOpen, onClose }: { event: Event | null; isOpen: b
                 className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
                 <ExternalLink className="w-4 h-4" />
-                Linke Git
+                {t("goToLink")}
               </a>
             </div>
           </div>
@@ -296,7 +312,7 @@ const EventModal = ({ event, isOpen, onClose }: { event: Event | null; isOpen: b
           <div className="relative w-full h-full bg-gray-800 flex items-center justify-center">
             <div className="text-center">
               <div className="text-6xl text-gray-400 mb-4">?</div>
-              <p className="text-white">Desteklenmeyen medya türü</p>
+              <p className="text-white">{t("unsupportedMedia")}</p>
             </div>
           </div>
         );
@@ -405,7 +421,7 @@ interface EventsSectionProps {
 }
 
 export default function EventsSection({ events }: EventsSectionProps) {
-  const t = useTranslations("events");
+  const t = useTranslations("eventsSection");
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -486,10 +502,10 @@ export default function EventsSection({ events }: EventsSectionProps) {
                 </svg>
               </div>
               <h3 className="text-2xl font-semibold text-white mb-4">
-                {t("details.noEvents")}
+                {t("noEvents")}
               </h3>
               <p className="text-gray-400 text-lg">
-                Bu kategoride henüz etkinlik bulunmuyor.
+                {t("noEventsInCategory")}
               </p>
             </div>
           </motion.div>

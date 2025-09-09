@@ -67,7 +67,7 @@ const Gallery = () => {
           </p>
           
           {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
+          <div className="flex flex-wrap justify-center gap-4">
             {categories.map((category) => (
               <HoverBorderGradient 
                 key={category.value}

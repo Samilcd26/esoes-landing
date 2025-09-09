@@ -1,6 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
 import { SanityGalleryService } from '../lib/api/sanityGalleryService'
 
+// Query keys
+export const sanityGalleryKeys = {
+  all: ['galleries'] as const,
+  lists: () => [...sanityGalleryKeys.all, 'list'] as const,
+  list: () => [...sanityGalleryKeys.lists()] as const,
+  details: () => [...sanityGalleryKeys.all, 'detail'] as const,
+  detail: (id: string) => [...sanityGalleryKeys.details(), id] as const,
+  search: (query: string) => [...sanityGalleryKeys.all, 'search', query] as const,
+  category: (category: string) => [...sanityGalleryKeys.all, 'category', category] as const,
+  images: () => [...sanityGalleryKeys.all, 'images'] as const,
+};
+
 export const useSanityGallery = () => {
   const {
     data: galleries,
@@ -8,7 +20,7 @@ export const useSanityGallery = () => {
     error,
     refetch,
   } = useQuery({
-    queryKey: ['galleries'],
+    queryKey: sanityGalleryKeys.list(),
     queryFn: SanityGalleryService.getActiveGalleries,
     staleTime: 5 * 60 * 1000, // 5 dakika
   })
@@ -28,7 +40,7 @@ export const useSanityGalleryByCategory = (category: string) => {
     error,
     refetch,
   } = useQuery({
-    queryKey: ['galleries', category],
+    queryKey: sanityGalleryKeys.category(category),
     queryFn: () => SanityGalleryService.getGalleriesByCategory(category),
     enabled: !!category,
     staleTime: 5 * 60 * 1000, // 5 dakika
@@ -49,7 +61,7 @@ export const useSanityGallerySearch = (query: string) => {
     error,
     refetch,
   } = useQuery({
-    queryKey: ['galleries', 'search', query],
+    queryKey: sanityGalleryKeys.search(query),
     queryFn: () => SanityGalleryService.searchGalleries(query),
     enabled: !!query && query.length > 2,
     staleTime: 2 * 60 * 1000, // 2 dakika
@@ -70,7 +82,7 @@ export const useSanityGalleryById = (id: string) => {
     error,
     refetch,
   } = useQuery({
-    queryKey: ['gallery', id],
+    queryKey: sanityGalleryKeys.detail(id),
     queryFn: () => SanityGalleryService.getGalleryById(id),
     enabled: !!id,
     staleTime: 5 * 60 * 1000, // 5 dakika
@@ -91,7 +103,7 @@ export const useSanityGalleryImages = () => {
     error,
     refetch,
   } = useQuery({
-    queryKey: ['gallery-images'],
+    queryKey: sanityGalleryKeys.images(),
     queryFn: SanityGalleryService.getGalleryImages,
     staleTime: 10 * 60 * 1000, // 10 dakika
   })

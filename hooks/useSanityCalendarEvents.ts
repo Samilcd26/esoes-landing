@@ -44,8 +44,11 @@ export const useSanityCalendarEventsForCalendar = () => {
   return useQuery({
     queryKey: sanityCalendarEventKeys.calendar(),
     queryFn: () => sanityCalendarEventService.getCalendarEventsForCalendar(),
-    staleTime: 5 * 60 * 1000,
-    gcTime: 10 * 60 * 1000,
+    // Balanced freshness for calendar
+    staleTime: 60 * 1000,
+    gcTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
   });
 };
 
@@ -54,8 +57,8 @@ export const useAllSanityCalendarEventsForCalendar = () => {
   return useQuery({
     queryKey: sanityCalendarEventKeys.adminCalendar(),
     queryFn: () => sanityCalendarEventService.getAllCalendarEventsForCalendar(),
-    staleTime: 2 * 60 * 1000,
-    gcTime: 5 * 60 * 1000,
+    staleTime: 0,
+    gcTime: 0,
   });
 };
 
