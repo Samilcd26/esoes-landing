@@ -2,7 +2,7 @@ import {defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'event',
-  title: 'Calendar Event',
+  title: 'Calendar Events',
   type: 'document',
   fields: [
     defineField({

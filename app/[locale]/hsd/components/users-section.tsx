@@ -5,6 +5,7 @@ import UserCard from "../../../../components/ui/user-card";
 import DepartmentHeader from "./department-header";
 import { useHsdManagementUsers } from "@/hooks/useSanityUsers";
 import { urlFor } from "@/lib/sanity/client";
+import { useTranslations } from "next-intl";
 
 interface User {
   firstName?: string;
@@ -27,6 +28,7 @@ interface UsersSectionProps {
 }
 
 export default function UsersSection({ groupedUsers, title }: UsersSectionProps) {
+  const t = useTranslations('hsd');
   const { data: hsdUsers } = useHsdManagementUsers();
   if (groupedUsers.length === 0) return null;
 
@@ -60,7 +62,7 @@ export default function UsersSection({ groupedUsers, title }: UsersSectionProps)
         >
           <div className="bg-gradient-to-br from-white/10 to-gray-50/10 dark:from-gray-800/20 dark:to-gray-700/20 backdrop-blur-sm border border-white/20 dark:border-gray-600/30 rounded-3xl p-8 shadow-2xl max-w-2xl w-full">
             <DepartmentHeader 
-              title="HSD Kampüs Elçisi ve Genel Sekreteri" 
+              title={t('users.ambassadorTitle')} 
               variant="ambassador" 
               className="mb-8"
             />
@@ -87,7 +89,7 @@ export default function UsersSection({ groupedUsers, title }: UsersSectionProps)
                   ))
                 ) : (
                   <>
-                  <div>HSD Elçileri bulunamadı</div>
+                  <div>{t('users.ambassadorEmpty')}</div>
                   </>
                 )}
               </div>
@@ -107,7 +109,7 @@ export default function UsersSection({ groupedUsers, title }: UsersSectionProps)
               className="bg-gradient-to-br from-white/10 to-gray-50/10 dark:from-gray-800/20 dark:to-gray-700/20 backdrop-blur-sm border border-white/20 dark:border-gray-600/30 rounded-3xl p-6 shadow-2xl"
             >
               <DepartmentHeader 
-                title={`${departmentGroup.departmentName} koordinatörleri`}
+                title={t('users.coordinatorsTitle', { departmentName: departmentGroup.departmentName })}
                 variant="department"
               />
               

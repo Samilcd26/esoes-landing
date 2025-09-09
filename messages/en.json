@@ -4,12 +4,8 @@
     "gallery": "Gallery",
     "department": "Department",
     "hsd": "HSD",
-    "contact": "Contact",
     "faq": "FAQ",
-    "login": "Login",
-    "logout": "Logout",
-    "loggingOut": "Logging out...",
-    "welcome": "Welcome"
+    "calendar": "Calendar"
   },
   "common": {
     "error": "Error",
@@ -152,18 +148,15 @@
     "contact": {
       "title": "Contact",
       "email": "esoesogu@gmail.com",
-      "address": "Eskisehir Osmangazi University - ESKISEHIR"
-    },
-    "quickLinks": {
-      "title": "Quick Access",
-      "home": "Home",
-      "departments": "Departments",
-      "gallery": "Gallery",
-      "faq": "FAQ",
-      "contact": "Contact"
+      "address": "Eskisehir Osmangazi University - ESKISEHIR",
+      "mapUrl": "https://share.google/RB3wUvj52SUNHvXgO"
     },
     "social": {
-      "title": "Social"
+      "title": "Social Media",
+      "instagramUrl": "https://www.instagram.com/esoesogu",
+      "linkedinUrl": "https://www.linkedin.com/company/esoesogü/",
+      "youtubeUrl": "https://www.youtube.com/@esoesogu",
+      "tiktokUrl": "https://www.tiktok.com/@esoesogu"
     },
     "bottom": {
       "copyright": "© 2024 ESOES. All rights reserved.",
@@ -245,11 +238,6 @@
     "empty": {
       "title": "There are no questions in this category yet",
       "subtitle": "You can select a different category or contact us."
-    },
-    "contact": {
-      "title": "Still have a question?",
-      "subtitle": "If you couldn't find the answer to your question here, you can contact us via our social media accounts or by e-mail.",
-      "button": "Contact Us"
     }
   },
   "FaqManagement": {
@@ -285,101 +273,31 @@
       "OTHER": "Other"
     }
   },
- 
+  "faqLayout": {
+    "title": "Frequently Asked Questions",
+    "description": "Frequently asked questions and answers about ESOES. Get information about membership, events, volunteering, and more.",
+    "keywords": "ESOES, FAQ, Frequently Asked Questions, Membership, Events, Volunteering"
+  },
+  "galleryLayout": {
+    "title": "Gallery",
+    "description": "View photos and memories from ESOES events and activities."
+  },
+  "email": {
+    "sendSuccess": "Email sent successfully!",
+    "sendError": "Failed to send email"
+  },
   "validation": {
     "required": "This field is required.",
     "fillAllFields": "Please fill in all required fields."
   },
   "events": {
-    "title": "Our Events",
-    "subtitle": "Special events and signature projects organized by ESOES",
+    "loading": {
+      "title": "Loading Events",
+      "subtitle": "Preparing events and calendar information..."
+    },
     "errors": {
       "title": "An Error Occurred",
       "message": "Please try again later."
-    },
-    "page": {
-      "calendar": {
-        "title": {
-          "part1": "Event",
-          "part2": "Calendar"
-        },
-        "subtitle": "Follow our upcoming events and join in"
-      }
-    },
-    "events": [
-      {
-        "id": "hebocon",
-        "title": "HEBOCON",
-        "description": "Hebocon is one of our signature events. It is a robot competition held with competing teams from universities in different cities of Turkey. The aim of the event is to make the worst possible robot with the parts given to the teams.",
-        "category": "Robot Competition",
-        "type": "Competition"
-      },
-      {
-        "id": "summit-of-future",
-        "title": "SUMMIT OF FUTURE",
-        "description": "Summit Of Future is our signature event organized by the club every year. The aim of our event is to expand the vision of participants and inspire from the experiences of experts in their fields. Additionally, through our rich foyer area and company stands, we provide participants with the opportunity to establish professional connections.",
-        "category": "Conference",
-        "type": "Signature Event"
-      },
-      {
-        "id": "game-jam",
-        "title": "GAME JAM",
-        "description": "GameJam is an intensive and creative process where teams consisting of people interested in game development design and develop original digital games within a certain time period according to the determined theme. This event aims to develop participants' skills such as idea generation, software development, time management and problem solving.",
-        "category": "Game Development",
-        "type": "Hackathon"
-      },
-      {
-        "id": "technical-trip",
-        "title": "TECHNICAL TRIP",
-        "description": "Technical trips offer students the opportunity to visit factories, production facilities and various businesses operating in their fields. Through this event, participants gain experience in observing the working processes of institutions.",
-        "category": "Technical Trip",
-        "type": "Education"
-      },
-      {
-        "id": "estalks",
-        "title": "ESTALKS - HTALKS",
-        "description": "EsTalks is an event that takes place with a moderator and a speaker. The speaker talks about themselves and their experiences in business life and answers the participants' questions.",
-        "category": "Talk",
-        "type": "Networking"
-      },
-      {
-        "id": "social-responsibility",
-        "title": "SOCIAL RESPONSIBILITY TRIPS",
-        "description": "Social responsibility trips aim to benefit society and provide a warmer environment in the club.",
-        "category": "Social Responsibility",
-        "type": "Trips"
-      },
-      {
-        "id": "education-workshop",
-        "title": "EDUCATION AND WORKSHOP",
-        "description": "Our education and workshop events aim to provide useful training to participants, expand networks and create a more intimate environment in the club through fun events.",
-        "category": "Education",
-        "type": "Workshop"
-      }
-    ],
-    "filters": {
-      "all": "All",
-      "competition": "Competition",
-      "conference": "Conference",
-      "workshop": "Workshop",
-      "trip": "Trips",
-      "networking": "Networking",
-      "social": "Social Responsibility"
-    },
-    "details": {
-      "category": "Category",
-      "type": "Type",
-      "date": "Date",
-      "location": "Location",
-      "participants": "Participants",
-      "register": "Register",
-      "learnMore": "View Details",
-      "noEvents": "No events found yet.",
-      "loading": {
-        "title": "Loading Events",
-        "subtitle": "Preparing events and calendar information..."
-      },
-      "error": "An error occurred while loading events."
     }
    },
   "department": {
@@ -396,32 +314,15 @@
       "message": "An error occurred while loading departments. Please try again later."
     },
     "empty": "No department information available yet.",
-    "testimonials": {
-      "title": "From Our Leads",
-      "subtitle": "Experiences and opinions of our department leads"
-    },
     "card": {
       "ctaText": "Learn More",
       "responsible": { "title": "Responsible Person" },
-      "assistant": { "title": "Assistant Users" },
-      "contact": { "title": "Contact" },
-      
-      "description": { "title": "Description" }
-    },
-    "team": {
-      "title": "Our Team Members",
-      "subtitle": "Meet the dedicated people behind each department",
-      "roles": {
-        "responsible": "Responsible",
-        "assistant": "Assistant"
-      }
+      "assistant": { "title": "Assistant Users" }
     },
     "generalManagement": {
-      "title": "General Management",
-      "subtitle": "Meet our general management team"
+      "title": "General Management"
     }
-  }
-  ,
+  },
   "hsd": {
     "header": {
       "title": "Who We Are: HUAWEI Student Developers (HSD) Eskisehir",
@@ -441,27 +342,39 @@
       "users": {
         "title": "HSD Team",
         "subtitle": "All team members working in HSD category"
-      },
-      "people": {
-        "title": "People",
-        "subtitle": "Leads and assistants of HSD departments",
-        "empty": "No people found yet."
-      },
-      "team": {
-        "title": "Detailed Team View",
-        "subtitle": "Meet our dedicated team members from each department"
       }
     },
-    "people": {
-      "roles": {
-        "responsible": "Lead",
-        "assistant": "Assistant"
-      },
-      "departmentPageLink": "Department page"
+    "users": {
+      "ambassadorTitle": "HSD Eskisehir Campus Ambassador and General Secretary",
+      "ambassadorEmpty": "HSD Ambassadors not found",
+      "coordinatorsTitle": "{departmentName} Coordinators"
     },
     "loading": {
       "title": "Loading HSD",
       "subtitle": "Fetching information about HSD departments..."
     }
+  },
+  "calendar": {
+    "title": "Calendar",
+    "subtitle": "Follow our upcoming events and join in",
+    "loading": {
+      "title": "Loading Calendar",
+      "subtitle": "Preparing events and calendar information..."
+    },
+    "errors": {
+      "title": "An Error Occurred",
+      "message": "An error occurred while loading the calendar."
+    }
+  },
+  "eventsSection": {
+    "title": "Our Event Archive",
+    "subtitle": "Browse through the best moments from our past events.",
+    "viewDetails": "View Details",
+    "media": "media",
+    "downloadDocument": "Download Document",
+    "goToLink": "Go to Link",
+    "unsupportedMedia": "Unsupported media type",
+    "noEvents": "No events found yet.",
+    "noEventsInCategory": "No events found in this category yet."
   }
 }

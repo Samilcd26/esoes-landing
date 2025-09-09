@@ -21,15 +21,14 @@ export function AppContent({ children }: { children: React.ReactNode }) {
 }
 
 function AppContentInner({ children }: { children: React.ReactNode }) {
-
- 
-
   // Render appropriate layout based on user authentication
-  return<>
-  <div className="fixed top-0 left-0 right-0 z-50">
-    <TopNavbar />
-  </div>
-  <main className="pt-24">{children}</main>
-  <Footer />
-</>
+  return (
+    <>
+      <div className="fixed top-0 left-0 right-0 z-50">
+        <TopNavbar />
+      </div>
+      <main className="pt-24">{children}</main>
+      <Footer />
+    </>
+  );
 }

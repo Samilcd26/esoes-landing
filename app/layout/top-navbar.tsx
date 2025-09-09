@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
-//import { useCurrentUser, useLogout } from "@/hooks/useAuth";
+import Link from "next/link";
 import { LanguageSelector } from "@/components/ui/language-selector";
 import {
   Navbar,
@@ -20,6 +20,11 @@ const getNavigationItems = (t: ReturnType<typeof useTranslations>, locale: strin
   link: string;
   isSpecial?: boolean;
 }> => [
+  {
+    key: "calendar",
+    name: t("navigation.calendar"),
+    link: `/${locale}/calendar`,
+  },
   {
     key: "events",
     name: t("navigation.events"),
@@ -41,7 +46,6 @@ const getNavigationItems = (t: ReturnType<typeof useTranslations>, locale: strin
     link: `/${locale}/hsd`,
     isSpecial: true,
   },
-
   {
     key: "faq",
     name: t("navigation.faq"),
@@ -51,10 +55,6 @@ const getNavigationItems = (t: ReturnType<typeof useTranslations>, locale: strin
 
 export default function TopNavbar() {
   const [isOpen, setIsOpen] = useState(false);
-  //const { data: user } = useCurrentUser();
-  //const logoutMutation = useLogout();
-  
-  // Safe translation hook with fallback
   const t = useTranslations();
   const locale = useLocale();
   
@@ -67,15 +67,6 @@ export default function TopNavbar() {
   const handleItemClick = () => {
     setIsOpen(false);
   };
-/*
-  const handleLogout = async () => {
-    try {
-      await logoutMutation.mutateAsync();
-      setIsOpen(false);
-    } catch (error) {
-      console.error("Logout error:", error);
-    }
-  }*/
 
   return (
     <Navbar className="max-w-7xl mx-auto">
@@ -83,61 +74,34 @@ export default function TopNavbar() {
       <NavBody>
         <NavbarLogo />
         <div className="flex items-center space-x-4 flex-1 justify-center">
-          {navigationItems.map((item) => {
-            if (item.isSpecial) {
-              return (
-                <a
-                  key={`nav-item-${item.key}`}
-                  href={item.link}
-                  onClick={handleItemClick}
-                  className="relative group"
-                >
-                  <div className="px-4 py-2 text-white font-bold transform hover:-translate-y-1 transition duration-400">
-                    <span className="relative z-10 flex items-center gap-1">
-                      <span className="text-red-900">&lt;</span>
-                      {item.name}
-                      <span className="text-red-900">&gt;</span>
-                    </span>
-                  </div>
-                </a>
-              );
-            }
-
-            return (
-              <a
-                key={`nav-item-${item.key}`}
-                href={item.link}
-                onClick={handleItemClick}
-                className="relative px-4 py-2 text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-100 transition-colors duration-200 font-medium"
-              >
-                {item.name}
-              </a>
-            );
-          })}
+          {navigationItems.map((item) => (
+            <Link
+              key={`nav-item-${item.key}`}
+              href={item.link}
+              onClick={handleItemClick}
+              className={`relative group px-4 py-2 transition-colors duration-300 font-semibold ${
+                item.isSpecial
+                  ? "transition-transform hover:scale-105"
+                  : "text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white"
+              }`}
+            >
+              {item.isSpecial ? (
+                <span className="flex items-center gap-1 text-lg">
+                  <span className="text-red-500 font-bold">&lt;</span>
+                  <span className="font-extrabold text-neutral-800 dark:text-neutral-200">{item.name}</span>
+                  <span className="text-red-500 font-bold">&gt;</span>
+                </span>
+              ) : (
+                <>
+                  {item.name}
+                  <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-blue-500 transform -translate-x-1/2 transition-all duration-300 group-hover:w-full"></span>
+                </>
+              )}
+            </Link>
+          ))}
         </div>
         <div className="flex items-center gap-4">
           <LanguageSelector />
-          {/* Login button temporarily hidden
-          {user ? (
-            <div className="flex flex-col gap-0">
-              <span className="text-sm text-neutral-600 dark:text-neutral-300">
-                {t("navigation.welcome")}, {user.email?.split("@")[0]}
-              </span>
-              <NavbarButton 
-                variant="secondary" 
-                onClick={handleLogout}
-                disabled={logoutMutation.isPending}
-                className="mt-1"
-              >
-                {logoutMutation.isPending ? t("navigation.loggingOut") : t("navigation.logout")}
-              </NavbarButton>
-            </div>
-          ) : (
-            <Link href="/login">
-              <NavbarButton variant="primary" as="span">{t("navigation.login")}</NavbarButton>
-            </Link>
-          )}
-          */}
         </div>
       </NavBody>
 
@@ -151,60 +115,30 @@ export default function TopNavbar() {
         </MobileNavHeader>
         
         <MobileNavMenu isOpen={isOpen} onClose={() => setIsOpen(false)}>
-          {navigationItems.map((item) => {
-            if (item.isSpecial) {
-              return (
-                <a
-                  key={`mobile-link-${item.key}`}
-                  href={item.link}
-                  onClick={handleItemClick}
-                  className="flex w-full items-center justify-center"
-                >
-                  <div className="px-4 py-2 text-white font-bold transform hover:-translate-y-1 transition duration-400">
-                    <span className="relative z-10 flex items-center gap-1">
-                      <span className="text-red-900">&lt;</span>
-                      {item.name}
-                      <span className="text-red-900">&gt;</span>
-                    </span>
-                  </div>
-                </a>
-              );
-            }
-
-            return (
-              <a
-                key={`mobile-link-${item.key}`}
-                href={item.link}
-                onClick={handleItemClick}
-                className="flex w-full items-center justify-center px-4 py-3 text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-100 transition-colors duration-200 font-medium"
-              >
-                {item.name}
-              </a>
-            );
-          })}
-          <div className="flex w-full items-center justify-center px-4 py-3">
-            <LanguageSelector />
-            {/* Login button temporarily hidden
-            {user ? (
-              <div className="flex flex-col gap-0">
-                <span className="text-sm text-neutral-600 dark:text-neutral-300">
-                  {t("navigation.welcome")}, {user.email?.split("@")[0]}
+          {navigationItems.map((item) => (
+            <Link
+              key={`mobile-link-${item.key}`}
+              href={item.link}
+              onClick={handleItemClick}
+              className={`w-full text-center px-4 py-3 font-medium transition-colors duration-200 ${
+                item.isSpecial
+                  ? ""
+                  : "text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-100"
+              }`}
+            >
+              {item.isSpecial ? (
+                <span className="flex items-center justify-center gap-1 text-lg">
+                  <span className="text-red-500 font-bold">&lt;</span>
+                  <span className="font-extrabold text-neutral-800 dark:text-neutral-200">{item.name}</span>
+                  <span className="text-red-500 font-bold">&gt;</span>
                 </span>
-                <NavbarButton 
-                  variant="secondary" 
-                  onClick={handleLogout}
-                  disabled={logoutMutation.isPending}
-                  className="mt-1"
-                >
-                  {logoutMutation.isPending ? t("navigation.loggingOut") : t("navigation.logout")}
-                </NavbarButton>
-              </div>
-            ) : (
-              <Link href="/login">
-                <NavbarButton variant="primary" as="span">{t("navigation.login")}</NavbarButton>
-              </Link>
-            )}
-            */}
+              ) : (
+                item.name
+              )}
+            </Link>
+          ))}
+          <div className="flex w-full items-center justify-center px-4 py-3 mt-4 border-t border-neutral-200 dark:border-neutral-700">
+            <LanguageSelector />
           </div>
         </MobileNavMenu>
       </MobileNav>

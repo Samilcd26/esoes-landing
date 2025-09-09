@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { useTranslations } from 'next-intl';
 
 export interface ContactFormData {
   name: string;
@@ -17,6 +18,7 @@ export interface EventRegistrationData {
 }
 
 export const useEmailService = () => {
+  const t = useTranslations('email');
   const [isLoading, setIsLoading] = useState(false);
 
   const sendEmail = async (type: string, data: unknown) => {
@@ -33,15 +35,15 @@ export const useEmailService = () => {
       const result = await response.json();
 
       if (response.ok) {
-        toast.success('Email sent successfully!');
+        toast.success(t('sendSuccess'));
         return true;
       } else {
-        toast.error(result.error || 'Failed to send email');
+        toast.error(result.error || t('sendError'));
         return false;
       }
     } catch (error) {
       console.error('Email service error:', error);
-      toast.error('Failed to send email');
+      toast.error(t('sendError'));
       return false;
     } finally {
       setIsLoading(false);

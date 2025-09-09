@@ -27,9 +27,9 @@ export interface PaginatedResponse<T> {
 }
 
 // Calendar Event tipleri
-export interface CalendarEvent {
+export interface CalendarEvents {
   _id: string;
-  _type: 'calendar_event';
+  _type: 'calendar_event' | 'event';
   title: string;
   description: string;
   startDate: string;

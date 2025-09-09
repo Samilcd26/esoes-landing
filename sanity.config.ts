@@ -8,7 +8,7 @@ export default defineConfig({
   title: 'esoes',
 
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+  dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
 
@@ -27,6 +27,6 @@ export default defineConfig({
   // API ayarları
   api: {
     projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+    dataset: 'production',
   },
 })

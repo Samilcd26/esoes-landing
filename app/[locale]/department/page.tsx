@@ -93,7 +93,7 @@ export default function DepartmentPage() {
                         <div>
                             <h4 className="font-semibold text-lg mb-3 text-purple-600 dark:text-purple-400 flex items-center gap-2">
                                 <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
-                                {t("card.assistant.title") || "Assistant Users"}
+                                {t("card.assistant.title")}
                             </h4>
                             <div className="space-y-3">
                                 {department.assistant.map((person, index) => (
@@ -183,9 +183,7 @@ export default function DepartmentPage() {
                                 <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
                                     {t("generalManagement.title")}
                                 </h2>
-                                <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                                    {t("generalManagement.subtitle")}
-                                </p>
+                              
                             </div>
                             <div className="flex justify-center">
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl">

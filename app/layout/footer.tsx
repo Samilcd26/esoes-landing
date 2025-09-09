@@ -2,21 +2,28 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
-import { Mail,  MapPin } from 'lucide-react';
 import Link from 'next/link';
-import { IconBrandLinkedinFilled,IconBrandYoutube, IconBrandTiktok,IconBrandInstagram } from '@tabler/icons-react';
+import { Mail, MapPin } from 'lucide-react';
+import { IconBrandLinkedinFilled, IconBrandYoutube, IconBrandTiktok, IconBrandInstagram } from '@tabler/icons-react';
 
 export default function Footer() {
   const t = useTranslations('footer');
+
+  const socials = [
+    { icon: <IconBrandInstagram size={20} />, href: t('social.instagramUrl'), hoverColor: 'pink-500' },
+    { icon: <IconBrandLinkedinFilled size={20} />, href: t('social.linkedinUrl'), hoverColor: 'blue-700' },
+    { icon: <IconBrandYoutube size={20} />, href: t('social.youtubeUrl'), hoverColor: 'red-500' },
+    { icon: <IconBrandTiktok size={20} />, href: t('social.tiktokUrl'), hoverColor: 'cyan-500' },
+  ];
 
   return (
     <footer className="bg-black text-white py-10 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-12 xl:gap-4">
+        <div className="flex flex-col md:flex-row justify-center items-stretch gap-8">
           
           {/* Company Info - Takes more space */}
-          <div className="md:col-span-1 lg:col-span-2 xl:col-span-5">
+          <div className="w-full md:max-w-md">
             <GridItem
                title={t('company.title')}
               description={t('company.description')}
@@ -24,66 +31,38 @@ export default function Footer() {
           </div>
 
           {/* Contact Info */}
-          <div className="md:col-span-1 lg:col-span-1 xl:col-span-4">
+          <div className="w-full md:max-w-sm">
             <GridItem
               icon={null}
               title={t('contact.title')}
               description={
                 <div className="space-y-1 text-sm">
-                  <div className="flex items-center gap-2">
+                  <a href={`mailto:${t('contact.email')}`} className="flex items-center gap-2 hover:text-purple-300 transition-colors">
                     <Mail size={16} className="text-purple-400" />
                     <span>{t('contact.email')}</span>
-                  </div>
-                  <div className="flex items-center gap-2 cursor-pointer" onClick={() => {
-                    if (typeof window !== 'undefined') {
-                      window.open('https://share.google/RB3wUvj52SUNHvXgO', '_blank');
-                    }
-                  }}>
+                  </a>
+                  <a href={t('contact.mapUrl')} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 cursor-pointer hover:text-purple-300 transition-colors">
                     <MapPin size={16} className="text-purple-400" />
                     <span>{t('contact.address')}</span>
-                  </div>
+                  </a>
                 </div>
               }
             />
           </div>
 
-          {/* Quick Links */}
-          <div className="md:col-span-1 lg:col-span-1 xl:col-span-2">
-            <div className="h-full rounded-2xl border p-2 md:rounded-3xl md:p-3 border-gray-800">
-              <div className="relative flex h-full flex-col gap-3 overflow-hidden rounded-xl p-4 bg-gray-900/30">
-                <div className="w-fit rounded-lg border border-gray-600 p-2">
-                </div>
-                <div className="space-y-2">
-                  <h3 className="font-sans text-lg font-semibold text-white">
-                    {t('quickLinks.title')}
-                  </h3>
-                  <div className="space-y-1 text-sm">
-                    <Link href="/home" className="block hover:text-purple-400 transition-colors text-gray-300">{t('quickLinks.home')}</Link>
-                    <Link href="/department" className="block hover:text-purple-400 transition-colors text-gray-300">{t('quickLinks.departments')}</Link>
-                    <Link href="/gallery" className="block hover:text-purple-400 transition-colors text-gray-300">{t('quickLinks.gallery')}</Link>
-                    <Link href="/faq" className="block hover:text-purple-400 transition-colors text-gray-300">{t('quickLinks.faq')}</Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
           {/* Social Media - Compact vertical design */}
-          <div className="md:col-span-3 lg:col-span-4 xl:col-span-1 md:flex md:justify-center xl:block">
-            <div className="w-full max-w-sm md:max-w-none xl:w-full h-full">
-              <div className="h-full rounded-2xl border p-3 border-gray-800 relative min-h-[12rem]">
-                <div className="relative flex flex-col items-center justify-start h-full rounded-xl p-2 bg-gray-900/30">
-                  <div className="flex flex-col items-center gap-3 pt-4">
-                    <h3 className="font-sans text-lg font-semibold text-white text-center">
-                      {t('social.title')}
-                    </h3>
-                    <div className="flex xl:flex-col gap-2">
-                      <SocialIcon icon={<IconBrandInstagram size={20} />} href="https://www.instagram.com/esoesogu" hoverColor="pink-500" />
-                      <SocialIcon icon={<IconBrandLinkedinFilled size={20} />} href="https://www.linkedin.com/company/esoesog%C3%BC/" hoverColor="blue-700" />
-                      <SocialIcon icon={<IconBrandYoutube size={20} />} href="https://www.youtube.com/@esoesogu" hoverColor="red-500" />
-                      <SocialIcon icon={<IconBrandTiktok size={20} />} href="https://www.tiktok.com/@esoesogu" hoverColor="blue-600" />
-                    </div>  
-                  </div>
+          <div className="w-full md:w-auto">
+            <div className="h-full rounded-2xl border p-3 border-gray-800 relative min-h-[12rem]">
+              <div className="relative flex flex-col items-center justify-start h-full rounded-xl p-2 bg-gray-900/30">
+                <div className="flex flex-col items-center gap-3 pt-4">
+                  <h3 className="font-sans text-lg font-semibold text-white text-center">
+                    {t('social.title')}
+                  </h3>
+                  <div className="flex flex-row md:flex-col gap-2">
+                    {socials.map((social) => (
+                      <SocialIcon key={social.href} {...social} />
+                    ))}
+                  </div>  
                 </div>
               </div>
             </div>
@@ -97,6 +76,8 @@ export default function Footer() {
               {t('bottom.copyright')}
             </p>
             <div className="flex gap-4 text-sm text-gray-400">
+              <Link href="/privacy" className="hover:text-white transition-colors">{t('bottom.privacy')}</Link>
+              <Link href="/terms" className="hover:text-white transition-colors">{t('bottom.terms')}</Link>
             </div>
           </div>
         </div>
@@ -115,9 +96,11 @@ const GridItem = ({ icon, title, description }: GridItemProps) => {
   return (
     <div className="h-full rounded-2xl border p-2 md:rounded-3xl md:p-3 border-gray-800 relative">
       <div className="relative flex h-full flex-col gap-3 overflow-hidden rounded-xl p-4 bg-gray-900/30">
-        <div className="w-fit rounded-lg border border-gray-600 p-2">
-          {icon}
-        </div>
+        {icon && (
+          <div className="w-fit rounded-lg border border-gray-600 p-2">
+            {icon}
+          </div>
+        )}
         <div className="space-y-2">
           <h3 className="font-sans text-lg font-semibold text-white">
             {title}
@@ -131,11 +114,21 @@ const GridItem = ({ icon, title, description }: GridItemProps) => {
   );
 };
 
+const socialHoverClasses: { [key: string]: string } = {
+  'pink-500': 'hover:text-pink-500',
+  'blue-700': 'hover:text-blue-700',
+  'red-500': 'hover:text-red-500',
+  'cyan-500': 'hover:text-cyan-500',
+};
+
 const SocialIcon = ({ icon, href, hoverColor }: { icon: React.ReactNode; href: string; hoverColor: string }) => {
+  const hoverClass = socialHoverClasses[hoverColor] || 'hover:text-white';
   return (
     <a
       href={href}
-      className={`w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center hover:${hoverColor}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 transition-colors duration-200 ${hoverClass}`}
     >
       {icon}
     </a>
