@@ -63,19 +63,19 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <HoverBorderGradient
-              onClick={() => {
-                if (typeof window !== 'undefined') {
-                  window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSeDHO9m0yJvLWpvzZgwek2tfovrCagfI58MqffHhrixxekyTw/viewform";
-                }
-              }}
-              containerClassName="rounded-full"
-              className="bg-black text-white px-8 py-3 text-lg font-semibold cursor-pointer"
+            <a 
+              href="https://docs.google.com/forms/d/e/1FAIpQLSeDHO9m0yJvLWpvzZgwek2tfovrCagfI58MqffHhrixxekyTw/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="no-underline"
             >
-              {t("hero.joinClub")}
-            </HoverBorderGradient>
-
-          
+              <HoverBorderGradient
+                containerClassName="rounded-full"
+                className="bg-black text-white px-8 py-3 text-lg font-semibold cursor-pointer"
+              >
+                {t("hero.joinClub")}
+              </HoverBorderGradient>
+            </a>
           </div>
         </div>
 
