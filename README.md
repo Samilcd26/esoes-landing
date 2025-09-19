@@ -26,7 +26,6 @@ Modern event management platform built with Next.js, SendGrid, and React Query.
 
 - Node.js 18+ 
 - npm or yarn
-- Supabase account
 
 ### Installation
 
@@ -46,10 +45,18 @@ npm install
 cp env.example .env.local
 ```
 
-Edit `.env.local` and add your Supabase credentials:
+Edit `.env.local` and add your SendGrid and Sanity credentials:
 ```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+SENDGRID_API_KEY=your_sendgrid_api_key
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id
+NEXT_PUBLIC_SANITY_DATASET=production
+NEXT_PUBLIC_SANITY_API_VERSION=2024-05-01
+SANITY_API_TOKEN=your_sanity_api_token
+AWS_ACCESS_KEY_ID=your_aws_access_key
+AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+AWS_REGION=your_aws_region
+AWS_S3_BUCKET=your_s3_bucket_name
 ```
 
 4. Run the development server:
@@ -73,7 +80,7 @@ esoes-landing/
 │   └── examples/         # Example components
 ├── lib/                  # Utility libraries
 │   ├── api/              # API layer
-│   │   ├── client.ts     # Supabase client
+│   │   ├── client.ts     # Sanity client
 │   │   └── services/     # API services
 │   ├── hooks/            # Custom React Query hooks
 │   └── types/            # TypeScript type definitions
@@ -84,10 +91,9 @@ esoes-landing/
 
 The project uses a layered architecture for API communication:
 
-### 1. Supabase Client (`lib/api/client.ts`)
-- Configured Supabase client with authentication
+### 1. Sanity Client (`lib/api/client.ts`)
+- Configured Sanity client
 - Type-safe database operations
-- Automatic token management
 
 ### 2. API Services (`lib/api/services/`)
 - **eventService.ts**: Event CRUD operations
@@ -157,150 +163,29 @@ function LoginForm() {
 
 ## Database Schema
 
-The application expects the following Supabase tables:
-
-### Users Table
-```sql
-CREATE TABLE users (
-  id UUID REFERENCES auth.users(id) PRIMARY KEY,
-  email TEXT NOT NULL,
-  first_name TEXT NOT NULL,
-  last_name TEXT NOT NULL,
-  role TEXT NOT NULL DEFAULT 'user' CHECK (role IN ('user', 'admin', 'organizer')),
-  avatar_url TEXT,
-  department_id UUID REFERENCES departments(id) ON DELETE SET NULL,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-```
-
-### Departments Table
-```sql
-CREATE TABLE departments (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  name TEXT NOT NULL UNIQUE,
-  description TEXT,
-  image_url TEXT,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-```
-
-### Events Table
-```sql
-CREATE TABLE events (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  title TEXT NOT NULL,
-  description TEXT,
-  start_date TIMESTAMP WITH TIME ZONE NOT NULL,
-  end_date TIMESTAMP WITH TIME ZONE NOT NULL,
-  location TEXT NOT NULL,
-  image_url TEXT,
-  capacity INTEGER NOT NULL DEFAULT 0,
-  registered_count INTEGER NOT NULL DEFAULT 0,
-  status TEXT NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'published', 'cancelled')),
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-```
-
-### Event Registrations Table
-```sql
-CREATE TABLE event_registrations (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  event_id UUID REFERENCES events(id) ON DELETE CASCADE,
-  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  UNIQUE(event_id, user_id)
-);
-```
-
-### FAQs Table
-```sql
-CREATE TABLE faqs (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  question TEXT NOT NULL,
-  answer TEXT NOT NULL,
-  category TEXT NOT NULL,
-  order_index INTEGER NOT NULL DEFAULT 0,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-```
-
-### Contact Messages Table
-```sql
-CREATE TABLE contact_messages (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  name TEXT NOT NULL,
-  email TEXT NOT NULL,
-  subject TEXT NOT NULL,
-  message TEXT NOT NULL,
-  status TEXT NOT NULL DEFAULT 'unread' CHECK (status IN ('unread', 'read', 'replied')),
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-```
-
-### Uploaded Files Table
-```sql
-CREATE TABLE uploaded_files (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-  original_name TEXT NOT NULL,
-  file_name TEXT NOT NULL,
-  file_path TEXT NOT NULL,
-  file_type TEXT NOT NULL CHECK (file_type IN ('image', 'video')),
-  mime_type TEXT NOT NULL,
-  file_size BIGINT NOT NULL,
-  r2_bucket TEXT NOT NULL,
-  r2_key TEXT NOT NULL,
-  cdn_url TEXT NOT NULL,
-  status TEXT NOT NULL DEFAULT 'processing' CHECK (status IN ('processing', 'completed', 'failed')),
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-```
-
-## Database Functions
-
-The application uses several PostgreSQL functions for complex operations:
-
-### Department Management
-- `get_department_statistics()` - Returns department statistics with member counts
-- `get_department_members(dept_id)` - Returns all members of a specific department
-- `assign_user_to_department(user_id, dept_id)` - Assigns a user to a department
-- `remove_user_from_department(user_id)` - Removes a user from their department
-
-### Event Management
-- `increment_event_registration_count(event_id)` - Increments event registration count
-- `decrement_event_registration_count(event_id)` - Decrements event registration count
-- `get_event_statistics()` - Returns event statistics
+The application uses Sanity.io for content management. The schema definitions can be found in `lib/sanity/schemas`.
 
 ## Environment Variables
 
-Create a `.env.local` file with the following variables:
+Create a `.env.local` file in the root directory and add the following variables:
 
 ```env
-
-# App Configuration
+# Application URL
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 
-# Sanity Configuration (if still using)
+# SendGrid Configuration
+SENDGRID_API_KEY=your_sendgrid_api_key
+
+# Sanity Configuration
 NEXT_PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id
 NEXT_PUBLIC_SANITY_DATASET=production
 SANITY_API_TOKEN=your_sanity_api_token
 
-# AWS S3 Configuration (if using)
+# AWS S3 Configuration
 AWS_ACCESS_KEY_ID=your_aws_access_key
 AWS_SECRET_ACCESS_KEY=your_aws_secret_key
 AWS_REGION=your_aws_region
 AWS_S3_BUCKET=your_s3_bucket_name
-
-# Note: Supabase email functionality has been replaced with SendGrid
-# Remove these variables if no longer using Supabase:
-# NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-# NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
 ## Available Scripts
