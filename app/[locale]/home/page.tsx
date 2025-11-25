@@ -34,14 +34,7 @@ export default function Home() {
 
         {/* Hero Content */}
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
-          <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 relative mb-6 sm:mb-8">
-            <Image
-              src="/assets/images/esogu.png"
-              alt="ESOGU Logo"
-              fill
-              className="object-contain rounded-lg"
-            />
-          </div>
+          
           <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50">
             ESOES
           </h1>

@@ -23,6 +23,11 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Compiler options
+  compiler: {
+    // styled-components için SSR desteği
+    styledComponents: true,
+  },
   // Turbopack ile uyumlu konfigürasyon
   webpack: (config) => {
     // FFmpeg için gerekli konfigürasyonlar
