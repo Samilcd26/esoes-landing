@@ -3,12 +3,20 @@
 import TopNavbar from "./layout/top-navbar";
 import Footer from "./layout/footer";
 import { QueryProvider } from "@/components/providers/query-provider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 
 export function AppContent({ children }: { children: React.ReactNode }) {
   return (
-    <QueryProvider>
-      <AppContentInner>{children}</AppContentInner>
-    </QueryProvider>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="dark"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <QueryProvider>
+        <AppContentInner>{children}</AppContentInner>
+      </QueryProvider>
+    </ThemeProvider>
   );
 }
 
