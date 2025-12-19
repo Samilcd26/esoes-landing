@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://esoes.org";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.esoesogu.info";
 const siteName = "ESOES";
 const defaultOgImage = `${siteUrl}/assets/images/esoes-logo.jpg`;
 

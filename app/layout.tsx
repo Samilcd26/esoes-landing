@@ -28,10 +28,6 @@ export const metadata: Metadata = {
       "öğrenci topluluğu",
     ],
   }),
-  title: {
-    default: "ESOES",
-    template: "ESOES - %s",
-  },
   icons: {
     icon: "/assets/icons/logo.svg",
     shortcut: "/assets/icons/logo.svg",
