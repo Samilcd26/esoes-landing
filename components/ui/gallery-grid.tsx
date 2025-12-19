@@ -256,7 +256,7 @@ export const GalleryGrid = ({ galleries, className }: GalleryGridProps) => {
           <Image
             src={imageUrl}
             fill
-            className="object-cover object-left-top"
+            className="object-cover object-center"
             alt={altText}
           />
           

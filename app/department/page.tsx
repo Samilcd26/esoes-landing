@@ -217,7 +217,7 @@ export default function DepartmentPage() {
                 <section className="py-20">
                     <div className="text-center mb-12">
                         <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Departmanlar</h2>
-                        <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">ESOES'in farklı departmanlarını keşfedin</p>
+                        <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">ESOES&apos;in farklı departmanlarını keşfedin</p>
                     </div>
                     {departmentCards.length > 0 ? (
                         <ExpandableCardGrid cards={departmentCards} />

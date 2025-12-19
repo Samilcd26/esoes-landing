@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { SanityUserService, User, CreateUserData, UpdateUserData } from '@/lib/api/sanityUserService'
+import { SanityUserService, CreateUserData, UpdateUserData } from '@/lib/api/sanityUserService'
 
 // Query keys
 export const userKeys = {

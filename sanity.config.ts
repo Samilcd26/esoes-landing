@@ -7,6 +7,7 @@
 import {visionTool} from '@sanity/vision'
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
+import type {SchemaTypeDefinition} from 'sanity'
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import {apiVersion, dataset, projectId} from './lib/sanity/env'
@@ -19,7 +20,7 @@ export default defineConfig({
   dataset,
   // Add and edit the content schema in the './lib/sanity/schemas' folder
   schema: {
-    types: schemaTypes as any,
+    types: schemaTypes as SchemaTypeDefinition[],
   },
   plugins: [
     structureTool({structure}),

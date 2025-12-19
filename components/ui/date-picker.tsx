@@ -90,10 +90,13 @@ export const DatePicker = ({
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Update internal state when props change
+  // This is necessary to sync controlled component props with internal state
   useEffect(() => {
     if (mode === 'single' && value) {
       const date = new Date(value);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedDate(date);
+       
       setSelectedTime(date.toTimeString().slice(0, 5));
     }
   }, [value, mode]);
@@ -102,12 +105,16 @@ export const DatePicker = ({
     if (mode === 'range') {
       if (startDate) {
         const date = new Date(startDate);
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setSelectedStartDate(date);
+         
         setStartTime(date.toTimeString().slice(0, 5));
       }
       if (endDate) {
         const date = new Date(endDate);
+         
         setSelectedEndDate(date);
+         
         setEndTime(date.toTimeString().slice(0, 5));
       }
     }

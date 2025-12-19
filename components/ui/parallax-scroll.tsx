@@ -79,7 +79,7 @@ export const ParallaxScroll = ({
                     src={el}
                     fill
                     className="object-cover object-left-top"
-                    alt="thumbnail"
+                    alt={`Galeri görseli ${idx + 1}`}
                   />
                 </div>
                 <div
@@ -113,7 +113,7 @@ export const ParallaxScroll = ({
                     src={el}
                     fill
                     className="object-cover object-left-top"
-                    alt="thumbnail"
+                    alt={`Galeri görseli ${idx + third + 1}`}
                   />
                 </div>
                 <div
@@ -147,7 +147,7 @@ export const ParallaxScroll = ({
                     src={el}
                     fill
                     className="object-cover object-left-top"
-                    alt="thumbnail"
+                    alt={`Galeri görseli ${idx + 2 * third + 1}`}
                   />
                 </div>
                 <div
@@ -188,7 +188,7 @@ export const ParallaxScroll = ({
               <div className="relative w-full h-auto max-h-[90vh]">
                 <Image
                   src={images[selectedImage]}
-                  alt={`Image ${selectedImage + 1}`}
+                  alt={`Galeri görseli ${selectedImage + 1} - Tam görünüm`}
                   fill
                   className="object-contain rounded-lg shadow-2xl"
                 />

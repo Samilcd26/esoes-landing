@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useMotionValueEvent, useScroll } from "motion/react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
@@ -68,19 +68,18 @@ export const StickyScroll = ({
   const backgroundColors = generateColorPalette(content.length);
   const linearGradients = generateColorPalette(content.length);
 
-  const [backgroundGradient, setBackgroundGradient] = useState(
-    linearGradients[0],
+  const backgroundGradient = React.useMemo(
+    () => linearGradients[activeCard % linearGradients.length],
+    [activeCard, linearGradients]
   );
 
   useEffect(() => {
-    setBackgroundGradient(linearGradients[activeCard % linearGradients.length]);
-    
     // For fullscreen mode, apply background to document body
     if (fullscreen && typeof window !== 'undefined') {
       document.body.style.background = backgroundColors[activeCard % backgroundColors.length];
       document.body.style.transition = "background 0.8s ease";
     }
-  }, [activeCard, fullscreen, backgroundColors, linearGradients]);
+  }, [activeCard, fullscreen, backgroundColors]);
 
   // Cleanup effect for fullscreen mode
   useEffect(() => {
