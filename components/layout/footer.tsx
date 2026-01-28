@@ -34,9 +34,9 @@ export default function Footer() {
               title="İletişim"
               description={
                 <div className="space-y-1 text-sm">
-                  <a href="mailto:info@esoes.org" className="flex items-center gap-2 hover:text-purple-300 transition-colors">
+                  <a href="mailto:esoesogu@gmail.com" className="flex items-center gap-2 hover:text-purple-300 transition-colors">
                     <Mail size={16} className="text-purple-400" />
-                    <span>info@esoes.org</span>
+                    <span>esoesogu@gmail.com</span>
                   </a>
                   <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 cursor-pointer hover:text-purple-300 transition-colors">
                     <MapPin size={16} className="text-purple-400" />

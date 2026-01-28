@@ -29,10 +29,14 @@ export const metadata: Metadata = {
     ],
   }),
   icons: {
-    icon: "/assets/icons/logo.svg",
-    shortcut: "/assets/icons/logo.svg",
-    apple: "/assets/icons/logo.svg",
+    icon: [
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/favicon-96x96.png",
+    apple: "/apple-touch-icon.png",
   },
+  manifest: "/site.webmanifest",
   applicationName: siteConfig.name,
   category: "education",
   classification: "Student Organization",
