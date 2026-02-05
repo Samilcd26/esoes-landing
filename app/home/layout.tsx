@@ -4,7 +4,7 @@ import { generateSeoMetadata } from "@/lib/seo/metadata";
 export const metadata: Metadata = generateSeoMetadata({
   title: "Ana Sayfa",
   description:
-    "ESOES ana sayfası - Eskişehir Mühendislik Öğrencileri Çevre Sürdürülebilirliği Topluluğu'na hoş geldiniz. Etkinliklerimizi, departmanlarımızı ve faaliyetlerimizi keşfedin.",
+    "ESOES ana sayfası - Engineering Society of Eskişehir'e hoş geldiniz. Etkinliklerimizi, projelerimizi ve faaliyetlerimizi keşfedin.",
   path: "/home",
   keywords: [
     "ana sayfa",
