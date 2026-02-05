@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   ...generateSeoMetadata({
     title: "ESOES",
     description:
-      "ESOES - Eskişehir Mühendislik Öğrencileri Çevre Sürdürülebilirliği Topluluğu. Eskişehir Osmangazi Üniversitesi'nde çevre ve sürdürülebilirlik konularında faaliyet gösteren öğrenci topluluğu.",
+      "Girişimci ESOGÜ Mühendislik Fakültesi öğrencileri tarafından kurulan Engineering Society of Eskişehir (ESOES), tüm mühendislik öğrencilerine hitap eden geniş üye profiliyle, keşfederek fark yaratmayı amaçlayan bir öğrenci kulübüdür.",
     keywords: [
       "Eskişehir üniversite etkinlikleri",
       "university events",

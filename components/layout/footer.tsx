@@ -18,12 +18,12 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto">
         {/* Main Footer Grid */}
         <div className="flex flex-col md:flex-row justify-center items-stretch gap-8">
-          
+
           {/* Company Info - Takes more space */}
           <div className="w-full md:max-w-md">
             <GridItem
-               title="ESOES"
-              description="Eskişehir Mühendislik Öğrencileri Çevre Sürdürülebilirliği Topluluğu"
+              title="ESOES"
+              description="Engineering Society of Eskişehir"
             />
           </div>
 
@@ -59,7 +59,7 @@ export default function Footer() {
                     {socials.map((social) => (
                       <SocialIcon key={social.href} {...social} />
                     ))}
-                  </div>  
+                  </div>
                 </div>
               </div>
             </div>

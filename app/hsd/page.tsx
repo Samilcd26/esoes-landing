@@ -3,11 +3,11 @@
 import { useSanityDepartmentsByCategory } from "@/hooks/useSanityDepartments";
 import React from "react";
 import Image from "next/image";
-import { 
-  HsdHeader, 
-  UsersSection, 
-  MissionSection, 
-  DepartmentsSection 
+import {
+  HsdHeader,
+  UsersSection,
+  MissionSection,
+  DepartmentsSection
 } from "./components";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
@@ -40,8 +40,8 @@ export default function HsdDepartmentsPage() {
                       <div className="flex-shrink-0">
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-semibold text-sm">
                           {person.image ? (
-                            <Image 
-                              src={person.image} 
+                            <Image
+                              src={person.image}
                               alt={`${person.firstName} ${person.lastName}`}
                               width={48}
                               height={48}
@@ -99,8 +99,8 @@ export default function HsdDepartmentsPage() {
                       <div className="flex-shrink-0">
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white font-semibold text-sm">
                           {person.image ? (
-                            <Image 
-                              src={person.image} 
+                            <Image
+                              src={person.image}
                               alt={`${person.firstName} ${person.lastName}`}
                               width={48}
                               height={48}
@@ -159,7 +159,7 @@ export default function HsdDepartmentsPage() {
       image?: string;
       role: string;
     }> = [];
-    
+
     // Add responsible users
     if (department.responsible) {
       users.push(...department.responsible.map((person) => ({
@@ -167,7 +167,7 @@ export default function HsdDepartmentsPage() {
         role: 'responsible'
       })));
     }
-    
+
     // Add assistant users
     if (department.assistant) {
       users.push(...department.assistant.map((person) => ({
@@ -175,17 +175,17 @@ export default function HsdDepartmentsPage() {
         role: 'assistant'
       })));
     }
-    
+
     if (users.length > 0) {
       acc.push({
         departmentName: department.name,
         users: users
       });
     }
-    
+
     return acc;
-  }, [] as Array<{ 
-    departmentName: string; 
+  }, [] as Array<{
+    departmentName: string;
     users: Array<{
       firstName?: string;
       lastName?: string;
@@ -199,11 +199,11 @@ export default function HsdDepartmentsPage() {
 
   if (isLoading) {
     return (
-      <LoadingSpinner 
-      title="Yükleniyor..."
-      subtitle="HSD departmanları getiriliyor"
-      className="min-h-[60vh]"
-    />
+      <LoadingSpinner
+        title="Yükleniyor..."
+        subtitle="HSD departmanları getiriliyor"
+        className="min-h-[60vh]"
+      />
     );
   }
 
@@ -221,31 +221,31 @@ export default function HsdDepartmentsPage() {
   return (
     <div className="w-full !scroll-smooth">
       {/* Header Section */}
-      <HsdHeader 
+      <HsdHeader
         title="HSD Departmanları"
-        description="Hızlı Sürdürülebilir Dönüşüm departmanlarımızı keşfedin"
+        description="ESOES departmanlarını ve çalışma gruplarını keşfedin"
       />
 
       {/* Users Section */}
-      <UsersSection 
+      <UsersSection
         groupedUsers={groupedUsers}
         title="Kullanıcılar"
       />
 
       {/* Mission Section */}
-      <MissionSection 
+      <MissionSection
         title="Misyonumuz"
         missions={[
-          'Çevre sürdürülebilirliği için hızlı ve etkili çözümler üretmek',
-          'Mühendislik öğrencilerini çevre konularında bilinçlendirmek',
-          'Sürdürülebilir teknolojiler geliştirmek ve uygulamak'
+          'Kulübün aktifliğini ve prestijini korumak',
+          'Üyelerimizin gelişimine katkı sağlamak',
+          'Sürdürülebilir projeler ve etkinlikler üretmek'
         ]}
       />
 
       {/* Departments Section */}
-      <DepartmentsSection 
+      <DepartmentsSection
         title="HSD Departmanları"
-        subtitle="Hızlı Sürdürülebilir Dönüşüm departmanlarımızı keşfedin"
+        subtitle="ESOES departmanlarını ve çalışma gruplarını keşfedin"
         departmentCards={departmentCards}
         emptyMessage="Henüz departman bulunamadı"
       />

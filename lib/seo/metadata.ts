@@ -34,13 +34,18 @@ export function generateSeoMetadata({
   const defaultKeywords = [
     "ESOES",
     "Eskişehir Osmangazi Üniversitesi",
-    "Öğrenci klübü",
+    "Öğrenci kulübü",
     "Mühendislik öğrencileri",
-    "Çevre sürdürülebilirliği",
+    "Girişimcilik",
+    "İnovasyon",
+    "Sosyallik",
+    "Kariyer gelişimi",
+    "Engineering Society of Eskişehir",
     "Eskisehir Osmangazi University",
     "Student club",
     "Engineering students",
-    "Environmental sustainability",
+    "Entrepreneurship",
+    "Innovation",
   ];
 
   const allKeywords = [...new Set([...defaultKeywords, ...keywords])];
@@ -99,7 +104,7 @@ export function generateSeoMetadata({
 export const homeMetadata: Metadata = generateSeoMetadata({
   title: "Ana Sayfa",
   description:
-    "ESOES - Eskişehir Mühendislik Öğrencileri Çevre Sürdürülebilirliği Topluluğu. Eskişehir Osmangazi Üniversitesi'nde çevre ve sürdürülebilirlik konularında faaliyet gösteren öğrenci topluluğu.",
+    "Girişimci ESOGÜ Mühendislik Fakültesi öğrencileri tarafından kurulan Engineering Society of Eskişehir (ESOES), tüm mühendislik öğrencilerine hitap eden geniş üye profiliyle, keşfederek fark yaratmayı amaçlayan bir öğrenci kulübüdür.",
   path: "/home",
   keywords: [
     "ana sayfa",
@@ -116,7 +121,7 @@ export const siteConfig = {
   name: siteName,
   url: siteUrl,
   description:
-    "Eskişehir Mühendislik Öğrencileri Çevre Sürdürülebilirliği Topluluğu",
+    "Engineering Society of Eskişehir - Keşfederek Fark Yarat",
   ogImage: defaultOgImage,
   locale: "tr_TR",
   organization: {
